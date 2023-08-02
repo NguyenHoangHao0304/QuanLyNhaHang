@@ -1,9 +1,12 @@
 com\hh\pojo\Hall.class
+com\hh\service\Impl\HallServiceImpl.class
+com\hh\service\HallService.class
 com\hh\pojo\Service.class
 com\hh\pojo\Food.class
 com\hh\repository\Impl\HallRepositoryImpl.class
 com\hh\pojo\Booking.class
 com\hh\pojo\Brach.class
+com\hh\controllers\HallController.class
 com\hh\pojo\User.class
 com\hh\pojo\Employee.class
 com\hh\configs\WebAppContextConfig.class

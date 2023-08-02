@@ -76,7 +76,7 @@ public class HallRepositoryImpl implements HallRepository {
             q.where(predicates.toArray(Predicate[]::new));
         }
 
-        q.orderBy(builder.desc(r.get("id")));
+//        q.orderBy(builder.desc(r.get("id")));
 
         Query query = session.createQuery(q);
 

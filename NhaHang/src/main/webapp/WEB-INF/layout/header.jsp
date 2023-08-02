@@ -42,7 +42,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Quản lý chi nhánh</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href=""/>Quản lý sảnh cưới</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/hall"/>"/>Quản lý sảnh cưới</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Quản lý thức ăn</a></li>
                         <li><hr class="dropdown-divider"></li>

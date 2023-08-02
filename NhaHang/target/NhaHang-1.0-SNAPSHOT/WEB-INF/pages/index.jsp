@@ -10,7 +10,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Trang Chủ</h1>
+                    <h2 class="m-0 text-dark">Trang Chủ</h2>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
                                  alt=""></a>
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a href="#">Chi Tiết</a>
+                        <a href="<c:url value="/hall"/>">Chi Tiết</a>
                     </h4>
                 </div>
             </div>
