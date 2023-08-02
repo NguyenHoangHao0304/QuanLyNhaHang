@@ -34,7 +34,8 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan(basePackages = "com.hh.controllers")
+@ComponentScan(basePackages = {"com.hh.controllers"
+        ,"com.hh.repository","com.hh.service"})
 @PropertySource("classpath:configs.properties")
 public class WebAppContextConfig implements WebMvcConfigurer {
 
