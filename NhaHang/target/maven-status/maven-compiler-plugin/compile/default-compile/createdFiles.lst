@@ -1,0 +1,5 @@
+com\hh\configs\TilesConfig.class
+com\hh\configs\DispatcherServletInit.class
+com\hh\configs\HibernateConfig.class
+com\hh\controllers\IndexController.class
+com\hh\configs\WebAppContextConfig.class
