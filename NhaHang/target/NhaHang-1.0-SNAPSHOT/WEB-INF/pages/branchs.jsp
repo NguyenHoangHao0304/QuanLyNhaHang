@@ -1,0 +1,72 @@
+<%-- 
+    Document   : branchs
+    Created on : Aug 5, 2023, 1:08:35 PM
+    Author     : Admin
+--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<c:url value="/branchs" var="branchAction" />
+<section class="container">
+    <h1 class="text-center text-primary mt-1">QUẢN LÝ CHI NHÁNH</h1>
+    <div>
+        <a href="<c:url value="/branchs/create"/>" class="btn btn-warning mt-1">Thêm sản phẩm</a>
+    </div>
+    <c:if test="${counter > 1}">
+        <ul class="pagination mt-1">
+            <li class="page-item"><a class="page-link" href="${branchAction}">Tất cả</a></li>
+                <c:forEach begin="1" end="${counter}" var="i">
+                    <c:url value="/branchs" var="pageBranchAction" >
+                        <c:param name="page" value="${i}"/>
+                    </c:url>
+                <li class="page-item"><a class="page-link" href="${pageBranchAction}">${i}</a></li>
+                </c:forEach>
+        </ul>
+    </c:if>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tên Chi Nhánh</th>
+                <th>Địa Chỉ</th>
+                <th>Danh Sách Các Hall</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${branch}" var="b">
+                <tr>
+                    <td>${b.id}</td>
+                    <td>${b.branchName}</td>
+                    <td>${b.branchAddress}</td>
+                    <td>
+                        <%--<select class="form-select">
+                            <c:forEach items="${halls}" var="h">
+                                <c:choose>
+                                    <c:when test="${h.branchId.id == b.id}">
+                                        <option value="${h.branchId.id}">${h.hallName}</option>
+                                    </c:when>
+                                    <c:otherwise></c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </select>--%>
+                        <ul class="list-group list-group-flush">
+                            <c:forEach items="${halls}" var="h">
+                                <c:choose>
+                                    <c:when test="${h.branchId.id == b.id}">
+                                        <li class="list-group-item" value="${h.branchId.id}">${h.hallName}</li>
+                                        </c:when>
+                                        <c:otherwise></c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                        </ul>
+                    </td>
+                    <td>
+                        <c:url value="/branchs/${b.id}" var="api"/>
+                        <a href="${api}" class="btn btn-success">Cập Nhật</a>
+                        <button class="btn btn-danger" onclick="deleteBranch('${api}')">Xóa</button>
+                    </td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+</section>
+<script src="<c:url value="/js/branch.js"/>"></script>

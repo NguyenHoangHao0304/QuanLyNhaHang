@@ -6,11 +6,20 @@ package com.hh.service;
 
 import com.hh.pojo.Branch;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author Admin
  */
 public interface BranchService {
-    List<Branch> getBranch();
+    List<Branch> getBranchs(Map<String, String> params);
+
+    int countBranch();
+
+    boolean addOrUpdateBranch(Branch b);
+
+    Branch getBranchById(int id);
+
+    boolean deleteBranch(int id);
 }

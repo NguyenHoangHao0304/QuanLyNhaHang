@@ -1,5 +1,6 @@
 com\hh\formatter\BranchFormatter.class
 com\hh\pojo\Hall.class
+com\hh\controllers\BranchController.class
 com\hh\service\Impl\HallServiceImpl.class
 com\hh\service\HallService.class
 com\hh\pojo\Service.class
@@ -9,6 +10,7 @@ com\hh\pojo\Booking.class
 com\hh\controllers\HallController.class
 com\hh\pojo\User.class
 com\hh\service\Impl\BranchServiceImpl.class
+com\hh\api\ApiHallController.class
 com\hh\pojo\Employee.class
 com\hh\configs\WebAppContextConfig.class
 com\hh\pojo\Food_.class
@@ -21,8 +23,8 @@ com\hh\repository\HallRepository.class
 com\hh\pojo\Booking_.class
 com\hh\pojo\Feedback_.class
 com\hh\controllers\IndexController.class
+com\hh\api\ApiBranchController.class
 com\hh\pojo\Payment_.class
-com\hh\controllers\HallEditController.class
 com\hh\pojo\BookingFood.class
 com\hh\pojo\Bill.class
 com\hh\pojo\Branch_.class

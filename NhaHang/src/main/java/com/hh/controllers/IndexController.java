@@ -4,8 +4,14 @@
  */
 package com.hh.controllers;
 
+import com.hh.service.BranchService;
+import com.hh.service.HallService;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -13,11 +19,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author Admin
  */
 @Controller
+@ControllerAdvice
 public class IndexController {
+
+    @Autowired
+    private HallService HallService;
+    @Autowired
+    private BranchService branchService;
+
+    @ModelAttribute
+    public void commonAttr(Model model, Map<String, String> params) {
+        model.addAttribute("branchs", this.branchService.getBranchs(params));
+        model.addAttribute("halls", this.HallService.getHalls(params));
+    }
 
     @RequestMapping("/")
     public String index(Model model) {
-        
+
         return "index";
     }
 }

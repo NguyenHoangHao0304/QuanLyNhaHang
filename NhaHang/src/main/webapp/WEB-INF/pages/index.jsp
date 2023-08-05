@@ -22,7 +22,7 @@
                                  alt=""></a>
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a href="#">Chi Tiết</a>
+                        <a href="<c:url value="/branchs"/>">Chi Tiết</a>
                     </h4>
                 </div>
             </div>

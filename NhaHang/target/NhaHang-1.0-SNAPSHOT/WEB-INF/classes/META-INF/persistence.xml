@@ -2,19 +2,19 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="com.hh_NhaHang_war_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.hh.pojo.Payment</class>
     <class>com.hh.pojo.Brach</class>
-    <class>com.hh.pojo.Feedback</class>
-    <class>com.hh.pojo.Food</class>
-    <class>com.hh.pojo.Employee</class>
-    <class>com.hh.pojo.User</class>
-    <class>com.hh.pojo.Hall</class>
-    <class>com.hh.pojo.Booking</class>
-    <class>com.hh.pojo.Service</class>
-    <class>com.hh.pojo.BookingService</class>
-    <class>com.hh.pojo.Bill</class>
-    <class>com.hh.pojo.BookingFood</class>
-    <class>com.hh.pojo.Branch</class>
+    <class>com.hh.api.pojo.BookingService</class>
+    <class>com.hh.api.pojo.BookingFood</class>
+    <class>com.hh.api.pojo.User</class>
+    <class>com.hh.api.pojo.Branch</class>
+    <class>com.hh.api.pojo.Payment</class>
+    <class>com.hh.api.pojo.Employee</class>
+    <class>com.hh.api.pojo.Bill</class>
+    <class>com.hh.api.pojo.Booking</class>
+    <class>com.hh.api.pojo.Service</class>
+    <class>com.hh.api.pojo.Food</class>
+    <class>com.hh.api.pojo.Feedback</class>
+    <class>com.hh.api.pojo.Hall</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/quanlynhahangtieccuoi?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
