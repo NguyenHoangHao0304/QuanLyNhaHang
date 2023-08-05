@@ -8,17 +8,17 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -57,39 +57,30 @@ public class Booking implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "start_time")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIME)
     private Date startTime;
     @Basic(optional = false)
     @NotNull
     @Column(name = "end_time")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIME)
     private Date endTime;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "booking_name")
     private String bookingName;
-    @JoinTable(name = "booking_has_food", joinColumns = {
-        @JoinColumn(name = "booking_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "food_id", referencedColumnName = "id")})
-    @ManyToMany
-    private Set<Food> foodSet;
-    @JoinTable(name = "bill", joinColumns = {
-        @JoinColumn(name = "booking_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "payment_id", referencedColumnName = "id")})
-    @ManyToMany
-    private Set<Payment> paymentSet;
-    @JoinTable(name = "booking_has_service", joinColumns = {
-        @JoinColumn(name = "booking_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "service_id", referencedColumnName = "id")})
-    @ManyToMany
-    private Set<Service> serviceSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookingId")
+    private Set<BookingFood> bookingFoodSet;
     @JoinColumn(name = "hall_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Hall hallId;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User userId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookingId")
+    private Set<Bill> billSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookingId")
+    private Set<BookingService> bookingServiceSet;
 
     public Booking() {
     }
@@ -147,30 +138,12 @@ public class Booking implements Serializable {
     }
 
     @XmlTransient
-    public Set<Food> getFoodSet() {
-        return foodSet;
+    public Set<BookingFood> getBookingFoodSet() {
+        return bookingFoodSet;
     }
 
-    public void setFoodSet(Set<Food> foodSet) {
-        this.foodSet = foodSet;
-    }
-
-    @XmlTransient
-    public Set<Payment> getPaymentSet() {
-        return paymentSet;
-    }
-
-    public void setPaymentSet(Set<Payment> paymentSet) {
-        this.paymentSet = paymentSet;
-    }
-
-    @XmlTransient
-    public Set<Service> getServiceSet() {
-        return serviceSet;
-    }
-
-    public void setServiceSet(Set<Service> serviceSet) {
-        this.serviceSet = serviceSet;
+    public void setBookingFoodSet(Set<BookingFood> bookingFoodSet) {
+        this.bookingFoodSet = bookingFoodSet;
     }
 
     public Hall getHallId() {
@@ -187,6 +160,24 @@ public class Booking implements Serializable {
 
     public void setUserId(User userId) {
         this.userId = userId;
+    }
+
+    @XmlTransient
+    public Set<Bill> getBillSet() {
+        return billSet;
+    }
+
+    public void setBillSet(Set<Bill> billSet) {
+        this.billSet = billSet;
+    }
+
+    @XmlTransient
+    public Set<BookingService> getBookingServiceSet() {
+        return bookingServiceSet;
+    }
+
+    public void setBookingServiceSet(Set<BookingService> bookingServiceSet) {
+        this.bookingServiceSet = bookingServiceSet;
     }
 
     @Override

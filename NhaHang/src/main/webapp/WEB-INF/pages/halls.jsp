@@ -6,17 +6,17 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<c:url value="/hall" var="hallAction" />
+<c:url value="/halls" var="hallAction" />
 <section class="container">
-    <h1 class="text-center text-info mt-1">QUẢN LÝ SẢNH CƯỚI</h1>
+    <h1 class="text-center text-primary mt-1">QUẢN LÝ SẢNH CƯỚI</h1>
     <div>
-        <a href="<c:url value="/products"/>" class="btn btn-info mt-1">Thêm sản phẩm</a>
+        <a href="<c:url value="/hallEdits"/>" class="btn btn-warning mt-1">Thêm sản phẩm</a>
     </div>
     <c:if test="${counter > 1}">
         <ul class="pagination mt-1">
             <li class="page-item"><a class="page-link" href="${hallAction}">Tất cả</a></li>
                 <c:forEach begin="1" end="${counter}" var="i">
-                    <c:url value="/hall" var="pageHallAction" >
+                    <c:url value="/halls" var="pageHallAction" >
                         <c:param name="page" value="${i}"/>
                     </c:url>
                 <li class="page-item"><a class="page-link" href="${pageHallAction}">${i}</a></li>
@@ -37,7 +37,7 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach items="${halls}" var="h">
+            <c:forEach items="${hall}" var="h">
                 <tr>
                     <td>${h.id}</td>
                     <td>${h.hallName}</td>
@@ -46,9 +46,9 @@
                     <td>${h.priceAfternoon} VNĐ</td>
                     <td>${h.priceEvening} VNĐ</td>
                     <td>${h.priceWeekend} VNĐ</td>
-                    <td>${h.branchId.id}</td>
+                    <td>${h.branchId.branchName}</td>
                     <td>
-                        <c:url value="/products/${p.id}" var="api"/>
+                        <c:url value="/hallEdits/${h.id}" var="api"/>
                         <a href="${api}" class="btn btn-success">Cập Nhật</a>
                         <button class="btn btn-danger" onclick="deleteProduct('${api}')">Xóa</button>
                     </td>

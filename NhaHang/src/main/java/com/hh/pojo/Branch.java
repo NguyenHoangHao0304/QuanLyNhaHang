@@ -27,14 +27,14 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Admin
  */
 @Entity
-@Table(name = "brach")
+@Table(name = "branch")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Brach.findAll", query = "SELECT b FROM Brach b"),
-    @NamedQuery(name = "Brach.findById", query = "SELECT b FROM Brach b WHERE b.id = :id"),
-    @NamedQuery(name = "Brach.findByBranchName", query = "SELECT b FROM Brach b WHERE b.branchName = :branchName"),
-    @NamedQuery(name = "Brach.findByBranchAddress", query = "SELECT b FROM Brach b WHERE b.branchAddress = :branchAddress")})
-public class Brach implements Serializable {
+    @NamedQuery(name = "Branch.findAll", query = "SELECT b FROM Branch b"),
+    @NamedQuery(name = "Branch.findById", query = "SELECT b FROM Branch b WHERE b.id = :id"),
+    @NamedQuery(name = "Branch.findByBranchName", query = "SELECT b FROM Branch b WHERE b.branchName = :branchName"),
+    @NamedQuery(name = "Branch.findByBranchAddress", query = "SELECT b FROM Branch b WHERE b.branchAddress = :branchAddress")})
+public class Branch implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -59,14 +59,14 @@ public class Brach implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "branchId")
     private Set<Employee> employeeSet;
 
-    public Brach() {
+    public Branch() {
     }
 
-    public Brach(Integer id) {
+    public Branch(Integer id) {
         this.id = id;
     }
 
-    public Brach(Integer id, String branchName, String branchAddress) {
+    public Branch(Integer id, String branchName, String branchAddress) {
         this.id = id;
         this.branchName = branchName;
         this.branchAddress = branchAddress;
@@ -133,10 +133,10 @@ public class Brach implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Brach)) {
+        if (!(object instanceof Branch)) {
             return false;
         }
-        Brach other = (Brach) object;
+        Branch other = (Branch) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -145,7 +145,7 @@ public class Brach implements Serializable {
 
     @Override
     public String toString() {
-        return "com.hh.pojo.Brach[ id=" + id + " ]";
+        return "com.hh.pojo.Branch[ id=" + id + " ]";
     }
     
 }

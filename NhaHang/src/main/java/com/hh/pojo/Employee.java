@@ -66,7 +66,7 @@ public class Employee implements Serializable {
     private String email;
     @JoinColumn(name = "branch_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Brach branchId;
+    private Branch branchId;
 
     public Employee() {
     }
@@ -123,11 +123,11 @@ public class Employee implements Serializable {
         this.email = email;
     }
 
-    public Brach getBranchId() {
+    public Branch getBranchId() {
         return branchId;
     }
 
-    public void setBranchId(Brach branchId) {
+    public void setBranchId(Branch branchId) {
         this.branchId = branchId;
     }
 

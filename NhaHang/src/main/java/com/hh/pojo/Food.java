@@ -8,14 +8,15 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -56,8 +57,8 @@ public class Food implements Serializable {
     @Size(max = 255)
     @Column(name = "food_image")
     private String foodImage;
-    @ManyToMany(mappedBy = "foodSet")
-    private Set<Booking> bookingSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "foodId")
+    private Set<BookingFood> bookingFoodSet;
 
     public Food() {
     }
@@ -105,12 +106,12 @@ public class Food implements Serializable {
     }
 
     @XmlTransient
-    public Set<Booking> getBookingSet() {
-        return bookingSet;
+    public Set<BookingFood> getBookingFoodSet() {
+        return bookingFoodSet;
     }
 
-    public void setBookingSet(Set<Booking> bookingSet) {
-        this.bookingSet = bookingSet;
+    public void setBookingFoodSet(Set<BookingFood> bookingFoodSet) {
+        this.bookingFoodSet = bookingFoodSet;
     }
 
     @Override

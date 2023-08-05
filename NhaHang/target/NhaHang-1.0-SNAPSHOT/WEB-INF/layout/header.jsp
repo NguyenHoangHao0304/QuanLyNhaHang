@@ -42,7 +42,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Quản lý chi nhánh</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="<c:url value="/hall"/>"/>Quản lý sảnh cưới</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/halls"/>"/>Quản lý sảnh cưới</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Quản lý thức ăn</a></li>
                         <li><hr class="dropdown-divider"></li>
@@ -70,11 +70,19 @@
                     <a class="nav-link" href="#">Thống kê</a>
                 </li>
             </ul>
-            <c:url value="/" var="action" />
-            <form class="d-flex" action="${action}">
-                <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
-                <button class="btn btn-primary" type="submit">Tìm</button>
-            </form>
+            <c:choose>
+                <c:when test="${hall != null}">
+                    <c:url value="/halls" var="actionHall" />
+                    <form class="d-flex" action="${actionHall}">
+                        <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
+                        <button class="btn btn-warning" type="submit">Tìm</button>
+                    </form>
+                </c:when>
+                <c:otherwise>
+                    <c:url value="/" var="actionHall" />
+                </c:otherwise>
+            </c:choose>
+
         </div>
     </div>
 </nav>

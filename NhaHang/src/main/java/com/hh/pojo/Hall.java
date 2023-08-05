@@ -50,36 +50,36 @@ public class Hall implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @NotNull(message = "{hall.name.notNull}")
+    @Size(min = 1, max = 255, message = "{hall.name.lenErr}")
     @Column(name = "hall_name")
     private String hallName;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{hall.capacity.notNull}")
     @Column(name = "capacity")
     private int capacity;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{hall.price.notNull}")
     @Column(name = "price_morning")
     private BigDecimal priceMorning;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{hall.price.notNull}")
     @Column(name = "price_afternoon")
     private BigDecimal priceAfternoon;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{hall.price.notNull}")
     @Column(name = "price_evening")
     private BigDecimal priceEvening;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{hall.price.notNull}")
     @Column(name = "price_weekend")
     private BigDecimal priceWeekend;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hallId")
     private Set<Booking> bookingSet;
     @JoinColumn(name = "branch_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Brach branchId;
+    private Branch branchId;
 
     public Hall() {
     }
@@ -163,11 +163,11 @@ public class Hall implements Serializable {
         this.bookingSet = bookingSet;
     }
 
-    public Brach getBranchId() {
+    public Branch getBranchId() {
         return branchId;
     }
 
-    public void setBranchId(Brach branchId) {
+    public void setBranchId(Branch branchId) {
         this.branchId = branchId;
     }
 

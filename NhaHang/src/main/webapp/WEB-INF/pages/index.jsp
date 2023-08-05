@@ -34,7 +34,7 @@
                                  alt=""></a>
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a href="<c:url value="/hall"/>">Chi Tiết</a>
+                        <a href="<c:url value="/halls"/>">Chi Tiết</a>
                     </h4>
                 </div>
             </div>

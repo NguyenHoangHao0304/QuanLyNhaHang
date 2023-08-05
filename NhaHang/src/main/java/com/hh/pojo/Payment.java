@@ -5,16 +5,16 @@
 package com.hh.pojo;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,8 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Payment.findAll", query = "SELECT p FROM Payment p"),
     @NamedQuery(name = "Payment.findById", query = "SELECT p FROM Payment p WHERE p.id = :id"),
     @NamedQuery(name = "Payment.findByPaymentDate", query = "SELECT p FROM Payment p WHERE p.paymentDate = :paymentDate"),
-    @NamedQuery(name = "Payment.findByPaymentMethod", query = "SELECT p FROM Payment p WHERE p.paymentMethod = :paymentMethod"),
-    @NamedQuery(name = "Payment.findByTotal", query = "SELECT p FROM Payment p WHERE p.total = :total")})
+    @NamedQuery(name = "Payment.findByPaymentMethod", query = "SELECT p FROM Payment p WHERE p.paymentMethod = :paymentMethod")})
 public class Payment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,13 +53,8 @@ public class Payment implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "payment_method")
     private String paymentMethod;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "total")
-    private BigDecimal total;
-    @ManyToMany(mappedBy = "paymentSet")
-    private Set<Booking> bookingSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "paymentId")
+    private Set<Bill> billSet;
 
     public Payment() {
     }
@@ -69,11 +63,10 @@ public class Payment implements Serializable {
         this.id = id;
     }
 
-    public Payment(Integer id, Date paymentDate, String paymentMethod, BigDecimal total) {
+    public Payment(Integer id, Date paymentDate, String paymentMethod) {
         this.id = id;
         this.paymentDate = paymentDate;
         this.paymentMethod = paymentMethod;
-        this.total = total;
     }
 
     public Integer getId() {
@@ -100,21 +93,13 @@ public class Payment implements Serializable {
         this.paymentMethod = paymentMethod;
     }
 
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
-
     @XmlTransient
-    public Set<Booking> getBookingSet() {
-        return bookingSet;
+    public Set<Bill> getBillSet() {
+        return billSet;
     }
 
-    public void setBookingSet(Set<Booking> bookingSet) {
-        this.bookingSet = bookingSet;
+    public void setBillSet(Set<Bill> billSet) {
+        this.billSet = billSet;
     }
 
     @Override

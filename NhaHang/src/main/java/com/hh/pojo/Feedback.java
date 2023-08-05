@@ -52,7 +52,7 @@ public class Feedback implements Serializable {
     private String feedbackDescription;
     @JoinColumn(name = "branch_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Brach branchId;
+    private Branch branchId;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User userId;
@@ -94,11 +94,11 @@ public class Feedback implements Serializable {
         this.feedbackDescription = feedbackDescription;
     }
 
-    public Brach getBranchId() {
+    public Branch getBranchId() {
         return branchId;
     }
 
-    public void setBranchId(Brach branchId) {
+    public void setBranchId(Branch branchId) {
         this.branchId = branchId;
     }
 

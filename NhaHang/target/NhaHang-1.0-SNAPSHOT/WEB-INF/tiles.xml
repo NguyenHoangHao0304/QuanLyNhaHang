@@ -17,10 +17,15 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" 
                        value="/WEB-INF/pages/index.jsp" />
     </definition>
-    <definition name="hall" extends="baseLayout">
+    <definition name="halls" extends="baseLayout">
         <put-attribute name="title" value="Quản lý Hall" />
         <put-attribute name="content" 
-                       value="/WEB-INF/pages/hall.jsp" />
+                       value="/WEB-INF/pages/halls.jsp" />
+    </definition>
+    <definition name="hallEdits" extends="baseLayout">
+        <put-attribute name="title" value="Edit Hall" />
+        <put-attribute name="content" 
+                       value="/WEB-INF/pages/hallEdits.jsp" />
     </definition>
 </tiles-definitions>
 
