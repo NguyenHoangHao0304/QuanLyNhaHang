@@ -34,6 +34,7 @@
                 <th>Giá Tối</th>
                 <th>Giá Cuối Tuần</th>
                 <th>Chi Nhánh</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>

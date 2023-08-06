@@ -18,7 +18,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
                        value="/WEB-INF/pages/index.jsp" />
     </definition>
     <definition name="halls" extends="baseLayout">
-        <put-attribute name="title" value="Quản lý Hall" />
+        <put-attribute name="title" value="Hall" />
         <put-attribute name="content" 
                        value="/WEB-INF/pages/halls.jsp" />
     </definition>
@@ -28,7 +28,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
                        value="/WEB-INF/pages/hallEdits.jsp" />
     </definition>
     <definition name="branchs" extends="baseLayout">
-        <put-attribute name="title" value="Quản Lý Branch" />
+        <put-attribute name="title" value="Branch" />
         <put-attribute name="content" 
                        value="/WEB-INF/pages/branchs.jsp" />
     </definition>
@@ -36,6 +36,26 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Edit Branch" />
         <put-attribute name="content" 
                        value="/WEB-INF/pages/branchEdits.jsp" />
+    </definition>
+    <definition name="foods" extends="baseLayout">
+        <put-attribute name="title" value="Menu" />
+        <put-attribute name="content" 
+                       value="/WEB-INF/pages/foods.jsp" />
+    </definition>
+    <definition name="foodEdits" extends="baseLayout">
+        <put-attribute name="title" value="Edit Menu" />
+        <put-attribute name="content" 
+                       value="/WEB-INF/pages/foodEdits.jsp" />
+    </definition>
+    <definition name="services" extends="baseLayout">
+        <put-attribute name="title" value="Service" />
+        <put-attribute name="content" 
+                       value="/WEB-INF/pages/services.jsp" />
+    </definition>
+    <definition name="serviceEdits" extends="baseLayout">
+        <put-attribute name="title" value="Edit Service" />
+        <put-attribute name="content" 
+                       value="/WEB-INF/pages/serviceEdits.jsp" />
     </definition>
 </tiles-definitions>
 

@@ -18,10 +18,12 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -45,13 +47,13 @@ public class Food implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @NotNull(message = "{food.name.notNull}")
+    @Size(min = 5, max = 255, message = "{food.name.lenErr}")
     @Column(name = "food_name")
     private String foodName;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{food.price.notNull}")
     @Column(name = "food_price")
     private BigDecimal foodPrice;
     @Size(max = 255)
@@ -60,6 +62,9 @@ public class Food implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "foodId")
     private Set<BookingFood> bookingFoodSet;
 
+    @Transient
+    private MultipartFile file;
+    
     public Food() {
     }
 
@@ -137,6 +142,20 @@ public class Food implements Serializable {
     @Override
     public String toString() {
         return "com.hh.pojo.Food[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
     
 }

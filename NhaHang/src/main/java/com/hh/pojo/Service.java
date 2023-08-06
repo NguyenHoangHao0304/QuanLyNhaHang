@@ -18,10 +18,12 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -46,16 +48,16 @@ public class Service implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @NotNull(message = "{service.name.notNull}")
+    @Size(min = 5, max = 255, message = "{service.name.lenErr}")
     @Column(name = "service_name")
     private String serviceName;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{service.price.notNull}")
     @Column(name = "service_price")
     private BigDecimal servicePrice;
-    @Size(max = 255)
+    @Size(max = 255, message = "{service.description.lenErr}")
     @Column(name = "service_description")
     private String serviceDescription;
     @Size(max = 255)
@@ -64,6 +66,9 @@ public class Service implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "serviceId")
     private Set<BookingService> bookingServiceSet;
 
+     @Transient
+    private MultipartFile file;
+     
     public Service() {
     }
 
@@ -149,6 +154,20 @@ public class Service implements Serializable {
     @Override
     public String toString() {
         return "com.hh.pojo.Service[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
     
 }

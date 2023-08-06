@@ -17,13 +17,13 @@
         <form:input type="text" class="form-control" path="branchName" id="branchName" 
                     placeholder="Tên chi nhánh" name="branchName"/>
         <label for="branchName">Tên Chi Nhánh</label>
-        <%--<form:errors path="hallName" element="div" cssClass="text-danger"/>--%>
+        <form:errors path="branchName" element="div" cssClass="text-danger"/>
     </div>
     <div class="form-floating mb-3 mt-3">
         <form:input type="text" class="form-control" path="branchAddress" id="branchAddress" 
                     placeholder="Địa Chỉ" name="branchAddress"/>
         <label for="branchAddress">Địa Chỉ</label>
-        <%--<form:errors path="capacity" element="div" cssClass="text-danger"/>--%>
+        <form:errors path="branchAddress" element="div" cssClass="text-danger"/>
     </div>
     <div class="form-floating mb-3 mt-3">
         <button class="btn btn-info mt-1" type="submit"> 

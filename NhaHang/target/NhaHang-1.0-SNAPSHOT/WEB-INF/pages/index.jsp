@@ -5,6 +5,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<c:url value="/" var="indexAction" />
 <div class="content-wrapper mt-4">
     <div class="content-header">
         <div class="container-fluid">
@@ -45,7 +46,7 @@
                                  alt=""></a>
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a href="#">Chi Tiết</a>
+                        <a href="<c:url value="/foods"/>">Chi Tiết</a>
                     </h4>
                 </div>
             </div>
@@ -56,7 +57,7 @@
                                  alt=""></a>
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a href="#">Chi Tiết</a>
+                        <a href="<c:url value="/services"/>">Chi Tiết</a>
                     </h4>
                 </div>
             </div>
@@ -72,7 +73,7 @@
                 </div>
             </div>
         </div>
-           <div class="col-lg-4 col-md-6 mb-4">
+        <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
                 <a href="#"><img class="card-img-top" src="https://res.cloudinary.com/drqfqkwfo/image/upload/v1690904524/Tr%E1%BA%AFng_N%C3%BAi_%E1%BA%A2nh_l%C3%A0m_trung_t%C3%A2m_%C4%90%E1%BB%99ng_l%E1%BB%B1c_c%C3%A1_nh%C3%A2n_B%C3%A0i_%C4%91%C4%83ng_Instagram_jq2j2u.png"
                                  alt=""></a>

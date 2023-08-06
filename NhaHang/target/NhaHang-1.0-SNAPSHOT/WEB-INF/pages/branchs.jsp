@@ -9,7 +9,7 @@
 <section class="container">
     <h1 class="text-center text-primary mt-1">QUẢN LÝ CHI NHÁNH</h1>
     <div>
-        <a href="<c:url value="/branchs/create"/>" class="btn btn-warning mt-1">Thêm sản phẩm</a>
+        <a href="<c:url value="/branchs/create"/>" class="btn btn-warning mt-1">Thêm chi nhánh</a>
     </div>
     <c:if test="${counter > 1}">
         <ul class="pagination mt-1">
@@ -29,6 +29,7 @@
                 <th>Tên Chi Nhánh</th>
                 <th>Địa Chỉ</th>
                 <th>Danh Sách Các Hall</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>

@@ -43,13 +43,13 @@ public class Branch implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @NotNull(message = "{branch.name.notNull}")
+    @Size(min = 5, max = 255, message = "{branch.name.lenErr}")
     @Column(name = "branch_name")
     private String branchName;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @NotNull(message = "{branch.adress.notNull}")
+    @Size(min = 5, max = 255, message = "{branch.adress.lenErr}")
     @Column(name = "branch_address")
     private String branchAddress;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "branchId")

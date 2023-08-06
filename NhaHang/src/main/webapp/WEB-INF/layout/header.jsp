@@ -44,9 +44,9 @@
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="<c:url value="/halls"/>"/>Quản lý sảnh cưới</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Quản lý thức ăn</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/foods"/>">Quản lý thức ăn</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Quản lý dịch vụ</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/services"/>">Quản lý dịch vụ</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Quản lý nhân viên</a></li>
                         <li><hr class="dropdown-divider"></li>
@@ -81,6 +81,20 @@
                   <c:when test="${branch != null}">
                      <c:url value="/branchs" var="actionBranch" />
                      <form class="d-flex" action="${actionBranch}">
+                         <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
+                         <button class="btn btn-warning" type="submit">Tìm</button>
+                     </form>
+                 </c:when>
+                  <c:when test="${food != null}">
+                     <c:url value="/foods" var="actionFood" />
+                     <form class="d-flex" action="${actionFood}">
+                         <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
+                         <button class="btn btn-warning" type="submit">Tìm</button>
+                     </form>
+                 </c:when>
+                 <c:when test="${service != null}">
+                     <c:url value="/services" var="actionService" />
+                     <form class="d-flex" action="${actionService}">
                          <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
                          <button class="btn btn-warning" type="submit">Tìm</button>
                      </form>
