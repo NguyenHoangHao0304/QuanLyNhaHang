@@ -42,7 +42,7 @@
                     </td>
                     <td>${s.id}</td>
                     <td>${s.serviceName}</td>
-                    <td>${s.servicePrice}</td>
+                    <td>${s.servicePrice} VNĐ</td>
                     <td>${s.serviceDescription}</td>
                     <td>
                         <c:url value="/services/${s.id}" var="api"/>

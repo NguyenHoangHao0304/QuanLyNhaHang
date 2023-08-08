@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<h1 class="text-center text-info mt-1">EDIT CHI NHÁNH</h1>
+<h1 class="text-center text-info mt-1">EDIT DỊCH VỤ</h1>
 <c:url value="/services" var="action" />
 <form:form modelAttribute="service" method="post" action="${action}" enctype="multipart/form-data">
     <%--<form:errors path="*" element="div" cssClass="alert alert-danger"/>--%>
@@ -17,7 +17,7 @@
     <div class="form-floating mb-3 mt-3">
         <form:input type="text" class="form-control" path="serviceName" id="serviceName" 
                     placeholder="Tên dịch vụ" name="serviceName"/>
-        <label for="serviceName">Tên Dịch Vụ</label>
+        <label for="serviceName">Tên dịch vụ</label>
         <form:errors path="serviceName" element="div" cssClass="text-danger"/>
     </div>
     <div class="form-floating mb-3 mt-3">
@@ -35,7 +35,7 @@
     <div class="form-floating mb-3 mt-3">
         <form:input type="file" class="form-control" path="file" id="file" 
                     placeholder="Ảnh món ăn" />
-        <label for="file">Ảnh món ăn</label>
+        <label for="file">Ảnh dịch vụ</label>
     </div>
     <div class="form-floating mb-3 mt-3">
         <button class="btn btn-info mt-1" type="submit"> 

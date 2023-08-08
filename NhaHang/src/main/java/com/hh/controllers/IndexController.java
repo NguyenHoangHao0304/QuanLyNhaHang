@@ -5,6 +5,7 @@
 package com.hh.controllers;
 
 import com.hh.service.BranchService;
+import com.hh.service.EmployeeService;
 import com.hh.service.HallService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,14 @@ public class IndexController {
     private HallService HallService;
     @Autowired
     private BranchService branchService;
+    @Autowired
+    private EmployeeService employeeService;
 
     @ModelAttribute
     public void commonAttr(Model model, Map<String, String> params) {
         model.addAttribute("branchs", this.branchService.getBranchs(params));
         model.addAttribute("halls", this.HallService.getHalls(params));
+        model.addAttribute("employees", this.employeeService.getEmployees(params));
     }
 
     @RequestMapping("/")

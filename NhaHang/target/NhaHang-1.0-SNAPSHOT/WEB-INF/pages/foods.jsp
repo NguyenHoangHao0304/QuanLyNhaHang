@@ -40,7 +40,7 @@
                     </td>
                     <td>${f.id}</td>
                     <td>${f.foodName}</td>
-                    <td>${f.foodPrice}</td>
+                    <td>${f.foodPrice} VNĐ</td>
                     <td>
                         <c:url value="/foods/${f.id}" var="api"/>
                         <a href="${api}" class="btn btn-success">Cập Nhật</a>

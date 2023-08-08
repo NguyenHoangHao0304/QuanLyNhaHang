@@ -15,6 +15,7 @@
     <class>com.hh.api.pojo.Food</class>
     <class>com.hh.api.pojo.Feedback</class>
     <class>com.hh.api.pojo.Hall</class>
+    <class>com.hh.pojo.User</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/quanlynhahangtieccuoi?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

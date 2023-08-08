@@ -9,7 +9,7 @@
 <nav class="navbar navbar-expand-lg bg-light navbar-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="${action}"><img
-                src="https://res.cloudinary.com/drqfqkwfo/image/upload/v1690935139/logo1_guymfm.png"
+                src="<c:url value="/images/logo1.png"/>"
                 alt="Bootstrap" height="70" width="100"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
@@ -48,9 +48,9 @@
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="<c:url value="/services"/>">Quản lý dịch vụ</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Quản lý nhân viên</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/employees"/>">Quản lý nhân viên</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Quản lý User</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/users"/>">Quản lý User</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -69,40 +69,69 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Thống kê</a>
                 </li>
+                <c:choose>
+                    <c:when test="${pageContext.request.userPrincipal.name != null}">
+                        <li class="nav-item">
+                            <a class="nav-link text-danger" href="<c:url value="/"/>">${pageContext.request.userPrincipal.name}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-danger" href="<c:url value="/logout"/>">Đăng Xuất</a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/login"/>">Đăng Nhập</a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
             </ul>  
             <c:choose>
-                 <c:when test="${hall != null}">
-                     <c:url value="/halls" var="actionHall" />
-                     <form class="d-flex" action="${actionHall}">
-                         <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
-                         <button class="btn btn-warning" type="submit">Tìm</button>
-                     </form>
-                 </c:when> 
-                  <c:when test="${branch != null}">
-                     <c:url value="/branchs" var="actionBranch" />
-                     <form class="d-flex" action="${actionBranch}">
-                         <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
-                         <button class="btn btn-warning" type="submit">Tìm</button>
-                     </form>
-                 </c:when>
-                  <c:when test="${food != null}">
-                     <c:url value="/foods" var="actionFood" />
-                     <form class="d-flex" action="${actionFood}">
-                         <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
-                         <button class="btn btn-warning" type="submit">Tìm</button>
-                     </form>
-                 </c:when>
-                 <c:when test="${service != null}">
-                     <c:url value="/services" var="actionService" />
-                     <form class="d-flex" action="${actionService}">
-                         <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
-                         <button class="btn btn-warning" type="submit">Tìm</button>
-                     </form>
-                 </c:when>
-                 <c:otherwise>
-                 
-                 </c:otherwise>
-             </c:choose>
+                <c:when test="${hall != null}">
+                    <c:url value="/halls" var="actionHall" />
+                    <form class="d-flex" action="${actionHall}">
+                        <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
+                        <button class="btn btn-warning" type="submit">Tìm</button>
+                    </form>
+                </c:when> 
+                <c:when test="${branch != null}">
+                    <c:url value="/branchs" var="actionBranch" />
+                    <form class="d-flex" action="${actionBranch}">
+                        <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
+                        <button class="btn btn-warning" type="submit">Tìm</button>
+                    </form>
+                </c:when>
+                <c:when test="${food != null}">
+                    <c:url value="/foods" var="actionFood" />
+                    <form class="d-flex" action="${actionFood}">
+                        <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
+                        <button class="btn btn-warning" type="submit">Tìm</button>
+                    </form>
+                </c:when>
+                <c:when test="${service != null}">
+                    <c:url value="/services" var="actionService" />
+                    <form class="d-flex" action="${actionService}">
+                        <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
+                        <button class="btn btn-warning" type="submit">Tìm</button>
+                    </form>
+                </c:when>
+                <c:when test="${employee != null}">
+                    <c:url value="/employees" var="actionEmployee" />
+                    <form class="d-flex" action="${actionEmployee}">
+                        <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
+                        <button class="btn btn-warning" type="submit">Tìm</button>
+                    </form>
+                </c:when>
+                <c:when test="${user != null}">
+                    <c:url value="/users" var="actionUser" />
+                    <form class="d-flex" action="${actionUser}">
+                        <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
+                        <button class="btn btn-warning" type="submit">Tìm</button>
+                    </form>
+                </c:when>
+                <c:otherwise>
+                    <c:url value="/" var="action" />
+                </c:otherwise>
+            </c:choose>
 
         </div>
     </div>

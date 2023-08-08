@@ -35,8 +35,11 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"com.hh.controllers",
-     "com.hh.repository", "com.hh.service", "com.hh.api"})
+@ComponentScan(basePackages = {
+    "com.hh.controllers",
+    "com.hh.repository", 
+    "com.hh.service", 
+    "com.hh.api"})
 @PropertySource("classpath:configs.properties")
 public class WebAppContextConfig implements WebMvcConfigurer {
 
@@ -55,7 +58,10 @@ public class WebAppContextConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/resources/js/");
+        registry.addResourceHandler("/js/**")
+                .addResourceLocations("/WEB-INF/resources/js/");
+        registry.addResourceHandler("/images/**")
+                .addResourceLocations("/WEB-INF/resources/images/");
     }
 //    @Bean
 //    public InternalResourceViewResolver internalResourceViewResolver() {

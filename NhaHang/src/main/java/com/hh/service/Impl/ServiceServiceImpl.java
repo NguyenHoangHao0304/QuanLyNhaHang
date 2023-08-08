@@ -45,7 +45,7 @@ public class ServiceServiceImpl implements ServiceService {
                 Map res = this.cloudinary.uploader().upload(s.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
                 s.setServiceImage(res.get("secure_url").toString());
             } catch (IOException ex) {
-                Logger.getLogger(FoodServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ServiceServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return this.serviceRepository.addOrUpdateService(s);

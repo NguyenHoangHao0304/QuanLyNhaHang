@@ -28,7 +28,8 @@
                 <th>Id</th>
                 <th>Tên Chi Nhánh</th>
                 <th>Địa Chỉ</th>
-                <th>Danh Sách Các Hall</th>
+                <th>Halls</th>
+                <th>Employees</th>
                 <th></th>
             </tr>
         </thead>
@@ -54,6 +55,18 @@
                                 <c:choose>
                                     <c:when test="${h.branchId.id == b.id}">
                                         <li class="list-group-item" value="${h.branchId.id}">${h.hallName}</li>
+                                        </c:when>
+                                        <c:otherwise></c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="list-group list-group-flush">
+                            <c:forEach items="${employees}" var="e">
+                                <c:choose>
+                                    <c:when test="${e.branchId.id == b.id}">
+                                        <li class="list-group-item" value="${e.branchId.id}">${e.firstName} ${e.lastName}</li>
                                         </c:when>
                                         <c:otherwise></c:otherwise>
                                     </c:choose>
