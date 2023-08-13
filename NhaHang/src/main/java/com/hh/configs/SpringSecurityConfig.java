@@ -33,7 +33,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
     "com.hh.service",
     "com.hh.api"
 })
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private Environment env;
     @Autowired
@@ -55,19 +56,22 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http)
             throws Exception {
 
-        http.formLogin()
+        http.formLogin().loginPage("/login")
                 .usernameParameter("username")
-                .passwordParameter("password");
-
-        http.formLogin().defaultSuccessUrl("/")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/")
                 .failureUrl("/login?error");
 
+//        http.formLogin().defaultSuccessUrl("/")
+//                .failureUrl("/login?error");
         http.logout().logoutSuccessUrl("/login");
         http.exceptionHandling()
                 .accessDeniedPage("/login?accessDenied");
 
-//        http.authorizeRequests().antMatchers("/").permitAll()
-//                .antMatchers("/**/add")
+        http.authorizeRequests().antMatchers("/").permitAll()
+                .antMatchers("/admin/**")
+                .access("hasRole('ROLE_ADMIN')");
+//                .antMatchers("/users/{id}")
 //                .access("hasRole('ROLE_ADMIN')");
 //        .antMatchers("/**/pay")
 //                .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
@@ -85,7 +89,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
         return cloudinary;
     }
 
-     @Bean
+    @Bean
     public SimpleDateFormat simpleDateFormat() {
         return new SimpleDateFormat("yyyy-MM-dd");
     }

@@ -42,15 +42,15 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="<c:url value="/branchs"/>">Quản lý chi nhánh</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="<c:url value="/halls"/>"/>Quản lý sảnh cưới</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/halls"/>">Quản lý sảnh cưới</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="<c:url value="/foods"/>">Quản lý thức ăn</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="<c:url value="/services"/>">Quản lý dịch vụ</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="<c:url value="/employees"/>">Quản lý nhân viên</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/admin/employees"/>">Quản lý nhân viên</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="<c:url value="/users"/>">Quản lý User</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/admin/users"/>">Quản lý User</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -81,6 +81,9 @@
                     <c:otherwise>
                         <li class="nav-item">
                             <a class="nav-link" href="<c:url value="/login"/>">Đăng Nhập</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/register"/>">Đăng Ký</a>
                         </li>
                     </c:otherwise>
                 </c:choose>
@@ -115,14 +118,14 @@
                     </form>
                 </c:when>
                 <c:when test="${employee != null}">
-                    <c:url value="/employees" var="actionEmployee" />
+                    <c:url value="/admin/employees" var="actionEmployee" />
                     <form class="d-flex" action="${actionEmployee}">
                         <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
                         <button class="btn btn-warning" type="submit">Tìm</button>
                     </form>
                 </c:when>
                 <c:when test="${user != null}">
-                    <c:url value="/users" var="actionUser" />
+                    <c:url value="/admin/users" var="actionUser" />
                     <form class="d-flex" action="${actionUser}">
                         <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
                         <button class="btn btn-warning" type="submit">Tìm</button>

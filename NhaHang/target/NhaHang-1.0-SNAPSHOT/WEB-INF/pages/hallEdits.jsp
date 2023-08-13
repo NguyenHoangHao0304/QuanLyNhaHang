@@ -57,12 +57,14 @@
                         <option value="${b.id}" selected>${b.branchName}</option>
                     </c:when>
                     <c:otherwise>
+                        <option></option>
                         <option value="${b.id}">${b.branchName}</option>
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
         </form:select>
         <label for="branch" class="form-label">Chi Nhánh</label>
+         <form:errors path="branchId" element="div" cssClass="text-danger"/>
     </div>
     <div class="form-floating mb-3 mt-3">
         <button class="btn btn-info mt-1" type="submit"> 

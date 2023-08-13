@@ -5,7 +5,6 @@
 package com.hh.controllers;
 
 import com.hh.pojo.Hall;
-import com.hh.service.BranchService;
 import com.hh.service.HallService;
 import java.util.Map;
 import javax.validation.Valid;
@@ -15,7 +14,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,12 +44,12 @@ public class HallController {
         return "halls";
     }
     
-    @GetMapping("/halls/create")
+    @GetMapping("/admin/halls/create")
     public String create(Model model) {
         model.addAttribute("hall", new Hall());
         return "hallEdits";
     }
-    @GetMapping("/halls/{id}")
+    @GetMapping("/admin/halls/{id}")
     public String update(Model model, @PathVariable(value = "id")  int id ){
         model.addAttribute("hall", this.hallService.getHallById(id));
         return "hallEdits";

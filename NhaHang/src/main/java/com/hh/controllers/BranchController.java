@@ -43,13 +43,13 @@ public class BranchController {
         return "branchs";
     }
 
-    @GetMapping("/branchs/create")
+    @GetMapping("/admin/branchs/create")
     public String create(Model model) {
         model.addAttribute("branch", new Branch());
         return "branchEdits";
     }
 
-    @GetMapping("/branchs/{id}")
+    @GetMapping("/admin/branchs/{id}")
     public String update(Model model, @PathVariable(value = "id") int id){
         model.addAttribute("branch", this.branchService.getBranchById(id));
         return "branchEdits";

@@ -20,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -56,9 +58,10 @@ public class Hall implements Serializable {
     private String hallName;
     @Basic(optional = false)
     @NotNull(message = "{hall.capacity.notNull}")
+    @Max(value=2000,message = "Phải ít hơn 2000!")  @Min(value=50, message = "Phải nhiều hơn hoặc bằng 50")
     @Column(name = "capacity")
     private int capacity;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    //@Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull(message = "{hall.price.notNull}")
     @Column(name = "price_morning")
@@ -78,6 +81,7 @@ public class Hall implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hallId")
     private Set<Booking> bookingSet;
     @JoinColumn(name = "branch_id", referencedColumnName = "id")
+    @NotNull(message = "{hall.branch.notNull}")
     @ManyToOne(optional = false)
     private Branch branchId;
 

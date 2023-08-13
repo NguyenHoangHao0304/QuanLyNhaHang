@@ -17,6 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -52,13 +53,13 @@ public class Employee implements Serializable {
     @Size(min = 1, max = 255, message = "{employee.name.lenErr}")
     @Column(name = "last_name")
     private String lastName;
-    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    @Pattern(regexp="0[0-9\\s.-]{9,13}$", message="phone phải có định dạng 0xxxxxxxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull(message = "{employee.phone.notNull}")
-    @Size(min = 1, max = 10, message = "{employee.phone.lenErr}")
+    @Size(min = 10, max = 11, message = "{employee.phone.lenErr}")
     @Column(name = "phone")
     private String phone;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Email phải theo định dạng **@**.**")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull(message = "{employee.email.notNull}")
     @Size(min = 1, max = 255, message = "{employee.email.lenErr}")
@@ -66,6 +67,7 @@ public class Employee implements Serializable {
     private String email;
     @JoinColumn(name = "branch_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @NotNull(message = "{employee.branch.notNull}")
     private Branch branchId;
 
     public Employee() {

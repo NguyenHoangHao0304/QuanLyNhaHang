@@ -34,7 +34,7 @@ public class UserController {
     @Autowired
     private Environment env;
 
-    @RequestMapping("/users")
+    @RequestMapping("/admin/users")
     public String service(Model model, @RequestParam Map<String, String> params) {
         model.addAttribute("user", this.userService.getUsers(params));
         int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE1"));
@@ -43,24 +43,48 @@ public class UserController {
         return "users";
     }
 
-    @GetMapping("/users/create")
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+    
+    @GetMapping("/register")
+    public String registerView(Model model){
+        model.addAttribute("user", new User());
+        return "register";
+    }
+    
+    @PostMapping("/register")
+    public String register(Model model,@ModelAttribute(value = "user") User u){
+        String errMsg = "";
+        if(u.getPassword().equals(u.getConfirmPassword())){
+            if(this.userService.addUser(u) == true){
+                return "redirect:/login";
+            }else
+                errMsg = "Da co loi xay ra!";
+        }else
+            errMsg = "Mat khau khong khop!";
+        model.addAttribute("errMsg",errMsg);
+        return "register";
+    }
+    @GetMapping("/admin/users/create")
     public String create(Model model) {
         model.addAttribute("user", new User());
         return "userEdits";
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/admin/users/{id}")
     public String update(Model model, @PathVariable(value = "id") int id) {
         model.addAttribute("user", this.userService.getUserById(id));
         return "userEdits";
     }
 
-    @PostMapping("users")
+    @PostMapping("/admin/users")
     public String add(@ModelAttribute(value = "user") @Valid User u,
             BindingResult rs) {
         if (!rs.hasErrors()) {
             if (this.userService.addOrUpdateUser(u) == true) {
-                return "redirect:/users";
+                return "redirect:/admin/users";
             }
         }
         return "userEdits";

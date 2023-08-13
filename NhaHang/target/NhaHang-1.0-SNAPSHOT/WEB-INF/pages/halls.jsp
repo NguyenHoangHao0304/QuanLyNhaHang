@@ -10,7 +10,7 @@
 <section class="container">
     <h1 class="text-center text-primary mt-1">QUẢN LÝ SẢNH CƯỚI</h1>
     <div>
-        <a href="<c:url value="/halls/create"/>" class="btn btn-warning mt-1">Thêm Sảnh Cưới</a>
+        <a href="<c:url value="/admin/halls/create"/>" class="btn btn-warning mt-1">Thêm Sảnh Cưới</a>
     </div>
     <c:if test="${counter > 1}">
         <ul class="pagination mt-1">
@@ -49,7 +49,7 @@
                     <td>${h.priceWeekend} VNĐ</td>
                     <td>${h.branchId.branchName}</td>
                     <td>
-                        <c:url value="/halls/${h.id}" var="api"/>
+                        <c:url value="/admin/halls/${h.id}" var="api"/>
                         <a href="${api}" class="btn btn-success">Cập Nhật</a>
                         <button class="btn btn-danger" onclick="deleteHall('${api}')">Xóa</button>
                     </td>

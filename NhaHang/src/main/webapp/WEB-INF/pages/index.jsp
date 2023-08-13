@@ -68,7 +68,7 @@
                                  alt=""></a>
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a href="<c:url value="/employees"/>">Chi Tiết</a>
+                        <a href="<c:url value="/admin/employees"/>">Chi Tiết</a>
                     </h4>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                                  alt=""></a>
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a href="<c:url value="/users"/>">Chi Tiết</a>
+                        <a href="<c:url value="/admin/users"/>">Chi Tiết</a>
                     </h4>
                 </div>
             </div>

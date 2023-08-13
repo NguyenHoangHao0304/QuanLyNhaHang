@@ -122,10 +122,23 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User getUserByUsername(String username) {
         Session s = this.factory.getObject().getCurrentSession();
-        Query q = s.createQuery("From User Where username=:un");
-        q.setParameter("un", username);
+        Query q = s.createQuery("SELECT u FROM User u WHERE u.username = :username");
+        q.setParameter("username", username);
 
         return (User) q.getSingleResult();
     }
+
+    @Override
+    public boolean addUser(User u) {
+        Session session = this.factory.getObject().getCurrentSession();
+        try {
+            session.save(u);
+            return true;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
 }

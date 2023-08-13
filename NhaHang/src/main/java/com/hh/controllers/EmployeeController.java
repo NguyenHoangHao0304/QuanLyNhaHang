@@ -5,7 +5,6 @@
 package com.hh.controllers;
 
 import com.hh.pojo.Employee;
-import com.hh.pojo.Hall;
 import com.hh.service.EmployeeService;
 import java.util.Map;
 import javax.validation.Valid;
@@ -34,7 +33,7 @@ public class EmployeeController {
     @Autowired
     private Environment env;
 
-    @RequestMapping("/employees")
+    @RequestMapping("/admin/employees")
     public String hall(Model model, @RequestParam Map<String, String> params) {
         model.addAttribute("employee", this.employeeService.getEmployees(params));
         int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE2"));
@@ -44,24 +43,24 @@ public class EmployeeController {
         return "employees";
     }
     
-    @GetMapping("/employees/create")
+    @GetMapping("/admin/employees/create")
     public String create(Model model) {
         model.addAttribute("employee", new Employee());
         return "employeeEdits";
     }
-    @GetMapping("/employees/{id}")
+    @GetMapping("/admin/employees/{id}")
     public String update(Model model, @PathVariable(value = "id")  int id ){
         model.addAttribute("employee", this.employeeService.getEmployeeById(id));
         return "employeeEdits";
     }
 
-    @PostMapping("/employees")
+    @PostMapping("/admin/employees")
     public String add(@ModelAttribute(value = "employee") @Valid Employee e,
             BindingResult rs) {
 
         if (!rs.hasErrors()) {
             if (this.employeeService.addOrUpdateEmployee(e) == true) {
-                return "redirect:/employees";
+                return "redirect:/admin/employees";
             }
         }
         return "employeeEdits";

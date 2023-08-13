@@ -44,13 +44,13 @@ public class FoodController {
         return "foods";
     }
 
-    @GetMapping("/foods/create")
+    @GetMapping("/admin/foods/create")
     public String create(Model model) {
         model.addAttribute("food", new Food());
         return "foodEdits";
     }
 
-    @GetMapping("/foods/{id}")
+    @GetMapping("/admin/foods/{id}")
     public String update(Model model, @PathVariable(value = "id") int id) {
         model.addAttribute("food", this.foodService.getFoodById(id));
         return "foodEdits";

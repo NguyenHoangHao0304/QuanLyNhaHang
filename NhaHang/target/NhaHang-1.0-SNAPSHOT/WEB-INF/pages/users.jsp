@@ -6,17 +6,17 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<c:url value="/users" var="userAction" />
+<c:url value="/admin/users" var="userAction" />
 <section class="container">
     <h1 class="text-center text-primary mt-1">QUẢN LÝ USER</h1>
     <div>
-        <a href="<c:url value="/users/create"/>" class="btn btn-warning mt-1">Thêm tài khoản</a>
+        <a href="<c:url value="/admin/users/create"/>" class="btn btn-warning mt-1">Thêm tài khoản</a>
     </div>
     <c:if test="${counter > 1}">
         <ul class="pagination mt-1">
             <li class="page-item"><a class="page-link" href="${userAction}">Tất cả</a></li>
                 <c:forEach begin="1" end="${counter}" var="i">
-                    <c:url value="/users" var="pageUserAction" >
+                    <c:url value="/admin/users" var="pageUserAction" >
                         <c:param name="page" value="${i}"/>
                     </c:url>
                 <li class="page-item"><a class="page-link" href="${pageUserAction}">${i}</a></li>
@@ -48,7 +48,7 @@
                     <td>${u.password}</td>
                     <td>${u.userRole}</td>
                     <td>
-                        <c:url value="/users/${u.id}" var="api"/>
+                        <c:url value="/admin/users/${u.id}" var="api"/>
                         <a href="${api}" class="btn btn-success">Cập Nhật</a>
                         <button class="btn btn-danger" onclick="deleteUser('${api}')">Xóa</button>
                     </td>

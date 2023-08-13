@@ -43,13 +43,13 @@ public class ServiceController {
         return "services";
     }
 
-    @GetMapping("/services/create")
+    @GetMapping("/admin/services/create")
     public String create(Model model) {
         model.addAttribute("service", new Service());
         return "serviceEdits";
     }
 
-    @GetMapping("/services/{id}")
+    @GetMapping("/admin/services/{id}")
     public String update(Model model, @PathVariable(value = "id") int id) {
         model.addAttribute("service", this.serviceService.getServiceById(id));
         return "serviceEdits";

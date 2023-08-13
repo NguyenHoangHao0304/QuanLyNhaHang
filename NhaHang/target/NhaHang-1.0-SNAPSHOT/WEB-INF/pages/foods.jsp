@@ -9,7 +9,7 @@
 <section class="container">
     <h1 class="text-center text-primary mt-1">MENU</h1>
     <div>
-        <a href="<c:url value="/foods/create"/>" class="btn btn-warning mt-1">Thêm món ăn</a>
+        <a href="<c:url value="/admin/foods/create"/>" class="btn btn-warning mt-1">Thêm món ăn</a>
     </div>
     <c:if test="${counter > 1}">
         <ul class="pagination mt-1">
@@ -42,7 +42,7 @@
                     <td>${f.foodName}</td>
                     <td>${f.foodPrice} VNĐ</td>
                     <td>
-                        <c:url value="/foods/${f.id}" var="api"/>
+                        <c:url value="/admin/foods/${f.id}" var="api"/>
                         <a href="${api}" class="btn btn-success">Cập Nhật</a>
                         <button class="btn btn-danger" onclick="deleteFood('${api}')">Xóa</button>
                     </td>

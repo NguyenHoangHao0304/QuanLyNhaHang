@@ -9,7 +9,7 @@
 <section class="container">
     <h1 class="text-center text-primary mt-1">QUẢN LÝ CHI NHÁNH</h1>
     <div>
-        <a href="<c:url value="/branchs/create"/>" class="btn btn-warning mt-1">Thêm chi nhánh</a>
+        <a href="<c:url value="/admin/branchs/create"/>" class="btn btn-warning mt-1">Thêm chi nhánh</a>
     </div>
     <c:if test="${counter > 1}">
         <ul class="pagination mt-1">
@@ -74,7 +74,8 @@
                         </ul>
                     </td>
                     <td>
-                        <c:url value="/branchs/${b.id}" var="api"/>
+                        <c:url value="/admin/branchs/${b.id}" var="api"/>
+                        <%--<c:url value="/api/admin/branchs/${b.id}" var="apidelete"/>--%>
                         <a href="${api}" class="btn btn-success">Cập Nhật</a>
                         <button class="btn btn-danger" onclick="deleteBranch('${api}')">Xóa</button>
                     </td>

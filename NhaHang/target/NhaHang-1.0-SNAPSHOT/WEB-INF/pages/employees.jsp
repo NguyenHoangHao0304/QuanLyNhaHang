@@ -6,17 +6,17 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<c:url value="/employees" var="employeeAction" />
+<c:url value="/admin/employees" var="employeeAction" />
 <section class="container">
     <h1 class="text-center text-primary mt-1">QUẢN LÝ NHÂN VIÊN</h1>
     <div>
-        <a href="<c:url value="/employees/create"/>" class="btn btn-warning mt-1">Thêm Nhân Viên</a>
+        <a href="<c:url value="/admin/employees/create"/>" class="btn btn-warning mt-1">Thêm Nhân Viên</a>
     </div>
     <c:if test="${counter > 1}">
         <ul class="pagination mt-1">
             <li class="page-item"><a class="page-link" href="${employeeAction}">Tất cả</a></li>
                 <c:forEach begin="1" end="${counter}" var="i">
-                    <c:url value="/employees" var="pageEmployeeAction" >
+                    <c:url value="/admin/employees" var="pageEmployeeAction" >
                         <c:param name="page" value="${i}"/>
                     </c:url>
                 <li class="page-item"><a class="page-link" href="${pageEmployeeAction}">${i}</a></li>
@@ -45,7 +45,7 @@
                     <td>${e.email}</td>
                     <td>${e.branchId.branchName}</td>
                     <td>
-                        <c:url value="/employees/${e.id}" var="api"/>
+                        <c:url value="/admin/employees/${e.id}" var="api"/>
                         <a href="${api}" class="btn btn-success">Cập Nhật</a>
                         <button class="btn btn-danger" onclick="deleteEmployee('${api}')">Xóa</button>
                     </td>

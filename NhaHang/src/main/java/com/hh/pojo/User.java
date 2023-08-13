@@ -42,6 +42,9 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByUserRole", query = "SELECT u FROM User u WHERE u.userRole = :userRole")})
 public class User implements Serializable {
 
+    public static final String ADMIN = "ROLE_ADMIN";
+    public static final String EMPLOYEE = "ROLE_EMPLOYEE";
+    public static final String CUSTOMER = "ROLE_CUSTOMER";
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,31 +52,32 @@ public class User implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @NotNull(message = "{user.name.notNull}")
+    @Size(min = 1, max = 45, message = "{user.name.notNull}")
     @Column(name = "first_name")
     private String firstName;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @NotNull(message = "{user.name.notNull}")
+    @Size(min = 1, max = 45, message = "{user.name.notNull}")
     @Column(name = "last_name")
     private String lastName;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 300)
+    @NotNull(message = "{user.username.notNull}")
+    @Size(min = 1, max = 300, message = "{user.username.notNull}")
     @Column(name = "username")
     private String username;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 300)
+    @NotNull(message = "{user.password.notNull}")
+    @Size(min = 1, max = 300, message = "{user.password.notNull}")
     @Column(name = "password")
     private String password;
+    @NotNull
     @Size(max = 300)
     @Column(name = "avatar")
     private String avatar;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @NotNull(message = "{user.role.notNull}")
+    @Size(min = 1, max = 45,message = "{user.role.notNull}")
     @Column(name = "user_role")
     private String userRole;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
@@ -83,7 +87,9 @@ public class User implements Serializable {
 
     @Transient
     private MultipartFile file;
-
+    @Transient
+    private String confirmPassword;
+    
     public User() {
     }
 
@@ -211,6 +217,20 @@ public class User implements Serializable {
      */
     public void setFile(MultipartFile file) {
         this.file = file;
+    }
+
+    /**
+     * @return the confirmPassword
+     */
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    /**
+     * @param confirmPassword the confirmPassword to set
+     */
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
 }

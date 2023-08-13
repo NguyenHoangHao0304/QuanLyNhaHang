@@ -21,6 +21,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -28,12 +29,15 @@ import org.springframework.stereotype.Service;
  * @author Admin
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private Cloudinary cloudinary;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     @Override
     public List<User> getUsers(Map<String, String> params) {
         return this.userRepository.getUsers(params);
@@ -46,6 +50,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public boolean addOrUpdateUser(User u) {
+
+        String pass = u.getPassword();
+        u.setPassword(this.passwordEncoder.encode(pass));
         if (!u.getFile().isEmpty()) {
             try {
                 Map res = this.cloudinary.uploader().upload(u.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
@@ -83,5 +90,21 @@ public class UserServiceImpl implements UserService{
     public User getUserByUsername(String username) {
         return this.userRepository.getUserByUsername(username);
     }
-    
+
+    @Override
+    public boolean addUser(User u) {
+        String pass = u.getPassword();
+        u.setPassword(this.passwordEncoder.encode(pass));
+        u.setUserRole(User.CUSTOMER);
+        if (!u.getFile().isEmpty()) {
+            try {
+                Map res = this.cloudinary.uploader().upload(u.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+                u.setAvatar(res.get("secure_url").toString());
+            } catch (IOException ex) {
+                Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return this.userRepository.addUser(u);
+    }
+
 }
