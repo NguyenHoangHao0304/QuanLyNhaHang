@@ -8,9 +8,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <h1 class="text-center text-info mt-1">ĐĂNG KÝ</h1>
-<c:if test="${param.error != null}">
+<c:if test="${errMsg != null}">
     <div class="alert alert-danger">
-        Da co loi xay ra!
+        ${errMsg}
     </div>
 </c:if>
 <c:url value="/register" var="action" />
@@ -23,25 +23,21 @@
         <form:input type="text" class="form-control" path="firstName" id="firstName" 
                     placeholder="Họ" name="firstName"/>
         <label for="firstName">Họ</label>
-        <form:errors path="firstName" element="div" cssClass="text-danger"/>
     </div>
     <div class="form-floating mb-3 mt-3">
         <form:input type="text" class="form-control" path="lastName" id="lastName" 
                     placeholder="Tên" name="lastName"/>
         <label for="lastName">Tên</label>
-        <form:errors path="lastName" element="div" cssClass="text-danger"/>
     </div>
     <div class="form-floating mb-3 mt-3">
         <form:input type="text" class="form-control" path="username" id="username" 
                     placeholder="username" name="username"/>
         <label for="username">Username</label>
-        <form:errors path="username" element="div" cssClass="text-danger"/>
     </div>
     <div class="form-floating mb-3 mt-3">
         <form:input type="password" class="form-control" path="password" id="password" 
                     placeholder="password" name="password"/>
         <label for="password">Password</label>
-        <form:errors path="password" element="div" cssClass="text-danger"/>
     </div>
     <div class="form-floating mb-3 mt-3">
         <form:input type="password" class="form-control" path="confirmPassword" id="confirm-password" 

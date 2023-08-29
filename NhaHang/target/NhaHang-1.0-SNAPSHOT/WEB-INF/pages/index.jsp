@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:url value="/" var="indexAction" />
 <div class="content-wrapper mt-4">
@@ -62,27 +63,30 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="<c:url value="/images/nhanvien.png"/>"
-                                 alt=""></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="<c:url value="/admin/employees"/>">Chi Tiết</a>
-                    </h4>
+        <sec:authorize access="hasRole('ROLE_ADMIN')"> 
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="<c:url value="/images/nhanvien.png"/>"
+                                     alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="<c:url value="/admin/employees"/>">Chi Tiết</a>
+                        </h4>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="<c:url value="/images/taikhoan.png"/>"
-                                 alt=""></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="<c:url value="/admin/users"/>">Chi Tiết</a>
-                    </h4>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="<c:url value="/images/taikhoan.png"/>"
+                                     alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="<c:url value="/admin/users"/>">Chi Tiết</a>
+                        </h4>
+                    </div>
                 </div>
             </div>
-        </div>
+        </sec:authorize>
+
     </div>
 </div>

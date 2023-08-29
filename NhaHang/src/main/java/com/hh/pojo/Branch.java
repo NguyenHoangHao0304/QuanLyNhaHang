@@ -4,6 +4,7 @@
  */
 package com.hh.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -53,10 +54,13 @@ public class Branch implements Serializable {
     @Column(name = "branch_address")
     private String branchAddress;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "branchId")
+    @JsonIgnore
     private Set<Feedback> feedbackSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "branchId")
+    @JsonIgnore
     private Set<Hall> hallSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "branchId")
+    @JsonIgnore
     private Set<Employee> employeeSet;
 
     public Branch() {

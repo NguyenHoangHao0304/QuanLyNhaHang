@@ -61,9 +61,10 @@ public class UserController {
             if(this.userService.addUser(u) == true){
                 return "redirect:/login";
             }else
-                errMsg = "Da co loi xay ra!";
+                errMsg = "Bạn nhập không đủ thông tin bên dưới!"
+                        + " Vui lòng điền đầy đủ thông tin!";
         }else
-            errMsg = "Mat khau khong khop!";
+            errMsg = "Mật khẩu không khớp nhau!";
         model.addAttribute("errMsg",errMsg);
         return "register";
     }

@@ -103,7 +103,8 @@ public class UserServiceImpl implements UserService {
             } catch (IOException ex) {
                 Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        }else
+            return System.out.checkError();
         return this.userRepository.addUser(u);
     }
 

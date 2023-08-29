@@ -4,6 +4,7 @@
  */
 package com.hh.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Set;
@@ -79,10 +80,12 @@ public class Hall implements Serializable {
     @Column(name = "price_weekend")
     private BigDecimal priceWeekend;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hallId")
+    @JsonIgnore
     private Set<Booking> bookingSet;
     @JoinColumn(name = "branch_id", referencedColumnName = "id")
     @NotNull(message = "{hall.branch.notNull}")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private Branch branchId;
 
     public Hall() {

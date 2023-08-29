@@ -5,7 +5,6 @@
 package com.hh.repository;
 
 import com.hh.pojo.Branch;
-import com.hh.pojo.Hall;
 import java.util.List;
 import java.util.Map;
 

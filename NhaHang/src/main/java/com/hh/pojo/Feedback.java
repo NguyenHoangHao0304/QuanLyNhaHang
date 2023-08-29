@@ -16,7 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -30,7 +29,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Feedback.findAll", query = "SELECT f FROM Feedback f"),
     @NamedQuery(name = "Feedback.findById", query = "SELECT f FROM Feedback f WHERE f.id = :id"),
-    @NamedQuery(name = "Feedback.findByFeedbackType", query = "SELECT f FROM Feedback f WHERE f.feedbackType = :feedbackType"),
     @NamedQuery(name = "Feedback.findByFeedbackDescription", query = "SELECT f FROM Feedback f WHERE f.feedbackDescription = :feedbackDescription")})
 public class Feedback implements Serializable {
 
@@ -40,14 +38,7 @@ public class Feedback implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "feedback_type")
-    private String feedbackType;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @Size(max = 255)
     @Column(name = "feedback_description")
     private String feedbackDescription;
     @JoinColumn(name = "branch_id", referencedColumnName = "id")
@@ -64,26 +55,12 @@ public class Feedback implements Serializable {
         this.id = id;
     }
 
-    public Feedback(Integer id, String feedbackType, String feedbackDescription) {
-        this.id = id;
-        this.feedbackType = feedbackType;
-        this.feedbackDescription = feedbackDescription;
-    }
-
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getFeedbackType() {
-        return feedbackType;
-    }
-
-    public void setFeedbackType(String feedbackType) {
-        this.feedbackType = feedbackType;
     }
 
     public String getFeedbackDescription() {

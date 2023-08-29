@@ -4,13 +4,17 @@
     Author     : Admin
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:url value="/foods" var="foodAction" />
 <section class="container">
-    <h1 class="text-center text-primary mt-1">MENU</h1>
-    <div>
-        <a href="<c:url value="/admin/foods/create"/>" class="btn btn-warning mt-1">Thêm món ăn</a>
-    </div>
+    <h1 class="text-center text-primary mt-1"> MÓN ĂN </h1>
+    <sec:authorize access="hasRole('ROLE_ADMIN')"> 
+        <div>
+            <a href="<c:url value="/admin/foods/create"/>" class="btn btn-warning mt-1">Thêm món ăn</a>
+        </div>
+    </sec:authorize>
+
     <c:if test="${counter > 1}">
         <ul class="pagination mt-1">
             <li class="page-item"><a class="page-link" href="${foodAction}">Tất cả</a></li>
@@ -41,11 +45,15 @@
                     <td>${f.id}</td>
                     <td>${f.foodName}</td>
                     <td>${f.foodPrice} VNĐ</td>
-                    <td>
-                        <c:url value="/admin/foods/${f.id}" var="api"/>
-                        <a href="${api}" class="btn btn-success">Cập Nhật</a>
-                        <button class="btn btn-danger" onclick="deleteFood('${api}')">Xóa</button>
-                    </td>
+                    <sec:authorize access="hasRole('ROLE_ADMIN')"> 
+                        <td>
+                            <c:url value="/admin/foods/${f.id}" var="api"/>
+                            <c:url value="/api/admin/foods/${f.id}" var="apiDlt"/>
+                            <a href="${api}" class="btn btn-success">Cập Nhật</a>
+                            <button class="btn btn-danger" onclick="deleteFood('${apiDlt}')">Xóa</button>
+                        </td>
+                    </sec:authorize>
+
                 </tr>
             </c:forEach>
         </tbody>

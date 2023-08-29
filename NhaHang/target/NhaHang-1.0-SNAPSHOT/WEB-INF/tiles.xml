@@ -87,5 +87,15 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" 
                        value="/WEB-INF/pages/register.jsp" />
     </definition>
+    <definition name="bookings" extends="baseLayout">
+        <put-attribute name="title" value="Booking" />
+        <put-attribute name="content" 
+                       value="/WEB-INF/pages/bookings.jsp" />
+    </definition>
+    <definition name="bookingform" extends="baseLayout">
+        <put-attribute name="title" value="Booking Form" />
+        <put-attribute name="content" 
+                       value="/WEB-INF/pages/bookingform.jsp" />
+    </definition>
 </tiles-definitions>
 

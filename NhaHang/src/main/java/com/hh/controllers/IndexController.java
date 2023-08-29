@@ -30,12 +30,15 @@ public class IndexController {
     private BranchService branchService;
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private UserService userService;
 
     @ModelAttribute
     public void commonAttr(Model model, Map<String, String> params) {
         model.addAttribute("branchs", this.branchService.getBranchs(params));
         model.addAttribute("halls", this.HallService.getHalls(params));
         model.addAttribute("employees", this.employeeService.getEmployees(params));
+        model.addAttribute("users", this.userService.getUsers(params));
     }
 
     @RequestMapping("/")

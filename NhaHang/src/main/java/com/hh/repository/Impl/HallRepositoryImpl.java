@@ -77,7 +77,6 @@ public class HallRepositoryImpl implements HallRepository {
         }
 
 //        q.orderBy(builder.desc(r.get("id")));
-
         Query query = session.createQuery(q);
 
         if (params != null) {
@@ -136,5 +135,6 @@ public class HallRepositoryImpl implements HallRepository {
             return false;
         }
     }
+
 
 }

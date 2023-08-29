@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:url value="/" var="action" />
 <nav class="navbar navbar-expand-lg bg-light navbar-light">
@@ -37,20 +38,22 @@
                 <li class="nav-item dropdown">
                     <a
                         class="nav-link dropdown-toggle" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false"> Quản lý
+                        data-bs-toggle="dropdown" aria-expanded="false"> Nhà Hàng
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="<c:url value="/branchs"/>">Quản lý chi nhánh</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/branchs"/>">Chi Nhánh</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="<c:url value="/halls"/>">Quản lý sảnh cưới</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/halls"/>">Sảnh Cưới</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="<c:url value="/foods"/>">Quản lý thức ăn</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/foods"/>">Thức Ăn</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="<c:url value="/services"/>">Quản lý dịch vụ</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="<c:url value="/admin/employees"/>">Quản lý nhân viên</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="<c:url value="/admin/users"/>">Quản lý User</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/services"/>">Dịch Vụ</a></li>
+                            <sec:authorize access="hasRole('ROLE_ADMIN')"> 
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="<c:url value="/admin/employees"/>">Nhân Viên</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="<c:url value="/admin/users"/>">User</a></li>
+                            </sec:authorize>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -59,16 +62,27 @@
                         data-bs-toggle="dropdown" aria-expanded="false"> Tiệc
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Thông tin đặt tiệc</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Hóa đơn</a></li>
-                        <li><hr class="dropdown-divider"></li>
+                        <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER','ROLE_EMPLOYEE')"> 
+                            <li><a class="dropdown-item" href="<c:url value="/bookings"/>">Thông tin đặt tiệc</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            </sec:authorize>
+                            <sec:authorize access="hasRole('ROLE_ADMIN')"> 
+                            <li><a class="dropdown-item" href="#">Hóa đơn</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            </sec:authorize>
                         <li><a class="dropdown-item" href="#">Feedback</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Thống kê</a>
-                </li>
+                <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_EMPLOYEE')"> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Thống kê</a>
+                    </li>
+                </sec:authorize>
+                <sec:authorize access="hasRole('ROLE_CUSTOMER')"> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/user/bookings/create"/>">Đặt Tiệc</a>
+                    </li>   
+                </sec:authorize>
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
                         <li class="nav-item">
@@ -127,6 +141,13 @@
                 <c:when test="${user != null}">
                     <c:url value="/admin/users" var="actionUser" />
                     <form class="d-flex" action="${actionUser}">
+                        <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
+                        <button class="btn btn-warning" type="submit">Tìm</button>
+                    </form>
+                </c:when>
+                <c:when test="${booking != null}">
+                    <c:url value="/bookings" var="actionBooking" />
+                    <form class="d-flex" action="${actionBooking}">
                         <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
                         <button class="btn btn-warning" type="submit">Tìm</button>
                     </form>

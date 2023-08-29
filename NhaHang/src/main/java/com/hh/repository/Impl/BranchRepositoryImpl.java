@@ -5,7 +5,6 @@
 package com.hh.repository.Impl;
 
 import com.hh.pojo.Branch;
-import com.hh.pojo.Hall;
 import com.hh.repository.BranchRepository;
 import java.util.ArrayList;
 import java.util.List;

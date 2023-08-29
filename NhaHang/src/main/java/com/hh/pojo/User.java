@@ -52,13 +52,13 @@ public class User implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull(message = "{user.name.notNull}")
-    @Size(min = 1, max = 45, message = "{user.name.notNull}")
+    @NotNull(message = "{user.firstname.notNull}")
+    @Size(min = 1, max = 45, message = "{user.firstname.notNull}")
     @Column(name = "first_name")
     private String firstName;
     @Basic(optional = false)
-    @NotNull(message = "{user.name.notNull}")
-    @Size(min = 1, max = 45, message = "{user.name.notNull}")
+    @NotNull(message = "{user.lastname.notNull}")
+    @Size(min = 1, max = 45, message = "{user.lastname.notNull}")
     @Column(name = "last_name")
     private String lastName;
     @Basic(optional = false)

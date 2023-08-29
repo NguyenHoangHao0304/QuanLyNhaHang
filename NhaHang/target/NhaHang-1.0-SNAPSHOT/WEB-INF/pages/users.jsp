@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:url value="/admin/users" var="userAction" />
 <section class="container">
-    <h1 class="text-center text-primary mt-1">QUẢN LÝ USER</h1>
+    <h1 class="text-center text-primary mt-1">USER</h1>
     <div>
         <a href="<c:url value="/admin/users/create"/>" class="btn btn-warning mt-1">Thêm tài khoản</a>
     </div>

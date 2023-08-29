@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:url value="/admin/employees" var="employeeAction" />
 <section class="container">
-    <h1 class="text-center text-primary mt-1">QUẢN LÝ NHÂN VIÊN</h1>
+    <h1 class="text-center text-primary mt-1">NHÂN VIÊN</h1>
     <div>
         <a href="<c:url value="/admin/employees/create"/>" class="btn btn-warning mt-1">Thêm Nhân Viên</a>
     </div>

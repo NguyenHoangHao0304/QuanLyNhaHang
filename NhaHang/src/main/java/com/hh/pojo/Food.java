@@ -4,6 +4,7 @@
  */
 package com.hh.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Set;
@@ -59,10 +60,12 @@ public class Food implements Serializable {
     @Size(max = 255)
     @Column(name = "food_image")
     private String foodImage;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "foodId")
     private Set<BookingFood> bookingFoodSet;
 
     @Transient
+    @JsonIgnore
     private MultipartFile file;
     
     public Food() {

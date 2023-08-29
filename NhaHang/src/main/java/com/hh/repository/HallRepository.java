@@ -23,4 +23,5 @@ public interface HallRepository {
     Hall getHallById(int id);
 
     boolean deleteHall(int id);
+    
 }

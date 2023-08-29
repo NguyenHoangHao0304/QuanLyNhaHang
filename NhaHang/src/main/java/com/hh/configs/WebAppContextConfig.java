@@ -7,6 +7,8 @@ package com.hh.configs;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.hh.formatter.BranchFormatter;
+import com.hh.formatter.HallFormatter;
+import com.hh.formatter.UserFormatter;
 import java.text.SimpleDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -54,6 +56,8 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new BranchFormatter());
+        registry.addFormatter(new UserFormatter());
+        registry.addFormatter(new HallFormatter());
     }
 
     @Override

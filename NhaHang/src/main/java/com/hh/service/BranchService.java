@@ -22,4 +22,5 @@ public interface BranchService {
     Branch getBranchById(int id);
 
     boolean deleteBranch(int id);
+    
 }

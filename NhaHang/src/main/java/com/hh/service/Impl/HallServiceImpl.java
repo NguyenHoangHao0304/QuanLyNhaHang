@@ -47,4 +47,5 @@ public class HallServiceImpl implements HallService {
         return this.HallRepo.deleteHall(id);
     }
 
+
 }
