@@ -37,7 +37,7 @@ public class ApiFoodController {
         this.foodService.deleteFood(id);
     }
 
-    @GetMapping("/foods")
+    @GetMapping("/foods/")
     @CrossOrigin
     public ResponseEntity<List<Food>> list(@RequestParam Map<String, String> params) {
         return new ResponseEntity<>(this.foodService.getFoods(params), HttpStatus.OK);

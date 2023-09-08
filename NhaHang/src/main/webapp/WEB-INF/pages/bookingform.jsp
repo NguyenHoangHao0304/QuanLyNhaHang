@@ -13,8 +13,9 @@
     <%--<form:errors path="*" element="div" cssClass="alert alert-danger"/>--%>
 
     <form:hidden path="id"/>
+    <form:hidden path="userId" value="${booking.userId.id}"/>
     <div class="form-floating mb-3 mt-3">
-        <form:input type="text" class="form-control" path="bookingDate" id="bookingDate" 
+        <form:input type="date" class="form-control" path="bookingDate" id="bookingDate" 
                     placeholder="Ngày Cưới" name="bookingDate"/>
         <label for="bookingDate">Ngày Cưới</label>
     </div>
@@ -45,7 +46,7 @@
         </form:select>
         <label for="branch" class="form-label">Sảnh Cưới</label>
     </div>
-    <div class="form-floating mb-3 mt-3">
+    <%--<div class="form-floating mb-3 mt-3">
         <form:select class="form-select" id="user" name="user" path="userId">
             <c:forEach items="${users}" var="u">
                 <c:choose>
@@ -60,7 +61,7 @@
             </c:forEach>
         </form:select>
         <label for="branch" class="form-label">User</label>
-    </div>
+    </div>--%>
     <div class="form-floating mb-3 mt-3">
         <button class="btn btn-info mt-1" type="submit"> 
             <c:choose>

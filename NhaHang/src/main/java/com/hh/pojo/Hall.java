@@ -5,8 +5,8 @@
 package com.hh.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -21,12 +21,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -34,17 +33,16 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "hall")
-@XmlRootElement
+@JsonIgnoreProperties(ignoreUnknown = true)
 @NamedQueries({
     @NamedQuery(name = "Hall.findAll", query = "SELECT h FROM Hall h"),
     @NamedQuery(name = "Hall.findById", query = "SELECT h FROM Hall h WHERE h.id = :id"),
     @NamedQuery(name = "Hall.findByHallName", query = "SELECT h FROM Hall h WHERE h.hallName = :hallName"),
     @NamedQuery(name = "Hall.findByCapacity", query = "SELECT h FROM Hall h WHERE h.capacity = :capacity"),
-    @NamedQuery(name = "Hall.findByPriceMorning", query = "SELECT h FROM Hall h WHERE h.priceMorning = :priceMorning"),
-    @NamedQuery(name = "Hall.findByPriceAfternoon", query = "SELECT h FROM Hall h WHERE h.priceAfternoon = :priceAfternoon"),
-    @NamedQuery(name = "Hall.findByPriceEvening", query = "SELECT h FROM Hall h WHERE h.priceEvening = :priceEvening"),
-    @NamedQuery(name = "Hall.findByPriceWeekend", query = "SELECT h FROM Hall h WHERE h.priceWeekend = :priceWeekend")})
+    @NamedQuery(name = "Hall.findByHallImage", query = "SELECT h FROM Hall h WHERE h.hallImage = :hallImage")})
 public class Hall implements Serializable {
+
+    
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,41 +51,30 @@ public class Hall implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull(message = "{hall.name.notNull}")
-    @Size(min = 1, max = 255, message = "{hall.name.lenErr}")
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "hall_name")
     private String hallName;
     @Basic(optional = false)
-    @NotNull(message = "{hall.capacity.notNull}")
-    @Max(value=2000,message = "Phải ít hơn 2000!")  @Min(value=50, message = "Phải nhiều hơn hoặc bằng 50")
+    @NotNull
     @Column(name = "capacity")
     private int capacity;
-    //@Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
-    @NotNull(message = "{hall.price.notNull}")
-    @Column(name = "price_morning")
-    private BigDecimal priceMorning;
-    @Basic(optional = false)
-    @NotNull(message = "{hall.price.notNull}")
-    @Column(name = "price_afternoon")
-    private BigDecimal priceAfternoon;
-    @Basic(optional = false)
-    @NotNull(message = "{hall.price.notNull}")
-    @Column(name = "price_evening")
-    private BigDecimal priceEvening;
-    @Basic(optional = false)
-    @NotNull(message = "{hall.price.notNull}")
-    @Column(name = "price_weekend")
-    private BigDecimal priceWeekend;
+    @Size(max = 255)
+    @Column(name = "hall_image")
+    private String hallImage;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hallId")
+    @JsonIgnore
+    private Set<HallPrice> hallPriceSet;
+    @JoinColumn(name = "branch_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Branch branchId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hallId")
     @JsonIgnore
     private Set<Booking> bookingSet;
-    @JoinColumn(name = "branch_id", referencedColumnName = "id")
-    @NotNull(message = "{hall.branch.notNull}")
-    @ManyToOne(optional = false)
-    @JsonIgnore
-    private Branch branchId;
-
+    
+    @Transient
+    private MultipartFile file;
+    
     public Hall() {
     }
 
@@ -95,14 +82,10 @@ public class Hall implements Serializable {
         this.id = id;
     }
 
-    public Hall(Integer id, String hallName, int capacity, BigDecimal priceMorning, BigDecimal priceAfternoon, BigDecimal priceEvening, BigDecimal priceWeekend) {
+    public Hall(Integer id, String hallName, int capacity) {
         this.id = id;
         this.hallName = hallName;
         this.capacity = capacity;
-        this.priceMorning = priceMorning;
-        this.priceAfternoon = priceAfternoon;
-        this.priceEvening = priceEvening;
-        this.priceWeekend = priceWeekend;
     }
 
     public Integer getId() {
@@ -129,45 +112,21 @@ public class Hall implements Serializable {
         this.capacity = capacity;
     }
 
-    public BigDecimal getPriceMorning() {
-        return priceMorning;
+    public String getHallImage() {
+        return hallImage;
     }
 
-    public void setPriceMorning(BigDecimal priceMorning) {
-        this.priceMorning = priceMorning;
-    }
-
-    public BigDecimal getPriceAfternoon() {
-        return priceAfternoon;
-    }
-
-    public void setPriceAfternoon(BigDecimal priceAfternoon) {
-        this.priceAfternoon = priceAfternoon;
-    }
-
-    public BigDecimal getPriceEvening() {
-        return priceEvening;
-    }
-
-    public void setPriceEvening(BigDecimal priceEvening) {
-        this.priceEvening = priceEvening;
-    }
-
-    public BigDecimal getPriceWeekend() {
-        return priceWeekend;
-    }
-
-    public void setPriceWeekend(BigDecimal priceWeekend) {
-        this.priceWeekend = priceWeekend;
+    public void setHallImage(String hallImage) {
+        this.hallImage = hallImage;
     }
 
     @XmlTransient
-    public Set<Booking> getBookingSet() {
-        return bookingSet;
+    public Set<HallPrice> getHallPriceSet() {
+        return hallPriceSet;
     }
 
-    public void setBookingSet(Set<Booking> bookingSet) {
-        this.bookingSet = bookingSet;
+    public void setHallPriceSet(Set<HallPrice> hallPriceSet) {
+        this.hallPriceSet = hallPriceSet;
     }
 
     public Branch getBranchId() {
@@ -201,6 +160,29 @@ public class Hall implements Serializable {
     @Override
     public String toString() {
         return "com.hh.pojo.Hall[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
+    @XmlTransient
+    public Set<Booking> getBookingSet() {
+        return bookingSet;
+    }
+
+    public void setBookingSet(Set<Booking> bookingSet) {
+        this.bookingSet = bookingSet;
     }
     
 }

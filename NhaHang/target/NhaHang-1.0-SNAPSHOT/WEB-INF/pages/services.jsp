@@ -51,8 +51,9 @@
                     <sec:authorize access="hasRole('ROLE_ADMIN')"> 
                         <td>
                             <c:url value="/admin/services/${s.id}" var="api"/>
+                            <c:url value="/api/admin/services/${s.id}" var="apiDlt"/>
                             <a href="${api}" class="btn btn-success">Cập Nhật</a>
-                            <button class="btn btn-danger" onclick="deleteService('${api}')">Xóa</button>
+                            <button class="btn btn-danger" onclick="Delete('${apiDlt}')">Xóa</button>
                         </td>
                     </sec:authorize>
 
@@ -61,4 +62,4 @@
         </tbody>
     </table>
 </section>
-<script src="<c:url value="/js/service.js"/>"></script>
+<script src="<c:url value="/js/delete.js"/>"></script>

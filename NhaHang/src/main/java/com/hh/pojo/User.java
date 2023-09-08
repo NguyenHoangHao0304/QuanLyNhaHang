@@ -4,6 +4,7 @@
  */
 package com.hh.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -42,6 +43,7 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByUserRole", query = "SELECT u FROM User u WHERE u.userRole = :userRole")})
 public class User implements Serializable {
 
+
     public static final String ADMIN = "ROLE_ADMIN";
     public static final String EMPLOYEE = "ROLE_EMPLOYEE";
     public static final String CUSTOMER = "ROLE_CUSTOMER";
@@ -77,19 +79,24 @@ public class User implements Serializable {
     private String avatar;
     @Basic(optional = false)
     @NotNull(message = "{user.role.notNull}")
-    @Size(min = 1, max = 45,message = "{user.role.notNull}")
+    @Size(min = 1, max = 45, message = "{user.role.notNull}")
     @Column(name = "user_role")
     private String userRole;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<Feedback> feedbackSet;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<Booking> bookingSet;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Set<Payment> paymentSet;
 
     @Transient
     private MultipartFile file;
     @Transient
     private String confirmPassword;
-    
+
     public User() {
     }
 
@@ -231,6 +238,15 @@ public class User implements Serializable {
      */
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    @XmlTransient
+    public Set<Payment> getPaymentSet() {
+        return paymentSet;
+    }
+
+    public void setPaymentSet(Set<Payment> paymentSet) {
+        this.paymentSet = paymentSet;
     }
 
 }

@@ -5,6 +5,7 @@
 package com.hh.service;
 
 import com.hh.pojo.Booking;
+import com.hh.pojo.User;
 import java.util.List;
 import java.util.Map;
 
@@ -23,4 +24,6 @@ public interface BookingService {
     Booking getBookingById(int id);
 
     boolean deleteBooking(int id);
+    
+    List<Booking> getBookingsByUser(User user);
 }

@@ -23,21 +23,6 @@
                 <li class="nav-item dropdown">
                     <a
                         class="nav-link dropdown-toggle" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false"> Chi Nhánh 
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Chi Nhánh 1</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Chi Nhánh 2</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Chi Nhánh 3</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Chi Nhánh 4</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a
-                        class="nav-link dropdown-toggle" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false"> Nhà Hàng
                     </a>
                     <ul class="dropdown-menu">
@@ -57,20 +42,23 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a
-                        class="nav-link dropdown-toggle" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false"> Tiệc
-                    </a>
+                    <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER','ROLE_EMPLOYEE')"> 
+                        <a
+                            class="nav-link dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false"> Tiệc
+                        </a>
+                    </sec:authorize>
                     <ul class="dropdown-menu">
-                        <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_CUSTOMER','ROLE_EMPLOYEE')"> 
-                            <li><a class="dropdown-item" href="<c:url value="/bookings"/>">Thông tin đặt tiệc</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                        <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')"> 
+                            <li><a class="dropdown-item" href="<c:url value="/admin/bookings"/>">Thông tin đặt tiệc</a></li>
+                            </sec:authorize>
+                            <sec:authorize access="hasRole('ROLE_CUSTOMER')"> 
+                            <li><a class="dropdown-item" href="<c:url value="/user/bookings"/>">Quản lý đặt tiệc</a></li>
                             </sec:authorize>
                             <sec:authorize access="hasRole('ROLE_ADMIN')"> 
                             <li><a class="dropdown-item" href="#">Hóa đơn</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="<c:url value="/feedbacks"/>">Feedback</a></li>
                             </sec:authorize>
-                        <li><a class="dropdown-item" href="#">Feedback</a></li>
                     </ul>
                 </li>
                 <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_EMPLOYEE')"> 
@@ -146,9 +134,30 @@
                     </form>
                 </c:when>
                 <c:when test="${booking != null}">
-                    <c:url value="/bookings" var="actionBooking" />
+                    <c:url value="/admin/bookings" var="actionBooking" />
                     <form class="d-flex" action="${actionBooking}">
                         <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
+                        <button class="btn btn-warning" type="submit">Tìm</button>
+                    </form>
+                </c:when>
+                <c:when test="${hallprice != null}">
+                    <c:url value="/halls/hallprices" var="actionHallPrice" />
+                    <form class="d-flex" action="${actionHallPrice}">
+                        <input class="form-control me-2" type="text" name="hallName" placeholder="Nhập tên sảnh ....">
+                        <button class="btn btn-warning" type="submit">Tìm</button>
+                    </form>
+                </c:when>
+                <c:when test="${userbooking != null}">
+                    <c:url value="/user/bookings" var="actionBooking" />
+                    <form class="d-flex" action="${actionBooking}">
+                        <input class="form-control me-2" type="text" name="kw" placeholder="Nhập từ khóa ....">
+                        <button class="btn btn-warning" type="submit">Tìm</button>
+                    </form>
+                </c:when>
+                <c:when test="${userfeedback != null}">
+                    <c:url value="/user/feedbacks" var="actionFeedback" />
+                    <form class="d-flex" action="${actionBooking}">
+                        <input class="form-control me-2" type="text" name="username" placeholder="Nhập từ khóa ....">
                         <button class="btn btn-warning" type="submit">Tìm</button>
                     </form>
                 </c:when>

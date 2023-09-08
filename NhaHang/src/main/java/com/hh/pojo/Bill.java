@@ -17,7 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -40,8 +39,6 @@ public class Bill implements Serializable {
     @Column(name = "id")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "unit_price")
     private BigDecimal unitPrice;
     @JoinColumn(name = "booking_id", referencedColumnName = "id")
@@ -56,11 +53,6 @@ public class Bill implements Serializable {
 
     public Bill(Integer id) {
         this.id = id;
-    }
-
-    public Bill(Integer id, BigDecimal unitPrice) {
-        this.id = id;
-        this.unitPrice = unitPrice;
     }
 
     public Integer getId() {

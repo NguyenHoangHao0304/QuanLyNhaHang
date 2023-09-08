@@ -7,7 +7,9 @@ package com.hh.configs;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.hh.formatter.BranchFormatter;
+import com.hh.formatter.DateFormatter;
 import com.hh.formatter.HallFormatter;
+import com.hh.formatter.TimeFormatter;
 import com.hh.formatter.UserFormatter;
 import java.text.SimpleDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +41,8 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableTransactionManagement
 @ComponentScan(basePackages = {
     "com.hh.controllers",
-    "com.hh.repository", 
-    "com.hh.service", 
+    "com.hh.repository",
+    "com.hh.service",
     "com.hh.api"})
 @PropertySource("classpath:configs.properties")
 public class WebAppContextConfig implements WebMvcConfigurer {
@@ -58,6 +60,8 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         registry.addFormatter(new BranchFormatter());
         registry.addFormatter(new UserFormatter());
         registry.addFormatter(new HallFormatter());
+        registry.addFormatter(new DateFormatter());
+        registry.addFormatter(new TimeFormatter("HH:mm:ss"));
     }
 
     @Override
@@ -76,6 +80,7 @@ public class WebAppContextConfig implements WebMvcConfigurer {
 //
 //        return r;
 //    }
+
     @Bean
     public SimpleDateFormat simpleDateFormat() {
         return new SimpleDateFormat("yyyy-MM-dd");
@@ -121,4 +126,5 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     public Validator getValidator() {
         return validator();
     }
+
 }

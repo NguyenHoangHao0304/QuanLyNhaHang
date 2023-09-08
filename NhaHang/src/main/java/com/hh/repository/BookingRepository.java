@@ -5,6 +5,7 @@
 package com.hh.repository;
 
 import com.hh.pojo.Booking;
+import com.hh.pojo.User;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ import java.util.Map;
  * @author Admin
  */
 public interface BookingRepository {
-    
+
     List<Booking> getBookings(Map<String, String> params);
 
     int countBooking();
@@ -23,4 +24,7 @@ public interface BookingRepository {
     Booking getBookingById(int id);
 
     boolean deleteBooking(int id);
+
+    List<Booking> getBookingsByUser(User user);
+    
 }

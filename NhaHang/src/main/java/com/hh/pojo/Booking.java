@@ -5,8 +5,11 @@
 package com.hh.pojo;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -44,13 +48,8 @@ public class Booking implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "booking_date")
-    @Temporal(TemporalType.DATE)
-    private Date bookingDate;
-    @Basic(optional = false)
-    @NotNull
+    private LocalDate bookingDate;
     @Column(name = "start_time")
     @Temporal(TemporalType.TIME)
     private Date startTime;
@@ -65,6 +64,12 @@ public class Booking implements Serializable {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User userId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookingId")
+    private Set<BookingFood> bookingFoodSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookingId")
+    private Set<BookingService> bookingServiceSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookingId")
+    private Set<Bill> billSet;
 
     public Booking() {
     }
@@ -73,10 +78,8 @@ public class Booking implements Serializable {
         this.id = id;
     }
 
-    public Booking(Integer id, Date bookingDate, Date startTime, String bookingName) {
+    public Booking(Integer id, String bookingName) {
         this.id = id;
-        this.bookingDate = bookingDate;
-        this.startTime = startTime;
         this.bookingName = bookingName;
     }
 
@@ -88,11 +91,11 @@ public class Booking implements Serializable {
         this.id = id;
     }
 
-    public Date getBookingDate() {
+    public LocalDate getBookingDate() {
         return bookingDate;
     }
 
-    public void setBookingDate(Date bookingDate) {
+    public void setBookingDate(LocalDate bookingDate) {
         this.bookingDate = bookingDate;
     }
 
@@ -152,5 +155,46 @@ public class Booking implements Serializable {
     public String toString() {
         return "com.hh.pojo.Booking[ id=" + id + " ]";
     }
-    
+    /**
+     * @return the bookingFoodSet
+     */
+    public Set<BookingFood> getBookingFoodSet() {
+        return bookingFoodSet;
+    }
+
+    /**
+     * @param bookingFoodSet the bookingFoodSet to set
+     */
+    public void setBookingFoodSet(Set<BookingFood> bookingFoodSet) {
+        this.bookingFoodSet = bookingFoodSet;
+    }
+
+    /**
+     * @return the bookingServiceSet
+     */
+    public Set<BookingService> getBookingServiceSet() {
+        return bookingServiceSet;
+    }
+
+    /**
+     * @param bookingServiceSet the bookingServiceSet to set
+     */
+    public void setBookingServiceSet(Set<BookingService> bookingServiceSet) {
+        this.bookingServiceSet = bookingServiceSet;
+    }
+
+    /**
+     * @return the billSet
+     */
+    public Set<Bill> getBillSet() {
+        return billSet;
+    }
+
+    /**
+     * @param billSet the billSet to set
+     */
+    public void setBillSet(Set<Bill> billSet) {
+        this.billSet = billSet;
+    }
+
 }

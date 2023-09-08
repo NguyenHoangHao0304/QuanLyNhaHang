@@ -97,5 +97,35 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" 
                        value="/WEB-INF/pages/bookingform.jsp" />
     </definition>
+    <definition name="hallprice" extends="baseLayout">
+        <put-attribute name="title" value="Hall Price" />
+        <put-attribute name="content" 
+                       value="/WEB-INF/pages/hallprice.jsp" />
+    </definition>
+    <definition name="hallpriceEdits" extends="baseLayout">
+        <put-attribute name="title" value="Hall Price Edit" />
+        <put-attribute name="content" 
+                       value="/WEB-INF/pages/hallpriceEdits.jsp" />
+    </definition>
+    <definition name="feedbacks" extends="baseLayout">
+        <put-attribute name="title" value="Feedback" />
+        <put-attribute name="content" 
+                       value="/WEB-INF/pages/feedbacks.jsp" />
+    </definition>
+    <definition name="feedbackEdits" extends="baseLayout">
+        <put-attribute name="title" value="Feedback Edits" />
+        <put-attribute name="content" 
+                       value="/WEB-INF/pages/feedbackEdits.jsp" />
+    </definition>
+    <definition name="manage-bookings" extends="baseLayout">
+        <put-attribute name="title" value="Booking" />
+        <put-attribute name="content" 
+                       value="/WEB-INF/pages/manage-bookings.jsp" />
+    </definition>
+    <definition name="manage-feedbacks" extends="baseLayout">
+        <put-attribute name="title" value="Feedback" />
+        <put-attribute name="content" 
+                       value="/WEB-INF/pages/manage-feedbacks.jsp" />
+    </definition>
 </tiles-definitions>
 

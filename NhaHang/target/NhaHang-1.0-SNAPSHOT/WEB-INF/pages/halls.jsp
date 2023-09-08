@@ -9,10 +9,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:url value="/halls" var="hallAction" />
 <section class="container">
-        <h1 class="text-center text-primary mt-1"> SẢNH CƯỚI </h1>
+    <h1 class="text-center text-primary mt-1"> SẢNH CƯỚI </h1>
     <sec:authorize access="hasRole('ROLE_ADMIN')"> 
         <div>
             <a href="<c:url value="/admin/halls/create"/>" class="btn btn-warning mt-1">Thêm Sảnh Cưới</a>
+            <a href="<c:url value="/halls/hallprices"/>" class="btn btn-warning mt-1">Quản Lý Giá Các Sảnh</a>
+        </div>
+    </sec:authorize>
+    <sec:authorize access="hasRole('ROLE_CUSTOMER')"> 
+        <div>
+            <a href="<c:url value="/halls/hallprices"/>" class="btn btn-warning mt-1">Chọn Buổi</a>
         </div>
     </sec:authorize>
     <c:if test="${counter > 1}">
@@ -29,13 +35,14 @@
     <table class="table table-hover">
         <thead>
             <tr>
+                <th></th>
                 <th>Id</th>
                 <th>Tên Sảnh</th>
                 <th>Sức chứa</th>
-                <th>Giá Sáng</th>
-                <th>Giá Trưa</th>
-                <th>Giá Tối</th>
-                <th>Giá Cuối Tuần</th>
+                <th>Buổi</th>
+                <th>Từ</th>
+                <th>Đến</th>
+                <th>Giá</th>
                 <th>Chi Nhánh</th>
                 <th></th>
             </tr>
@@ -43,20 +50,67 @@
         <tbody>
             <c:forEach items="${hall}" var="h">
                 <tr>
+                    <td>
+                        <img src="${h.hallImage}" alt="${h.hallName}" width="120" height="80"/>
+                    </td>
                     <td>${h.id}</td>
                     <td>${h.hallName}</td>
                     <td>${h.capacity} Người</td>
-                    <td>${h.priceMorning} VNĐ</td>
-                    <td>${h.priceAfternoon} VNĐ</td>
-                    <td>${h.priceEvening} VNĐ</td>
-                    <td>${h.priceWeekend} VNĐ</td>
+                    <td> 
+                        <ul class="list-group list-group-flush">
+                            <c:forEach items="${hallprices}" var="hp">
+                                <c:choose>
+                                    <c:when test="${hp.hallId.id == h.id}">
+                                        <li class="list-group-item" value="${hp.hallId.id}">${hp.timePeriod}</li>
+                                        </c:when>
+                                        <c:otherwise></c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                        </ul>
+                    </td>
+                    <td> 
+                        <ul class="list-group list-group-flush">
+                            <c:forEach items="${hallprices}" var="hp">
+                                <c:choose>
+                                    <c:when test="${hp.hallId.id == h.id}">
+                                        <li class="list-group-item" value="${hp.hallId.id}">${hp.timeStart}</li>
+                                        </c:when>
+                                        <c:otherwise></c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                        </ul>
+                    </td>
+                    <td> 
+                        <ul class="list-group list-group-flush">
+                            <c:forEach items="${hallprices}" var="hp">
+                                <c:choose>
+                                    <c:when test="${hp.hallId.id == h.id}">
+                                        <li class="list-group-item" value="${hp.hallId.id}">${hp.timeEnd}</li>
+                                        </c:when>
+                                        <c:otherwise></c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                        </ul>
+                    </td>
+                    <td> 
+                        <ul class="list-group list-group-flush">
+                            <c:forEach items="${hallprices}" var="hp">
+                                <c:choose>
+                                    <c:when test="${hp.hallId.id == h.id}">
+                                        <li class="list-group-item" value="${hp.hallId.id}">${hp.price} VNĐ</li>
+                                        </c:when>
+                                        <c:otherwise></c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                        </ul>
+                    </td>
                     <td>${h.branchId.branchName}</td>
                     <sec:authorize access="hasRole('ROLE_ADMIN')"> 
                         <td>
                             <c:url value="/admin/halls/${h.id}" var="api"/>
                             <c:url value="/api/admin/halls/${h.id}" var="apiDlt"/>
                             <a href="${api}" class="btn btn-success">Cập Nhật</a>
-                            <button class="btn btn-danger" onclick="deleteHall('${apiDlt}')">Xóa</button>
+                            <button class="btn btn-danger" onclick="Delete('${apiDlt}')">Xóa</button>
                         </td>
                     </sec:authorize>
                 </tr>
@@ -64,4 +118,4 @@
         </tbody>
     </table>
 </section>
-<script src="<c:url value="/js/hall.js"/>"></script>
+<script src="<c:url value="/js/delete.js"/>"></script>

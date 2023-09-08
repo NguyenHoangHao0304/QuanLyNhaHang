@@ -6,22 +6,20 @@ package com.hh.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -46,15 +44,16 @@ public class Payment implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "payment_date")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date paymentDate;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "payment_method")
     private String paymentMethod;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "paymentId")
-    private Set<Bill> billSet;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private User userId;
 
     public Payment() {
     }
@@ -93,13 +92,12 @@ public class Payment implements Serializable {
         this.paymentMethod = paymentMethod;
     }
 
-    @XmlTransient
-    public Set<Bill> getBillSet() {
-        return billSet;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setBillSet(Set<Bill> billSet) {
-        this.billSet = billSet;
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     @Override

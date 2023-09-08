@@ -13,6 +13,7 @@
     <%--<form:errors path="*" element="div" cssClass="alert alert-danger"/>--%>
 
     <form:hidden path="id"/>
+    <form:hidden path="hallImage"/>
     <div class="form-floating mb-3 mt-3">
         <form:input type="text" class="form-control" path="hallName" id="hallName" 
                     placeholder="Tên sảnh" name="hallName"/>
@@ -24,30 +25,6 @@
                     placeholder="Sức chứa" name="capacity"/>
         <label for="capacity">Sức Chứa</label>
         <form:errors path="capacity" element="div" cssClass="text-danger"/>
-    </div>
-    <div class="form-floating mb-3 mt-3">
-        <form:input type="text" class="form-control" path="priceMorning" id="priceMorning" 
-                    placeholder="Giá buổi sáng" name="priceMorning"/>
-        <label for="priceMorning">Giá Buổi Sáng</label>
-        <form:errors path="priceMorning" element="div" cssClass="text-danger"/>
-    </div>
-    <div class="form-floating mb-3 mt-3">
-        <form:input type="text" class="form-control" path="priceAfternoon" id="priceAfternoon" 
-                    placeholder="Giá buổi trưa" name="priceAfternoon"/>
-        <label for="priceAfternoon">Giá Buổi Trưa</label>
-        <form:errors path="priceAfternoon" element="div" cssClass="text-danger"/>
-    </div>
-    <div class="form-floating mb-3 mt-3">
-        <form:input type="text" class="form-control" path="priceEvening" id="priceEvening" 
-                    placeholder="Giá buổi Tối" name="priceEvening"/>
-        <label for="priceEvening">Giá Buổi Tối</label>
-        <form:errors path="priceEvening" element="div" cssClass="text-danger"/>
-    </div>
-    <div class="form-floating mb-3 mt-3">
-        <form:input type="text" class="form-control" path="priceWeekend" id="priceWeekend" 
-                    placeholder="Giá cuối tuần" name="priceWeekend"/>
-        <label for="priceWeekend">Giá Cuối Tuần</label>
-        <form:errors path="priceWeekend" element="div" cssClass="text-danger"/>
     </div>
     <div class="form-floating">
         <form:select class="form-select" id="branch" name="branch" path="branchId">
@@ -64,18 +41,23 @@
             </c:forEach>
         </form:select>
         <label for="branch" class="form-label">Chi Nhánh</label>
-         <form:errors path="branchId" element="div" cssClass="text-danger"/>
+        <form:errors path="branchId" element="div" cssClass="text-danger"/>
+    </div>
+    <div class="form-floating mb-3 mt-3">
+        <form:input type="file" class="form-control" path="file" id="file" 
+                    placeholder="Ảnh Sảnh" />
+        <label for="file">Ảnh Sảnh</label>
     </div>
     <div class="form-floating mb-3 mt-3">
         <button class="btn btn-info mt-1" type="submit"> 
-                            <c:choose>
-                    <c:when test="${hall.id != null}">
-                        Cập Nhật Sảnh
-                    </c:when>
-                    <c:otherwise>
-                        Thêm Sảnh
-                    </c:otherwise>
-                </c:choose>
+            <c:choose>
+                <c:when test="${hall.id != null}">
+                    Cập Nhật Sảnh
+                </c:when>
+                <c:otherwise>
+                    Thêm Sảnh
+                </c:otherwise>
+            </c:choose>
         </button>
     </div>
 </form:form>

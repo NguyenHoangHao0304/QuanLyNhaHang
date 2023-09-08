@@ -36,10 +36,16 @@ public class ApiHallController {
     public void delete(@PathVariable("id") int id) {
         this.hallService.deleteHall(id);
     }
-    
-    @GetMapping("/halls")
+
+    @GetMapping("/halls/")
     @CrossOrigin
-    public ResponseEntity<List<Hall>> list(@RequestParam Map<String,String> params){
-        return new ResponseEntity<>(this.hallService.getHalls(params),HttpStatus.OK);
+    public ResponseEntity<List<Hall>> list(@RequestParam Map<String, String> params) {
+        return new ResponseEntity<>(this.hallService.getHalls(params), HttpStatus.OK);
+    }
+
+    @GetMapping("/halls/{id}/")
+    @CrossOrigin
+    public ResponseEntity<Hall> getHallDetail(@PathVariable(value = "id") int id) {
+        return new ResponseEntity<>(this.hallService.getHallById(id), HttpStatus.OK);
     }
 }

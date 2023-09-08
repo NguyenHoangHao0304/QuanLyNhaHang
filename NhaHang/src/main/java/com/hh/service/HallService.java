@@ -22,4 +22,5 @@ public interface HallService {
     Hall getHallById(int id);
 
     boolean deleteHall(int id);
+    
 }

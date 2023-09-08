@@ -13,7 +13,7 @@ import java.util.Map;
  * @author Admin
  */
 public interface HallRepository {
-    
+
     List<Hall> getHalls(Map<String, String> params);
 
     int countHall();
@@ -23,5 +23,4 @@ public interface HallRepository {
     Hall getHallById(int id);
 
     boolean deleteHall(int id);
-    
 }

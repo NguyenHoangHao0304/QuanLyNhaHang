@@ -5,6 +5,7 @@
 package com.hh.service.Impl;
 
 import com.hh.pojo.Booking;
+import com.hh.pojo.User;
 import com.hh.repository.BookingRepository;
 import com.hh.service.BookingService;
 import java.util.List;
@@ -45,5 +46,10 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public boolean deleteBooking(int id) {
         return this.BookingRepo.deleteBooking(id);
+    }
+
+    @Override
+    public List<Booking> getBookingsByUser(User user) {
+        return this.BookingRepo.getBookingsByUser(user);
     }
 }

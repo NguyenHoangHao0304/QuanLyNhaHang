@@ -2,12 +2,13 @@ package com.hh.pojo;
 
 import com.hh.pojo.Booking;
 import com.hh.pojo.Feedback;
+import com.hh.pojo.Payment;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2023-08-28T22:48:01")
+@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2023-09-07T02:33:10")
 @StaticMetamodel(User.class)
 public class User_ { 
 
@@ -19,6 +20,7 @@ public class User_ {
     public static volatile SingularAttribute<User, String> avatar;
     public static volatile SingularAttribute<User, Integer> id;
     public static volatile SingularAttribute<User, String> userRole;
+    public static volatile SetAttribute<User, Payment> paymentSet;
     public static volatile SingularAttribute<User, String> username;
 
 }

@@ -6,6 +6,8 @@ package com.hh.controllers;
 
 import com.hh.service.BranchService;
 import com.hh.service.EmployeeService;
+import com.hh.service.FeedbackService;
+import com.hh.service.HallPriceService;
 import com.hh.service.HallService;
 import com.hh.service.UserService;
 import java.util.Map;
@@ -25,20 +27,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     @Autowired
-    private HallService HallService;
+    private HallService hallService;
     @Autowired
     private BranchService branchService;
     @Autowired
     private EmployeeService employeeService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private HallPriceService hallPriceService;
+    @Autowired
+    private FeedbackService feedbackService;
 
     @ModelAttribute
     public void commonAttr(Model model, Map<String, String> params) {
         model.addAttribute("branchs", this.branchService.getBranchs(params));
-        model.addAttribute("halls", this.HallService.getHalls(params));
+        model.addAttribute("halls", this.hallService.getHalls(params));
         model.addAttribute("employees", this.employeeService.getEmployees(params));
         model.addAttribute("users", this.userService.getUsers(params));
+        model.addAttribute("hallprices", this.hallPriceService.getHallPrice(params));
+        model.addAttribute("feedbacks", this.feedbackService.getFeedback(params));
     }
 
     @RequestMapping("/")

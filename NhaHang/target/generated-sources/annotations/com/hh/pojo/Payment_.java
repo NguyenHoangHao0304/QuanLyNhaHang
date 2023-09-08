@@ -1,19 +1,18 @@
 package com.hh.pojo;
 
-import com.hh.pojo.Bill;
+import com.hh.pojo.User;
 import java.util.Date;
 import javax.annotation.Generated;
-import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2023-08-28T22:48:01")
+@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2023-09-07T02:33:10")
 @StaticMetamodel(Payment.class)
 public class Payment_ { 
 
-    public static volatile SetAttribute<Payment, Bill> billSet;
     public static volatile SingularAttribute<Payment, String> paymentMethod;
     public static volatile SingularAttribute<Payment, Integer> id;
     public static volatile SingularAttribute<Payment, Date> paymentDate;
+    public static volatile SingularAttribute<Payment, User> userId;
 
 }

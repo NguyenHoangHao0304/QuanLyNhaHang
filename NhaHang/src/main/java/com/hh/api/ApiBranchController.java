@@ -37,7 +37,7 @@ public class ApiBranchController {
         this.branchService.deleteBranch(id);
     }
 
-    @GetMapping("/branchs")
+    @GetMapping("/branchs/")
     @CrossOrigin
     public ResponseEntity<List<Branch>> list(@RequestParam Map<String,String> params) {
         return new ResponseEntity<>(this.branchService.getBranchs(params), HttpStatus.OK);

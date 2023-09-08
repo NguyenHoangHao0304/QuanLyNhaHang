@@ -5,10 +5,12 @@
 package com.hh.repository.Impl;
 
 import com.hh.pojo.Booking;
+import com.hh.pojo.User;
 import com.hh.repository.BookingRepository;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.Query;
@@ -63,13 +65,12 @@ public class BookingRepositoryImpl implements BookingRepository {
             String bookingDateString = params.get("bookingDate");
             if (bookingDateString != null && !bookingDateString.isEmpty()) {
                 try {
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    Date bookingDate = dateFormat.parse(bookingDateString);
+                    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate bookingDate = LocalDate.parse(bookingDateString, dateFormatter);
                     predicates.add(builder.equal(r.get("bookingDate"), bookingDate));
-                } catch (Exception e) {
+                } catch (DateTimeParseException e) {
                     e.printStackTrace();
                 }
-
             }
 //            String fromCapacity = params.get("fromCapacity");
 //            if (fromCapacity != null && !fromCapacity.isEmpty()) {
@@ -86,9 +87,9 @@ public class BookingRepositoryImpl implements BookingRepository {
                 predicates.add(builder.equal(r.get("hallId"), Integer.parseInt(hallId)));
             }
 
-            String userId = params.get("userId");
-            if (userId != null && !userId.isEmpty()) {
-                predicates.add(builder.equal(r.get("userId"), Integer.parseInt(userId)));
+            String username = params.get("username");
+            if (username != null && !username.isEmpty()) {
+                predicates.add(builder.like(r.get("userId").get("username"), String.format("%%%s%%", username)));
             }
 
             q.where(predicates.toArray(Predicate[]::new));
@@ -152,5 +153,13 @@ public class BookingRepositoryImpl implements BookingRepository {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<Booking> getBookingsByUser(User user) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("FROM Booking WHERE userId = :user");
+        q.setParameter("user", user);
+        return q.getResultList();
     }
 }
