@@ -16,6 +16,10 @@ public interface FeedbackService {
 
     List<Feedback> getFeedback(Map<String, String> params);
 
+    List<Feedback> getFeedbackByBranchId(int branchId);
+
+    Feedback addFeedback(Feedback f);
+
     int countFeedback();
 
     boolean addOrUpdateFeedback(Feedback f);

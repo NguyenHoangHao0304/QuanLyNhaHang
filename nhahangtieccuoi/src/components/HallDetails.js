@@ -7,30 +7,52 @@ import cookie from "react-cookies";
 import { Button, Card, Col, Row } from "react-bootstrap";
 
 const HallDetails = () => {
-    const { id } = useParams();
+    const { hallId } = useParams();
     const [hallDetail, setHallDetail] = useState(null);
     const [hallPrice, setHallPrice] = useState(null);
     const [selectedHall, setSelectedHall] = useState(undefined);
     const [selectedHallName, setSelectedHallName] = useState(undefined);
     const [, cartdispatch] = useContext(MyCartContext);
 
-    useEffect(() => {
-        let loadHallDetails = async () => {
-            try {
-                let e = `${endpoints.hall.replace('{id}', id)}`;
-                let r = `${endpoints.hallprice.replace('{id}', id)}`;
+    // useEffect(() => {
+    //     let loadHallDetails = async () => {
+    //         try {
+    //             let e = `${endpoints.hall.replace('{id}', id)}`;
+    //             let r = `${endpoints.hallprice.replace('{id}', id)}`;
 
-                let rese = await Apis.get(e);
-                let resr = await Apis.get(r);
-                setHallDetail(rese.data);
-                setHallPrice(resr.data);
-            } catch (ex) {
-                console.error(ex);
+    //             let rese = await Apis.get(e);
+    //             let resr = await Apis.get(r);
+    //             setHallDetail(rese.data);
+    //             setHallPrice(resr.data);
+    //         } catch (ex) {
+    //             console.error(ex);
+    //         }
+    //     }
+    //     loadHallDetails();
+    // }, [id]);
+    useEffect(() => {
+        const loadHallDetails = async () => {
+            try {
+                let { data } = await Apis.get(endpoints['hall'](hallId));
+                setHallDetail(data);
+            } catch (error) {
+                console.error(error);
             }
         }
+
+        const loadHallPrices = async () => {
+            try {
+                let { data } = await Apis.get(endpoints['hallprice'](hallId));
+                setHallPrice(data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
         loadHallDetails();
-    }, [id]);
-    
+        loadHallPrices();
+    },[hallId])
+
     const handleSelectHall = (id) => {
         setSelectedHall(id);
         console.log(selectedHall);
@@ -42,10 +64,6 @@ const HallDetails = () => {
         if (selectedHallName !== name) {
             if (selectedHallName && selectedHallName in cart) {
                 delete cart[selectedHallName];
-                cartdispatch({
-                    type: "dec",
-                    payload: 1
-                });
                 cookie.save(`cart`, cart);
             }
         }

@@ -31,6 +31,7 @@
             <tr>
                 <th>Id</th>
                 <th>Mô tả</th>
+                <th>Thời Gian</th>
                 <th>Chi Nhánh</th>
                 <th>Tài Khoản</th>
                 <th></th>
@@ -41,6 +42,7 @@
                 <tr>
                     <td>${f.id}</td>
                     <td>${f.feedbackDescription}</td>
+                    <td>${f.feedbackDate}</td>
                     <td>${f.branchId.branchName}</td>
                     <td>${f.userId.username}</td>
                     <sec:authorize access="hasRole('ROLE_CUSTOMER')"> 

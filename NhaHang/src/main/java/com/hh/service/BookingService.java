@@ -26,4 +26,6 @@ public interface BookingService {
     boolean deleteBooking(int id);
     
     List<Booking> getBookingsByUser(User user);
+    
+    Booking addBooking(Booking bk);
 }

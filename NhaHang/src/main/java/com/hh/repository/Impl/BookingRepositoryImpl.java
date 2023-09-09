@@ -162,4 +162,16 @@ public class BookingRepositoryImpl implements BookingRepository {
         q.setParameter("user", user);
         return q.getResultList();
     }
+
+    @Override
+    public Booking addBooking(Booking bk) {
+        Session s = this.factory.getObject().getCurrentSession();
+        try {
+            s.save(bk);
+            return bk;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 }

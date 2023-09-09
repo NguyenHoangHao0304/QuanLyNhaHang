@@ -30,9 +30,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 @PropertySource("classpath:configs.properties")
-public class FeedbackRepositoryImpl implements FeedbackRepository{
+public class FeedbackRepositoryImpl implements FeedbackRepository {
 
-     @Autowired
+    @Autowired
     private LocalSessionFactoryBean factory;
     @Autowired
     private Environment env;
@@ -52,7 +52,7 @@ public class FeedbackRepositoryImpl implements FeedbackRepository{
             if (branchName != null && !branchName.isEmpty()) {
                 predicates.add(builder.like(r.get("branchId").get("branchName"), String.format("%%%s%%", branchName)));
             }
-            
+
             String username = params.get("username");
             if (username != null && !username.isEmpty()) {
                 predicates.add(builder.like(r.get("userId").get("username"), String.format("%%%s%%", username)));
@@ -117,6 +117,27 @@ public class FeedbackRepositoryImpl implements FeedbackRepository{
         } catch (HibernateException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    @Override
+    public List<Feedback> getFeedbackByBranchId(int branchId) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("SELECT f FROM Feedback f WHERE f.branchId.id = :id",Feedback.class);
+        q.setParameter("id", branchId);
+
+        return q.getResultList();
+    }
+
+    @Override
+    public Feedback addFeedback(Feedback f) {
+        Session s = this.factory.getObject().getCurrentSession();
+        try {
+            s.save(f);
+            return f;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            return null;
         }
     }
 }

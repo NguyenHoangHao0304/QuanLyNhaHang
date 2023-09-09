@@ -15,6 +15,8 @@ import Register from "./components/Register";
 import MyCartCounterReducer from "./reducers/MyCartCounterReducer";
 import Cart from "./components/Cart";
 import HallDetails from "./components/HallDetails";
+import BranchDetails from "./components/BranchDetails";
+import 'moment/locale/vi';
 
 
 export const MyUserContext = createContext();
@@ -47,7 +49,8 @@ const App = () => {
                   <Route path="/foods" element={<Foods />} />
                   <Route path="/services" element={<Services />} />
                   <Route path="/cart" element={<Cart />} />
-                  <Route path="/halls/:id" element={<HallDetails />} />
+                  <Route path="/halls/:hallId" element={<HallDetails />} />
+                  <Route path="/branchs/:branchId" element={<BranchDetails />} />
                 </Routes>
               </Container>
             </div>

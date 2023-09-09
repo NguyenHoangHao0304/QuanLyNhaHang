@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,9 +44,9 @@ public class ApiHallController {
         return new ResponseEntity<>(this.hallService.getHalls(params), HttpStatus.OK);
     }
 
-    @GetMapping("/halls/{id}/")
+    @GetMapping(path="/halls/{hallId}/", produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin
-    public ResponseEntity<Hall> getHallDetail(@PathVariable(value = "id") int id) {
-        return new ResponseEntity<>(this.hallService.getHallById(id), HttpStatus.OK);
+    public ResponseEntity<Hall> getHallDetail(@PathVariable(value = "hallId") int hallId) {
+        return new ResponseEntity<>(this.hallService.getHallById(hallId), HttpStatus.OK);
     }
 }

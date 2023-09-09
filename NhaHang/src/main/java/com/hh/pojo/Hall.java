@@ -51,12 +51,12 @@ public class Hall implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @NotNull(message = "{hall.name.notNull}")
+    @Size(min = 3, max = 255,message = "{hall.name.lenErr}")
     @Column(name = "hall_name")
     private String hallName;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{hall.capacity.notNull}")
     @Column(name = "capacity")
     private int capacity;
     @Size(max = 255)
@@ -65,6 +65,7 @@ public class Hall implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hallId")
     @JsonIgnore
     private Set<HallPrice> hallPriceSet;
+    @NotNull(message = "{hall.branch.notNull}")
     @JoinColumn(name = "branch_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Branch branchId;

@@ -35,9 +35,9 @@ public class ApiHallPriceController {
         this.hallPriceService.deleteHallPrice(id);
     }
 
-    @GetMapping("/hallprices/{id}/")
+    @GetMapping("/halls/{hallId}/hallprices/")
     @CrossOrigin
-    public ResponseEntity<List<HallPrice>> list(@PathVariable(value = "id") int id) {
-        return new ResponseEntity<>(this.hallPriceService.getHallPriceByHallId(id), HttpStatus.OK);
+    public ResponseEntity<List<HallPrice>> list(@PathVariable(value = "hallId") int hallId) {
+        return new ResponseEntity<>(this.hallPriceService.getHallPriceByHallId(hallId), HttpStatus.OK);
     }
 }

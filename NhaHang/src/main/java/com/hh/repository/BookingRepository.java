@@ -27,4 +27,6 @@ public interface BookingRepository {
 
     List<Booking> getBookingsByUser(User user);
     
+    Booking addBooking(Booking bk);
+    
 }

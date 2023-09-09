@@ -20,6 +20,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -57,6 +58,7 @@ public class HallPrice implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "price")
     private BigDecimal price;
+    @NotNull(message = "{hallprice.hall.notNull}")
     @JoinColumn(name = "hall_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Hall hallId;

@@ -7,10 +7,13 @@ package com.hh.service.Impl;
 import com.hh.pojo.Booking;
 import com.hh.pojo.User;
 import com.hh.repository.BookingRepository;
+import com.hh.repository.UserRepository;
 import com.hh.service.BookingService;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,6 +25,8 @@ public class BookingServiceImpl implements BookingService {
 
     @Autowired
     private BookingRepository BookingRepo;
+    @Autowired
+    private UserRepository userRepo;
 
     @Override
     public List<Booking> getBookings(Map<String, String> params) {
@@ -51,5 +56,14 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<Booking> getBookingsByUser(User user) {
         return this.BookingRepo.getBookingsByUser(user);
+    }
+
+    @Override
+    public Booking addBooking(Booking bk) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User u = this.userRepo.getUserByUsername(authentication.getName());
+        bk.setUserId(u);
+        
+        return this.BookingRepo.addBooking(bk);
     }
 }

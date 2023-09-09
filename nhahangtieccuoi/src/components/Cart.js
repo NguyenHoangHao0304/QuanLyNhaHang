@@ -38,6 +38,11 @@ const Cart = () => {
             let res = await authApi().post(endpoints[`pay`],carts);
             if(res.status === 200){
                 cookie.remove("cart");
+
+                cartDispatch({
+                    "type": "update",
+                    "pay": 0
+                });
                 setCarts(null);
             }
         }

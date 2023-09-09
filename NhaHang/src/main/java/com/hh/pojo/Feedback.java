@@ -5,6 +5,7 @@
 package com.hh.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -41,6 +44,9 @@ public class Feedback implements Serializable {
     @Size(max = 255)
     @Column(name = "feedback_description")
     private String feedbackDescription;
+    @Column(name = "feedback_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date feedbackDate;
     @JoinColumn(name = "branch_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Branch branchId;
@@ -111,5 +117,13 @@ public class Feedback implements Serializable {
     public String toString() {
         return "com.hh.pojo.Feedback[ id=" + id + " ]";
     }
-    
+
+    public Date getFeedbackDate() {
+        return feedbackDate;
+    }
+
+    public void setFeedbackDate(Date feedbackDate) {
+        this.feedbackDate = feedbackDate;
+    }
+
 }

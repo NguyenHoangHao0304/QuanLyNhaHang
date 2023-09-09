@@ -72,7 +72,7 @@ const Services = () => {
                             <Card.Img variant="top" src={s.serviceImage} height={200} width={100} />
                             <Card.Body>
                                 <Card.Title>{s.serviceName}</Card.Title>
-                                <Card.Text>{s.servicePrice}</Card.Text>
+                                <Card.Text>{s.servicePrice} VNĐ</Card.Text>
                                 <Card.Text>{s.serviceDescription}</Card.Text>
                                 <Button variant="primary" onClick={() => order(s)}>Thêm</Button>
                             </Card.Body>

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Badge, Button, Col, Container, Form, Nav, NavDropdown, Navbar, Row } from "react-bootstrap";
-import Apis, { endpoints } from "../configs/Apis";
-import MySpinner from "./MySpinner";
+// import Apis, { endpoints } from "../configs/Apis";
+// import MySpinner from "./MySpinner";
 import { Link, useNavigate } from "react-router-dom";
 import { MyCartContext, MyUserContext } from "../App";
 import "./Header.css";
@@ -10,19 +10,19 @@ import "./Header.css";
 const Header = () => {
     const [user, dispatch] = useContext(MyUserContext);
     const [cartCounter,] = useContext(MyCartContext);
-    const [branchs, setBranchs] = useState(null);
+    // const [branchs, setBranchs] = useState(null);
     const [kw, setKw] = useState("");
     const nav = useNavigate();
     const headerRef = useRef(null);
-    useEffect(() => {
-        const loadBranchs = async () => {
-            // let res = await fetch("http://localhost:8080/NhaHang/api/branchs");
-            // let data = await res.json();
-            let res = await Apis.get(endpoints['branchs']);
-            setBranchs(res.data);
-        }
-        loadBranchs();
-    }, [])
+    // useEffect(() => {
+    //     const loadBranchs = async () => {
+    //         // let res = await fetch("http://localhost:8080/NhaHang/api/branchs");
+    //         // let data = await res.json();
+    //         let res = await Apis.get(endpoints['branchs']);
+    //         setBranchs(res.data);
+    //     }
+    //     loadBranchs();
+    // }, [])
 
     useEffect(() => {
         const header = headerRef.current;
@@ -39,8 +39,16 @@ const Header = () => {
     }, []);
 
     const search = (evt) => {
+        const currentPath = window.location.pathname;
         evt.preventDefault();
-        nav(`/foods/?kw=${kw}`);
+        if (currentPath === '/foods') {
+           nav(`/foods/?kw=${kw}`);
+        } else if (currentPath === '/services') {
+            nav(`/services/?kw=${kw}`);
+        }
+        else if (currentPath === '/halls') {
+            nav(`/halls/?kw=${kw}`);
+        }
     }
 
     const logout = () => {
@@ -49,9 +57,9 @@ const Header = () => {
         })
         nav(`/login`)
     }
-    if (branchs === null) {
-        return <MySpinner />
-    }
+    // if (branchs === null) {
+    //     return <MySpinner />
+    // }
     return (
         <>
             <div className="fixed-header" ref={headerRef}>

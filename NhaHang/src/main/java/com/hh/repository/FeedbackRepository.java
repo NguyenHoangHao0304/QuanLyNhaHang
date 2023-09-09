@@ -13,8 +13,13 @@ import java.util.Map;
  * @author Admin
  */
 public interface FeedbackRepository {
+
     List<Feedback> getFeedback(Map<String, String> params);
 
+    List<Feedback> getFeedbackByBranchId(int branchId);
+
+    Feedback addFeedback(Feedback f);
+    
     int countFeedback();
 
     boolean addOrUpdateFeedback(Feedback f);

@@ -11,9 +11,13 @@ export const endpoints ={
     "login":`${SERVER_CONTEXT}/api/login/`,
     "current-user":`${SERVER_CONTEXT}/api/current-user/`,
     "register":`${SERVER_CONTEXT}/api/users/`,
-    "hall":`${SERVER_CONTEXT}/api/halls/{id}/`,
-    "hallprice":`${SERVER_CONTEXT}/api/hallprices/{id}/`,
+    "hall": (hallId) => `${SERVER_CONTEXT}/api/halls/${hallId}/`,
+    "hallprice": (hallId) =>`${SERVER_CONTEXT}/api/halls/${hallId}/hallprices/`,
     "pay":`${SERVER_CONTEXT}/api/pay/`,
+    "branch": (branchId) => `${SERVER_CONTEXT}/api/branchs/${branchId}/`,
+    // "branch":`${SERVER_CONTEXT}/api/branchs/{id}/`,
+    "feedbacks":(branchId) => `${SERVER_CONTEXT}/api/branchs/${branchId}/feedbacks/`,
+    "add-feedback":`${SERVER_CONTEXT}/api/feedbacks/`,
 }
 
 export const authApi = () => {

@@ -57,7 +57,7 @@ public class ApiUserController {
         return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping("/test")
+    @GetMapping("/test/")
     @CrossOrigin(origins = {"127.0.0.1:5500"})
     public ResponseEntity<String> test() {
         return new ResponseEntity<>("SUCCESSFUL", HttpStatus.OK);
