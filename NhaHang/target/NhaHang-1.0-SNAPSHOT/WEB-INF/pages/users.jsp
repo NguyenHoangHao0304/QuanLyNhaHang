@@ -49,7 +49,7 @@
                     <td>${u.userRole}</td>
                     <td>
                         <c:url value="/admin/users/${u.id}" var="api"/>
-                        <c:url value="/api/admin/users/${u.id}" var="apiDlt"/>
+                        <c:url value="/api/users/${u.id}" var="apiDlt"/>
                         <a href="${api}" class="btn btn-success">Cập Nhật</a>
                         <button class="btn btn-danger" onclick="Delete('${apiDlt}')">Xóa</button>
                     </td>

@@ -9,6 +9,8 @@ import com.hh.pojo.User;
 import com.hh.repository.BookingRepository;
 import com.hh.repository.UserRepository;
 import com.hh.service.BookingService;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +62,8 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Booking addBooking(Booking bk) {
+        bk.setBookingDate(LocalDate.now());
+        bk.setStartTime(new Date());
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User u = this.userRepo.getUserByUsername(authentication.getName());
         bk.setUserId(u);

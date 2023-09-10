@@ -18,6 +18,8 @@ export const endpoints ={
     // "branch":`${SERVER_CONTEXT}/api/branchs/{id}/`,
     "feedbacks":(branchId) => `${SERVER_CONTEXT}/api/branchs/${branchId}/feedbacks/`,
     "add-feedback":`${SERVER_CONTEXT}/api/feedbacks/`,
+    "add-booking":`${SERVER_CONTEXT}/api/booking/`,
+    "bookings":`${SERVER_CONTEXT}/api/bookings/`,
 }
 
 export const authApi = () => {

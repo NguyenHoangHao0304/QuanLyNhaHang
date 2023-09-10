@@ -97,29 +97,18 @@
                             <c:forEach items="${feedbacks}" var="f">
                                 <c:choose>
                                     <c:when test="${f.branchId.id == b.id}">
-                                        <li class="list-group-item" value="${f.branchId.id}">${f.feedbackDescription}</li>
+                                        <li class="list-group-item" value="${f.branchId.id}">${f.feedbackDescription} ---------- By: ${f.userId.username}</li>
                                         </c:when>
                                         <c:otherwise></c:otherwise>
                                     </c:choose>
                                 </c:forEach>
                         </ul>
                     </td>
-                    <td>
-                        <ul class="list-group list-group-flush">
-                            <c:forEach items="${feedbacks}" var="f">
-                                <c:choose>
-                                    <c:when test="${f.branchId.id == b.id}">
-                                        <li class="list-group-item" value="${f.branchId.id}">${f.userId.username}</li>
-                                        </c:when>
-                                        <c:otherwise></c:otherwise>
-                                    </c:choose>
-                                </c:forEach>
-                        </ul>
-                    </td>
+
                     <sec:authorize access="hasRole('ROLE_ADMIN')"> 
                         <td>
                             <c:url value="/admin/branchs/${b.id}" var="api"/>
-                            <c:url value="/api/admin/branchs/${b.id}" var="apiDlt"/>
+                            <c:url value="/api/branchs/${b.id}" var="apiDlt"/>
                             <a href="${api}" class="btn btn-success">Cập Nhật</a>
                             <button class="btn btn-danger" onclick="Delete('${apiDlt}')">Xóa</button>
                         </td>

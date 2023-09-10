@@ -39,7 +39,7 @@ public class ApiUserController {
     @Autowired
     private UserService userService;
 
-    @DeleteMapping("/admin/users/{id}")
+    @DeleteMapping("/users/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable(value = "id") int id) {
         this.userService.deleteUser(id);

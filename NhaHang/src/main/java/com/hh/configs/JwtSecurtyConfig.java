@@ -94,7 +94,9 @@ public class JwtSecurtyConfig  extends WebSecurityConfigurerAdapter{
         http.authorizeRequests().antMatchers("/api/foods/").permitAll();
         http.authorizeRequests().antMatchers("/api/services/").permitAll();
         http.authorizeRequests().antMatchers("/api/branchs/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/bookings/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/**/feedbacks/").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/**/**").permitAll();
         http.antMatcher("/api/**").httpBasic().authenticationEntryPoint(restServicesEntryPoint()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_CUSTOMER')")

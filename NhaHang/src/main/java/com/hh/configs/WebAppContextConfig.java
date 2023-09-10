@@ -6,6 +6,8 @@ package com.hh.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.hh.formatter.BranchFormatter;
 import com.hh.formatter.DateFormatter;
 import com.hh.formatter.HallFormatter;
@@ -127,4 +129,10 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         return validator();
     }
 
+    @Bean
+    public ObjectMapper objectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule()); // Đăng ký module để hỗ trợ java.time.LocalDate
+        return mapper;
+    }
 }

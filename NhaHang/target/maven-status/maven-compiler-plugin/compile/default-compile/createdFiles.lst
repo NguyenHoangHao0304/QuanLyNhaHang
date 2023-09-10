@@ -9,6 +9,7 @@ com\hh\repository\ReceiptRepository.class
 com\hh\formatter\UserFormatter.class
 com\hh\configs\JwtSecurtyConfig.class
 com\hh\service\HallPriceService.class
+com\hh\repository\StatsRepository.class
 com\hh\controllers\HallPriceController.class
 com\hh\controllers\FoodController.class
 com\hh\pojo\Food_.class

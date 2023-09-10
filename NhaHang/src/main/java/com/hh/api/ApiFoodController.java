@@ -31,9 +31,13 @@ public class ApiFoodController {
     @Autowired
     private FoodService foodService;
 
-    @DeleteMapping("/admin/foods/{id}")
+    /**
+     *
+     * @param id
+     */
+    @DeleteMapping("/foods/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") int id) {
+    public void delete(@PathVariable(value = "id") int id) {
         this.foodService.deleteFood(id);
     }
 

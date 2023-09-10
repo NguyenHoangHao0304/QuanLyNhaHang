@@ -38,7 +38,7 @@ public class ApiBranchController {
     @Autowired
     private FeedbackService feedbackService;
 
-    @DeleteMapping("/admin/branchs/{id}")
+     @DeleteMapping("/branchs/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id) {
         this.branchService.deleteBranch(id);

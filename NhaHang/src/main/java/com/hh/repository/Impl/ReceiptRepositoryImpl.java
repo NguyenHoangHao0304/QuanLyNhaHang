@@ -47,7 +47,6 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
             Payment payment = new Payment();
             payment.setUserId(this.userRepo.getUserByUsername(authentication.getName()));
             payment.setPaymentDate(new Date());
-            payment.setPaymentMethod("Trực Tiếp");
             s.save(payment);
 
             for (Cart c : carts.values()) {

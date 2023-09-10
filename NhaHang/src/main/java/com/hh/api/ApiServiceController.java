@@ -30,9 +30,9 @@ public class ApiServiceController {
     @Autowired
     private ServiceService serviceService;
 
-    @DeleteMapping("/admin/services/{id}")
+    @DeleteMapping("/services/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") int id) {
+    public void delete(@PathVariable(value = "id") int id) {
         this.serviceService.deleteService(id);
     }
     

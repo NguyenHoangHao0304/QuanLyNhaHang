@@ -29,7 +29,7 @@ public class ApiHallPriceController {
     @Autowired
     private HallPriceService hallPriceService;
 
-    @DeleteMapping("/admin/halls/hallprices/{id}")
+    @DeleteMapping("/halls/hallprices/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id) {
         this.hallPriceService.deleteHallPrice(id);

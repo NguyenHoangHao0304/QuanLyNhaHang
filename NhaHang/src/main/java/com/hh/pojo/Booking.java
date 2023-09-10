@@ -4,6 +4,7 @@
  */
 package com.hh.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
@@ -64,10 +65,13 @@ public class Booking implements Serializable {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User userId;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookingId")
     private Set<BookingFood> bookingFoodSet;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookingId")
     private Set<BookingService> bookingServiceSet;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bookingId")
     private Set<Bill> billSet;
 

@@ -48,7 +48,7 @@
                     <sec:authorize access="hasRole('ROLE_ADMIN')"> 
                         <td>
                             <c:url value="/admin/foods/${f.id}" var="api"/>
-                            <c:url value="/api/admin/foods/${f.id}" var="apiDlt"/>
+                            <c:url value="/api/foods/${f.id}" var="apiDlt"/>
                             <a href="${api}" class="btn btn-success">Cập Nhật</a>
                             <button class="btn btn-danger" onclick="Delete('${apiDlt}')">Xóa</button>
                         </td>

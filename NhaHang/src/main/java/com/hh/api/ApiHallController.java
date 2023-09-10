@@ -32,7 +32,7 @@ public class ApiHallController {
     @Autowired
     private HallService hallService;
 
-    @DeleteMapping("/admin/halls/{id}")
+    @DeleteMapping("/halls/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id) {
         this.hallService.deleteHall(id);
