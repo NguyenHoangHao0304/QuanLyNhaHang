@@ -7,6 +7,7 @@ package com.hh.service.Impl;
 import com.hh.pojo.Booking;
 import com.hh.pojo.User;
 import com.hh.repository.BookingRepository;
+import com.hh.repository.HallRepository;
 import com.hh.repository.UserRepository;
 import com.hh.service.BookingService;
 import java.time.LocalDate;
@@ -27,6 +28,8 @@ public class BookingServiceImpl implements BookingService {
 
     @Autowired
     private BookingRepository BookingRepo;
+    @Autowired
+    private HallRepository hallRepo;
     @Autowired
     private UserRepository userRepo;
 
@@ -64,6 +67,7 @@ public class BookingServiceImpl implements BookingService {
     public Booking addBooking(Booking bk) {
         bk.setBookingDate(LocalDate.now());
         bk.setStartTime(new Date());
+//        bk.setHallId(this.hallRepo.getHallById(3));
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User u = this.userRepo.getUserByUsername(authentication.getName());
         bk.setUserId(u);

@@ -7,6 +7,7 @@ package com.hh.pojo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,11 +42,13 @@ public class Bill implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "unit_price")
     private BigDecimal unitPrice;
+    @Column(name = "num")
+    private int num;
     @JoinColumn(name = "booking_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Booking bookingId;
     @JoinColumn(name = "payment_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Payment paymentId;
 
     public Bill() {
@@ -110,6 +113,20 @@ public class Bill implements Serializable {
     @Override
     public String toString() {
         return "com.hh.pojo.Bill[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the num
+     */
+    public int getNum() {
+        return num;
+    }
+
+    /**
+     * @param num the num to set
+     */
+    public void setNum(int num) {
+        this.num = num;
     }
     
 }

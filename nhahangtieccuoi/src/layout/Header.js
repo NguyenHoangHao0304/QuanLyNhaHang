@@ -10,19 +10,9 @@ import "./Header.css";
 const Header = () => {
     const [user, dispatch] = useContext(MyUserContext);
     const [cartCounter,] = useContext(MyCartContext);
-    // const [branchs, setBranchs] = useState(null);
     const [kw, setKw] = useState("");
     const nav = useNavigate();
     const headerRef = useRef(null);
-    // useEffect(() => {
-    //     const loadBranchs = async () => {
-    //         // let res = await fetch("http://localhost:8080/NhaHang/api/branchs");
-    //         // let data = await res.json();
-    //         let res = await Apis.get(endpoints['branchs']);
-    //         setBranchs(res.data);
-    //     }
-    //     loadBranchs();
-    // }, [])
 
     useEffect(() => {
         const header = headerRef.current;
@@ -57,9 +47,6 @@ const Header = () => {
         })
         nav(`/login`)
     }
-    // if (branchs === null) {
-    //     return <MySpinner />
-    // }
     return (
         <>
             <div className="fixed-header" ref={headerRef}>
@@ -70,12 +57,6 @@ const Header = () => {
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="me-auto">
                                 <Link to="/" className="nav-link">&#128725; Home</Link>
-                                {/* <NavDropdown title="Chi Nhánh" id="basic-nav-dropdown">
-                                    {branchs.map(b => {
-                                        let h = `/?branchId=${b.id}`
-                                        return <Link to={h} className="dropdown-item" key={b.id}>{b.branchName}</Link>
-                                    })}
-                                </NavDropdown> */}
                                 <NavDropdown title="Tiệc" id="basic-nav-dropdown">
                                     <Link to="/halls" className="dropdown-item" >Sảnh</Link>
                                     <NavDropdown.Divider />

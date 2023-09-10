@@ -68,7 +68,6 @@ const BranchDetails = () => {
     return <>
         <h1 className="text-center text-warning">{branch.branchName}</h1>
         <h5 className="text-center text-warning">({branch.branchAddress})</h5>
-        {/* <img src="https://res.cloudinary.com/drqfqkwfo/image/upload/v1691435747/osqbj4rsvciiycykxetv.png" width={1000} height={1000}/> */}
         <Card className="mt-2" style={{ width: 1350 }}>
             <Card.Header><strong>Giới thiệu về Chi Nhánh</strong></Card.Header>
             <Card.Body>

@@ -5,8 +5,11 @@
 package com.hh.repository.Impl;
 
 import com.hh.pojo.Bill;
+import com.hh.pojo.Booking;
+import com.hh.pojo.BookingService;
 import com.hh.pojo.Cart;
 import com.hh.pojo.Payment;
+import com.hh.pojo.User;
 import com.hh.repository.BookingRepository;
 import com.hh.repository.ReceiptRepository;
 import com.hh.repository.UserRepository;
@@ -40,20 +43,23 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
     @Transactional(propagation = Propagation.REQUIRED)
     public boolean addReceipt(Map<String, Cart> carts) {
         Session s = this.factory.getObject().getCurrentSession();
-        Authentication authentication
-                = SecurityContextHolder.getContext().getAuthentication();
-
+        Payment payment = new Payment();
         try {
-            Payment payment = new Payment();
-            payment.setUserId(this.userRepo.getUserByUsername(authentication.getName()));
+            Authentication authentication
+                    = SecurityContextHolder.getContext().getAuthentication();
+            User u = this.userRepo.getUserByUsername(authentication.getName());
+            payment.setUserId(u);
             payment.setPaymentDate(new Date());
-            s.save(payment);
+            
+            s.save(u);
 
             for (Cart c : carts.values()) {
                 Bill b = new Bill();
                 b.setUnitPrice(c.getUnitPrice());
                 b.setPaymentId(payment);
-                b.setBookingId(this.bookingRepository.getBookingById(c.getId()));
+                b.setBookingId(this.bookingRepository.getBookingById(23));
+                b.setNum(c.getQuantity());
+                
                 s.save(b);
             }
             return true;

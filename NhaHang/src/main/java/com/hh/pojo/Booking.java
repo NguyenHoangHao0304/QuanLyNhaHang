@@ -55,7 +55,6 @@ public class Booking implements Serializable {
     @Temporal(TemporalType.TIME)
     private Date startTime;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "booking_name")
     private String bookingName;

@@ -105,7 +105,6 @@ const HallDetails = () => {
             console.info(cart);
 
         } else {
-            // Hiển thị thông báo lỗi hoặc xử lý khác tùy theo yêu cầu của bạn
             console.error("Chưa chọn sảnh");
         }
         // if (cart === null) {
