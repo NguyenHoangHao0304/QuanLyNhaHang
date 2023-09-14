@@ -9,10 +9,11 @@ const Cart = () => {
     const [user,] = useContext(MyUserContext);
     const [, cartDispatch] = useContext(MyCartContext);
     const [carts, setCarts] = useState(cookie.load("cart") || {});
-    // const [bookingDate, setBookingDate] = useState();
-    // const [startTime, setStartTime] = useState();
+    const [bookingDate, setBookingDate] = useState();
+    const [startTime, setStartTime] = useState();
     const [bookingName, setBookingName] = useState();
-    const [hallId, setHallId] = useState();
+    const [paymentMethod, setPaymentMethod] = useState();
+    const [hallId, setHallId] = useState(null);
     const [booking, setBooking] = useState(null);
     const [hall, setHall] = useState(null);
 
@@ -63,24 +64,44 @@ const Cart = () => {
 
     const pay = () => {
         const process = async () => {
-            let res = await authApi().post(endpoints[`pay`], carts);
-            if (res.status === 200) {
-                cookie.remove("cart");
-
-                cartDispatch({
-                    "type": "update",
-                    "pay": 0
+            try {
+                const dataToSend = {
+                    carts: carts,
+                    hallId: hallId,
+                    bookingName: bookingName,
+                    bookingDate: bookingDate,
+                    startTime: startTime,
+                    paymentMethod: paymentMethod
+                };
+                const res = await authApi().post(endpoints[`pay`], dataToSend, {
+                    "bookingName": bookingName,
+                    "hallId": hallId
                 });
-                setCarts(null);
+
+                if (res.status === 200) {
+                    cookie.remove("cart");
+
+                    cartDispatch({
+                        "type": "update",
+                        "pay": 0
+                    });
+                    setCarts(null);
+                }
+                setBooking([...booking, res.data]);
+
+            } catch (error) {
+                console.error(error);
+                console.log(bookingName);
+                console.log(hallId);
             }
 
-            let { data } = await authApi().post(endpoints[`add-booking`], {
-                // "bookingDate": bookingDate,
-                // "startTime": startTime,
-                "bookingName": bookingName,
-                "hallId": hallId
-            });
-            setBooking([...booking, data]);
+            // let { data } = await authApi().post(endpoints[`add-booking`], {
+            //     // "bookingDate": bookingDate,
+            //     // "startTime": startTime,
+            //     "bookingName": bookingName,
+            //     "hallId": hallId
+            // });
+            // setBooking([...booking, data]);
         }
         process();
     }
@@ -120,14 +141,14 @@ const Cart = () => {
         </Table>
         <h5 className="text-center text-warning mt-5">Thông tin cần thiết</h5>
         <Form className="mt-1">
-            {/* <Form.Group className="mb-3" >
+            <Form.Group className="mb-3" >
                 <Form.Label>Ngày tổ chức</Form.Label>
                 <Form.Control type="date" placeholder="Ngày tổ chức" value={bookingDate} onChange={(e) => setBookingDate(e.target.value)} />
             </Form.Group>
             <Form.Group className="mb-3" >
                 <Form.Label>Giờ bắt đầu</Form.Label>
                 <Form.Control type="text" placeholder="Giờ bắt đầu" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
-            </Form.Group> */}
+            </Form.Group>
             <Form.Group className="mb-3" >
                 <Form.Label>Tên Tiệc</Form.Label>
                 <Form.Control type="text" placeholder="Dạng Tiệc" value={bookingName} onChange={(e) => setBookingName(e.target.value)} />
@@ -138,6 +159,14 @@ const Cart = () => {
                     {hall && hall.map(h => (
                         <option value={h.id}>{h.hallName} - {h.branchId.branchName}</option>
                     ))}
+                </Form.Select>
+            </Form.Group>
+            <Form.Group className="mb-3" >
+                <Form.Label>Phương Thức Thanh Toán</Form.Label>
+                <Form.Select aria-label="Default select example" value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
+                        <option>Thanh toán TRỰC TIẾP</option>
+                        <option>Thanh toán qua ví MOMO</option>
+                        <option>Thanh toán qua ZALOPAY</option>
                 </Form.Select>
             </Form.Group>
         </Form>

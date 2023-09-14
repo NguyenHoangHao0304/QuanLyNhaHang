@@ -10,8 +10,8 @@ const HallDetails = () => {
     const { hallId } = useParams();
     const [hallDetail, setHallDetail] = useState(null);
     const [hallPrice, setHallPrice] = useState(null);
-    const [selectedHall, setSelectedHall] = useState(undefined);
-    const [selectedHallName, setSelectedHallName] = useState(undefined);
+    const [selectedHall, setSelectedHall] = useState();
+    const [selectedHallName, setSelectedHallName] = useState('');
     const [, cartdispatch] = useContext(MyCartContext);
 
     // useEffect(() => {

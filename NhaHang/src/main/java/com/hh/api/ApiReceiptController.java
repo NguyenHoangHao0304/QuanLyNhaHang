@@ -5,10 +5,12 @@
 package com.hh.api;
 
 import com.hh.pojo.Cart;
+import com.hh.pojo.DataRequest;
 import com.hh.service.ReceiptService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,10 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiReceiptController {
     @Autowired
     private ReceiptService receiptService;
-    @PostMapping("/pay/")
+    
+    @PostMapping(path="/pay/", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @CrossOrigin
-    public void addReceipt(@RequestBody Map<String, Cart> carts){
-        this.receiptService.addReceipt(carts);
+    public void addReceipt(@RequestBody DataRequest dataRequest){
+        this.receiptService.addReceipt(dataRequest);
     }
 }

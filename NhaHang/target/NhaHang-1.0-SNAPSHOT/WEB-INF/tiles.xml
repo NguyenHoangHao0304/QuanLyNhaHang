@@ -127,5 +127,15 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" 
                        value="/WEB-INF/pages/manage-feedbacks.jsp" />
     </definition>
+    <definition name="statsRevenue" extends="baseLayout">
+        <put-attribute name="title" value="Stats" />
+        <put-attribute name="content" 
+                       value="/WEB-INF/pages/statsRevenue.jsp" />
+    </definition>
+    <definition name="statsBookingByBranch" extends="baseLayout">
+        <put-attribute name="title" value="Stats" />
+        <put-attribute name="content" 
+                       value="/WEB-INF/pages/statsBookingByBranch.jsp" />
+    </definition>
 </tiles-definitions>
 

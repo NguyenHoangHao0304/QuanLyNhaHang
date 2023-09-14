@@ -35,8 +35,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
     "com.hh.components"
 })
 @Order(1)
-public class JwtSecurtyConfig  extends WebSecurityConfigurerAdapter{
- @Bean
+public class JwtSecurtyConfig extends WebSecurityConfigurerAdapter {
+
+    @Bean
     public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter() throws Exception {
         JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter = new JwtAuthenticationTokenFilter();
         jwtAuthenticationTokenFilter.setAuthenticationManager(authenticationManager());
@@ -65,7 +66,6 @@ public class JwtSecurtyConfig  extends WebSecurityConfigurerAdapter{
 //        auth.userDetailsService(userDetailsService)
 //                .passwordEncoder(passwordEncoder());
 //    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 //        http.formLogin()
@@ -84,7 +84,6 @@ public class JwtSecurtyConfig  extends WebSecurityConfigurerAdapter{
 //            .antMatchers("/api/**")
 //            .access("hasRole('ROLE_ADMIN')");
 //        http.csrf().disable();
-
         // Disable crsf cho đường dẫn /rest/**
         http.csrf().ignoringAntMatchers("/api/**");
         http.authorizeRequests().antMatchers("/api/login/**").permitAll();
@@ -96,7 +95,7 @@ public class JwtSecurtyConfig  extends WebSecurityConfigurerAdapter{
         http.authorizeRequests().antMatchers("/api/branchs/**").permitAll();
         http.authorizeRequests().antMatchers("/api/bookings/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/**/feedbacks/").permitAll();
-         http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/pay/").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/pay/").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/**/**").permitAll();
         http.antMatcher("/api/**").httpBasic().authenticationEntryPoint(restServicesEntryPoint()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()

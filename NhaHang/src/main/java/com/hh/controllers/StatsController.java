@@ -27,7 +27,7 @@ public class StatsController {
     public String countBookingByBranch(Model model) {
         List<Object[]> countBookingByBranchList = statsRepository.countBookingByBranch();
         model.addAttribute("countBookingByBranchList", countBookingByBranchList);
-        return "countBookingByBranch";
+        return "statsBookingByBranch";
     }
 
     @RequestMapping("/statsRevenue")

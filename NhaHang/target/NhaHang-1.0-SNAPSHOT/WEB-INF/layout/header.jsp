@@ -61,11 +61,21 @@
                             </sec:authorize>
                     </ul>
                 </li>
-                <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_EMPLOYEE')"> 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Thống kê</a>
-                    </li>
-                </sec:authorize>
+                <li class="nav-item dropdown">
+                    <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')"> 
+                        <a
+                            class="nav-link dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false"> Thống Kê
+                        </a>
+                    </sec:authorize>
+                    <ul class="dropdown-menu">
+                        <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')"> 
+                            <li><a class="dropdown-item" href="<c:url value="/statsRevenue"/>">Thống kê doanh thu</a></li>
+                            <li><a class="dropdown-item" href="<c:url value="/countBookingByBranch"/>">Thống kê mật độ tiệc cưới</a></li>
+                            </sec:authorize> 
+
+                    </ul>
+                </li>
                 <sec:authorize access="hasRole('ROLE_CUSTOMER')"> 
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value="/user/bookings/create"/>">Đặt Tiệc</a>

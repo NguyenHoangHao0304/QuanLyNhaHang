@@ -5,6 +5,8 @@
 package com.hh.service.Impl;
 
 import com.hh.pojo.Cart;
+import com.hh.pojo.DataRequest;
+import com.hh.pojo.Hall;
 import com.hh.repository.ReceiptRepository;
 import com.hh.service.ReceiptService;
 import java.util.Map;
@@ -21,8 +23,8 @@ public class RececiptServiceImpl implements ReceiptService{
     @Autowired
     private ReceiptRepository receiptRepo;
     @Override
-    public boolean addReceipt(Map<String, Cart> carts) {
-        return this.receiptRepo.addReceipt(carts);
+    public boolean addReceipt(DataRequest dataRequest) {
+        return this.receiptRepo.addReceipt(dataRequest);
     }
     
 }

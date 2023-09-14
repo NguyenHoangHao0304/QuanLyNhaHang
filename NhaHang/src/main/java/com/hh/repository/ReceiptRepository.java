@@ -5,6 +5,7 @@
 package com.hh.repository;
 
 import com.hh.pojo.Cart;
+import com.hh.pojo.DataRequest;
 import java.util.Map;
 
 /**
@@ -12,5 +13,5 @@ import java.util.Map;
  * @author Admin
  */
 public interface ReceiptRepository {
-    boolean addReceipt(Map<String, Cart> carts);
+    boolean addReceipt(DataRequest dataRequest);
 }

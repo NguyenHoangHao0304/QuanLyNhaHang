@@ -57,7 +57,7 @@
                     <td>${bk.bookingDate}</td>
                     <td>${bk.startTime}</td>
                     <td>${bk.bookingName}</td>
-                    <td>${bk.hallId.hallName}</td>
+                    <td>${bk.hallId.hallName} - ${bk.hallId.branchId.branchName}</td>
                     <td>${bk.userId.username}</td>
                     <sec:authorize access="hasRole('ROLE_CUSTOMER')"> 
                         <td>

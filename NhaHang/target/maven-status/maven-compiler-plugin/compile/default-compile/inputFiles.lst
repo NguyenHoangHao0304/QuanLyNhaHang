@@ -8,6 +8,7 @@ C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\j
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\repository\Impl\FoodRepositoryImpl.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\api\ApiBookingController.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\pojo\Bill.java
+C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\service\Impl\StatsServiceImpl.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\pojo\Service.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\service\BookingService.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\pojo\Hall.java
@@ -35,6 +36,7 @@ C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\j
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\service\FoodService.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\service\BranchService.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\configs\DispatcherServletInit.java
+C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\controllers\StatsController.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\pojo\Cart.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\repository\Impl\UserRepositoryImpl.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\service\HallService.java
@@ -67,10 +69,13 @@ C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\j
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\repository\Impl\EmployeeRepositoryImpl.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\service\Impl\BookingServiceImpl.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\service\ReceiptService.java
+C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\repository\Impl\StatsRepositoryImpl.java
+C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\service\StatsService.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\configs\SpringSecurityConfig.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\formatter\UserFormatter.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\api\ApiHallPriceController.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\controllers\FoodController.java
+C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\pojo\DataRequest.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\repository\EmployeeRepository.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\service\Impl\HallServiceImpl.java
 C:\Users\Admin\OneDrive\Desktop\Các môn học\QuanLyNhaHang\NhaHang\src\main\java\com\hh\configs\TilesConfig.java

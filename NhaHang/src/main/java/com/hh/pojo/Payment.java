@@ -42,10 +42,12 @@ public class Payment implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "payment_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date paymentDate;
+    @Basic(optional = false)
+    @Column(name = "payment_method")
+    private String paymentMethod;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User userId;
@@ -109,6 +111,20 @@ public class Payment implements Serializable {
     @Override
     public String toString() {
         return "com.hh.pojo.Payment[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the paymentMethod
+     */
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    /**
+     * @param paymentMethod the paymentMenthod to set
+     */
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
 }

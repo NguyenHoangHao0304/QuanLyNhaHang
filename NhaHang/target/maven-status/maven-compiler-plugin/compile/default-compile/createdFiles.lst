@@ -1,4 +1,5 @@
 com\hh\repository\UserRepository.class
+com\hh\service\Impl\StatsServiceImpl.class
 com\hh\repository\Impl\EmployeeRepositoryImpl.class
 com\hh\pojo\Hall.class
 com\hh\service\ServiceService.class
@@ -17,6 +18,7 @@ com\hh\service\Impl\HallPriceServiceImpl.class
 com\hh\api\ApiUserController.class
 com\hh\service\Impl\RececiptServiceImpl.class
 com\hh\pojo\Payment_.class
+com\hh\repository\Impl\StatsRepositoryImpl.class
 com\hh\pojo\BookingService_.class
 com\hh\repository\Impl\FeedbackRepositoryImpl.class
 com\hh\pojo\User_.class
@@ -51,6 +53,7 @@ com\hh\service\ReceiptService.class
 com\hh\service\BranchService.class
 com\hh\service\Impl\ServiceServiceImpl.class
 com\hh\controllers\UserController.class
+com\hh\pojo\DataRequest.class
 com\hh\repository\Impl\HallPriceRepositoryImpl.class
 com\hh\api\ApiServiceController.class
 com\hh\repository\Impl\BookingRepositoryImpl.class
@@ -85,6 +88,7 @@ com\hh\controllers\HallController.class
 com\hh\api\ApiEmployeeController.class
 com\hh\configs\WebAppContextConfig.class
 com\hh\repository\BookingRepository.class
+com\hh\service\StatsService.class
 com\hh\pojo\Hall_.class
 com\hh\pojo\Feedback_.class
 com\hh\api\ApiBranchController.class
@@ -92,6 +96,7 @@ com\hh\api\ApiBookingController.class
 com\hh\pojo\Branch_.class
 com\hh\service\FeedbackService.class
 com\hh\filters\JwtAuthenticationTokenFilter.class
+com\hh\controllers\StatsController.class
 com\hh\repository\FoodRepository.class
 com\hh\configs\DispatcherServletInit.class
 com\hh\configs\HibernateConfig.class

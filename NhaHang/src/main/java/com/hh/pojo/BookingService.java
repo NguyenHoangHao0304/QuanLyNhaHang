@@ -6,6 +6,7 @@ package com.hh.pojo;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,10 +38,10 @@ public class BookingService implements Serializable {
     @Column(name = "id")
     private Integer id;
     @JoinColumn(name = "booking_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Booking bookingId;
     @JoinColumn(name = "service_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Service serviceId;
 
     public BookingService() {
