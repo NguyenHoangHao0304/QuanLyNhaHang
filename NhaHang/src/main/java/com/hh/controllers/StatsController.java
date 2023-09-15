@@ -23,17 +23,24 @@ public class StatsController {
     @Autowired
     private StatsRepository statsRepository;
 
-    @RequestMapping("/countBookingByBranch")
+    @RequestMapping("/admin/countBookingByBranch")
     public String countBookingByBranch(Model model) {
         List<Object[]> countBookingByBranchList = statsRepository.countBookingByBranch();
         model.addAttribute("countBookingByBranchList", countBookingByBranchList);
         return "statsBookingByBranch";
     }
 
-    @RequestMapping("/statsRevenue")
+    @RequestMapping("/admin/statsRevenue")
     public String statsRevenue(Model model, @RequestParam Map<String, String> params) {
         List<Object[]> statsRevenueList = statsRepository.statsRevenue(params);
         model.addAttribute("statsRevenueList", statsRevenueList);
         return "statsRevenue";
+    }
+
+    @RequestMapping("/admin/countHallStats")
+    public String countHallStats(Model model, @RequestParam Map<String, String> params) {
+        List<Object[]> countHallStatsList = statsRepository.countHallStats(params);
+        model.addAttribute("countHallStatsList", countHallStatsList);
+        return "statsHall";
     }
 }

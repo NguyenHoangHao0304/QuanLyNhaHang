@@ -49,7 +49,6 @@ public class StatsRepositoryImpl implements StatsRepository {
         CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
 
         Root rBooking = q.from(Booking.class);
-        Root rHall = q.from(Hall.class);
         Root rBranch = q.from(Branch.class);
 
         q.where(b.equal(rBooking.get("hallId").get("branchId"), rBranch.get("id")));
@@ -64,30 +63,29 @@ public class StatsRepositoryImpl implements StatsRepository {
     @Override
     public List<Object[]> statsRevenue(Map<String, String> params) {
         Session s = this.factory.getObject().getCurrentSession();
-        CriteriaBuilder b = s.getCriteriaBuilder();
-        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+        CriteriaBuilder cb = s.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = cb.createQuery(Object[].class);
 
-        Root rBooking = q.from(Booking.class);
-        Root rBill = q.from(Bill.class);
-        Root rPayment = q.from(Payment.class);
+        Root<Bill> rBill = q.from(Bill.class);
+        Root<Payment> rPayment = q.from(Payment.class);
+        Root<Branch> rBranch = q.from(Branch.class);
 
         List<Predicate> predicates = new ArrayList<>();
-        predicates.add(b.equal(rBill.get("bookingId"), rBooking.get("id")));
-        predicates.add(b.equal(rBill.get("paymentId"), rPayment.get("id")));
-
-        String fd = params.get("fromDate");
-        if (fd != null && !fd.isEmpty()) {
+        predicates.add(cb.equal(rBill.get("bookingId").get("hallId").get("branchId"), rBranch.get("id")));
+        predicates.add(cb.equal(rBill.get("paymentId"), rPayment.get("id")));
+        String fromDate = params.get("fromDate");
+        if (fromDate != null && !fromDate.isEmpty()) {
             try {
-                predicates.add(b.greaterThanOrEqualTo(rPayment.get("paymentDate"), f.parse(fd)));
+                predicates.add(cb.greaterThanOrEqualTo(rPayment.get("paymentDate"), f.parse(fromDate)));
             } catch (ParseException ex) {
                 Logger.getLogger(StatsRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
-        String td = params.get("toDate");
-        if (td != null && !td.isEmpty()) {
+        String toDate = params.get("toDate");
+        if (toDate != null && !toDate.isEmpty()) {
             try {
-                predicates.add(b.lessThanOrEqualTo(rPayment.get("paymentDate"), f.parse(td)));
+                predicates.add(cb.lessThanOrEqualTo(rPayment.get("paymentDate"), f.parse(toDate)));
             } catch (ParseException ex) {
                 Logger.getLogger(StatsRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -97,18 +95,82 @@ public class StatsRepositoryImpl implements StatsRepository {
         if (quarter != null && !quarter.isEmpty()) {
             String year = params.get("year");
             if (year != null && !year.isEmpty()) {
-                predicates.add(b.equal(b.function("YEAR", Integer.class, rPayment.get("paymentDate")), Integer.parseInt(year)));
-                predicates.add(b.equal(b.function("QUARTER", Integer.class, rPayment.get("paymentDate")), Integer.parseInt(quarter)));
+                predicates.add(cb.equal(cb.function("YEAR", Integer.class, rPayment.get("paymentDate")), Integer.parseInt(year)));
+                predicates.add(cb.equal(cb.function("QUARTER", Integer.class, rPayment.get("paymentDate")), Integer.parseInt(quarter)));
             }
         }
 
         q.where(predicates.toArray(Predicate[]::new));
 
-        q.multiselect(rBooking.get("id"), rBooking.get("bookingName"), b.prod(rBill.get("unitPrice"), rBill.get("num")));
-        q.groupBy(rBooking.get("id"));
+        q.multiselect(rBranch.get("id"), rBranch.get("branchName"),
+                cb.function("YEAR", Integer.class, rPayment.get("paymentDate")).alias("year"),
+                cb.function("QUARTER", Integer.class, rPayment.get("paymentDate")).alias("quarter"),
+                cb.function("MONTH", Integer.class, rPayment.get("paymentDate")).alias("month"),
+                cb.sum(cb.prod(rBill.get("unitPrice"), rBill.get("num"))).alias("revenue"));
+
+        q.groupBy(rBranch.get("id"), 
+                cb.function("YEAR", Integer.class, rPayment.get("paymentDate")),
+                cb.function("QUARTER", Integer.class, rPayment.get("paymentDate")),
+                cb.function("MONTH", Integer.class, rPayment.get("paymentDate")));
 
         Query query = s.createQuery(q);
         return query.getResultList();
+    }
+
+    @Override
+    public List<Object[]> countHallStats(Map<String, String> params) {
+        Session s = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder cb = s.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = cb.createQuery(Object[].class);
+
+        Root<Booking> rBooking = q.from(Booking.class);
+        Root<Hall> rHall = q.from(Hall.class);
+
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(cb.equal(rBooking.get("hallId"), rHall.get("id")));
+
+        String fromDate = params.get("fromDate");
+        if (fromDate != null && !fromDate.isEmpty()) {
+            try {
+                predicates.add(cb.greaterThanOrEqualTo(
+                        rBooking.get("bookingDate"),
+                        f.parse(fromDate)
+                ));
+            } catch (ParseException ex) {
+                Logger.getLogger(StatsRepository.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        String toDate = params.get("toDate");
+        if (toDate != null && !toDate.isEmpty()) {
+            try {
+                predicates.add(cb.lessThanOrEqualTo(
+                        rBooking.get("bookingDate"),
+                        f.parse(toDate)
+                ));
+            } catch (ParseException ex) {
+                Logger.getLogger(StatsRepository.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        q.where(predicates.toArray(Predicate[]::new));
+
+        q.multiselect(
+                rHall.get("id"), rHall.get("hallName"),rHall.get("branchId").get("branchName"),
+                cb.function("YEAR", Integer.class, rBooking.get("bookingDate")).alias("year"),
+                cb.function("QUARTER", Integer.class, rBooking.get("bookingDate")).alias("quarter"),
+                cb.function("MONTH", Integer.class, rBooking.get("bookingDate")).alias("month"),
+                cb.count(rBooking.get("id")).alias("bookingCount")
+        );
+
+        q.groupBy(
+                rHall.get("id"),
+                cb.function("YEAR", Integer.class, rBooking.get("bookingDate")),
+                cb.function("QUARTER", Integer.class, rBooking.get("bookingDate")),
+                cb.function("MONTH", Integer.class, rBooking.get("bookingDate"))
+        );
+
+        return s.createQuery(q).getResultList();
     }
 
 }

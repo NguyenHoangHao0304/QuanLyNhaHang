@@ -16,4 +16,6 @@ public interface StatsRepository {
     List<Object[]> countBookingByBranch();
 
     List<Object[]> statsRevenue(Map<String, String> params);
+    
+    List<Object[]> countHallStats(Map<String, String> params);
 }

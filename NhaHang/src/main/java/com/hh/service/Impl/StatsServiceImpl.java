@@ -30,5 +30,10 @@ public class StatsServiceImpl implements StatsService{
     public List<Object[]> statsRevenue(Map<String, String> params) {
         return this.statsRepo.statsRevenue(params);
     }
+
+    @Override
+    public List<Object[]> countHallStats(Map<String, String> params) {
+        return this.statsRepo.countHallStats(params);
+    }
     
 }

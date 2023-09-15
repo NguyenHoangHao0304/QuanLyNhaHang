@@ -56,7 +56,6 @@
                             <li><a class="dropdown-item" href="<c:url value="/user/bookings"/>">Quản lý đặt tiệc</a></li>
                             </sec:authorize>
                             <sec:authorize access="hasRole('ROLE_ADMIN')"> 
-                            <li><a class="dropdown-item" href="#">Hóa đơn</a></li>
                             <li><a class="dropdown-item" href="<c:url value="/feedbacks"/>">Feedback</a></li>
                             </sec:authorize>
                     </ul>
@@ -70,8 +69,9 @@
                     </sec:authorize>
                     <ul class="dropdown-menu">
                         <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')"> 
-                            <li><a class="dropdown-item" href="<c:url value="/statsRevenue"/>">Thống kê doanh thu</a></li>
-                            <li><a class="dropdown-item" href="<c:url value="/countBookingByBranch"/>">Thống kê mật độ tiệc cưới</a></li>
+                            <li><a class="dropdown-item" href="<c:url value="/admin/statsRevenue"/>">Thống kê doanh thu</a></li>
+                            <li><a class="dropdown-item" href="<c:url value="/admin/countBookingByBranch"/>">Thống kê mật độ tiệc cưới</a></li>
+                            <li><a class="dropdown-item" href="<c:url value="/admin/countHallStats"/>">Thống kê mật độ sử dụng sảnh</a></li>
                             </sec:authorize> 
 
                     </ul>
