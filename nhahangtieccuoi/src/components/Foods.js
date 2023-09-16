@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Alert, Button, Card, Col, Row } from "react-bootstrap";
+import { Alert, Button, Card, Col, Pagination, Row } from "react-bootstrap";
 import MySpinner from "../layout/MySpinner";
 import Apis, { endpoints } from "../configs/Apis";
 import { useSearchParams } from "react-router-dom";
@@ -10,7 +10,8 @@ const Foods = () => {
     const [, cartdispatch] = useContext(MyCartContext);
     const [foods, setFoods] = useState(null);
     const [q] = useSearchParams();
-
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(100);
 
     useEffect(() => {
         let loadFoods = async () => {
@@ -27,10 +28,19 @@ const Foods = () => {
                 console.error(ex);
             }
         }
-        
+
         loadFoods();
     }, [q])
 
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const handleItemsPerPageChange = (e) => {
+        const newItemsPerPage = parseInt(e.target.value);
+        setItemsPerPage(newItemsPerPage);
+        setCurrentPage(1);
+    };
     // useEffect(() => {
     //     if (foods !== null) {
     //         foods.forEach((food) => {
@@ -55,7 +65,7 @@ const Foods = () => {
         if (!(food.foodName in cart)) {
             cart[food.foodName] = {
                 "id": food.id,
-                "foodId":food.id,
+                "foodId": food.id,
                 "name": food.foodName,
                 "quantity": 1,
                 "unitPrice": food.foodPrice
@@ -109,11 +119,34 @@ const Foods = () => {
     if (foods.length === 0) {
         return <Alert variant="info" className="mt-5">Không có món ăn nào!!</Alert>
     }
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentFoods = foods.slice(startIndex, endIndex);
+
     return (
         <>
             <h1 className="text-center text-info">Thực Đơn</h1>
+            <div className="mb-2">
+                <label htmlFor="itemsPerPageSelect" className="mr-2">Số món ăn trên mỗi trang:</label>
+                <select id="itemsPerPageSelect" onChange={handleItemsPerPageChange} value={itemsPerPage}>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="100">Tất cả</option>
+                </select>
+            </div>
+            <Pagination>
+                {Array.from({ length: Math.ceil(foods.length / itemsPerPage) }, (_, index) => (
+                    <Pagination.Item
+                        active={index + 1 === currentPage}
+                        onClick={() => handlePageChange(index + 1)}
+                    >
+                        {index + 1}
+                    </Pagination.Item>
+                ))}
+            </Pagination>
             <Row>
-                {foods.map(f => {
+                {currentFoods.map(f => {
                     return <Col xs={12} md={3} className="mt-2">
                         <Card style={{ height: '100%' }}>
                             <Card.Img variant="top" src={f.foodImage} height={200} width={100} />

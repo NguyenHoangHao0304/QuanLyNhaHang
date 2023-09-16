@@ -95,13 +95,13 @@ public class JwtSecurtyConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/api/branchs/**").permitAll();
         http.authorizeRequests().antMatchers("/api/bookings/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/**/feedbacks/").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/pay/").permitAll();
+//        http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/pay/").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/**/**").permitAll();
         http.antMatcher("/api/**").httpBasic().authenticationEntryPoint(restServicesEntryPoint()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_CUSTOMER')")
                 .antMatchers(HttpMethod.POST, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_CUSTOMER')")
-                .antMatchers(HttpMethod.DELETE, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_CUSTOMER')").and()
+                .antMatchers(HttpMethod.DELETE, "/api/**/").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_CUSTOMER')").and()
                 .addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
     }

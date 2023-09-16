@@ -45,11 +45,11 @@ const Login = () => {
         <Form onSubmit={login}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Tên Đăng Nhập</Form.Label>
-                <Form.Control type="text" value={username} onChange={e =>setUsername(e.target.value)} placeholder="Tên đăng nhập" />
+                <Form.Control type="text" value={username} onChange={e =>setUsername(e.target.value)} placeholder="Tên đăng nhập" required/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                 <Form.Label>Mật Khẩu</Form.Label>
-                <Form.Control type="password" value={password} onChange={e =>setPassword(e.target.value)} placeholder="Mật khẩu" />
+                <Form.Control type="password" value={password} onChange={e =>setPassword(e.target.value)} placeholder="Mật khẩu" required/>
             </Form.Group>
             <Form.Group className="mb-3" >
                 <Button type="submit" variant="danger">Đăng nhập</Button>

@@ -51,25 +51,25 @@ const HallDetails = () => {
 
         loadHallDetails();
         loadHallPrices();
-    },[hallId])
+    },[hallId]);
 
     const handleSelectHall = (id) => {
         setSelectedHall(id);
-        console.log(selectedHall);
+        // console.log(selectedHall);
         
     };
 
     const handleSelectHallName = (name) => {
         let cart = cookie.load("cart") || {};
         if (selectedHallName !== name) {
-            if (selectedHallName && selectedHallName in cart) {
+            if (selectedHallName in cart) {
                 delete cart[selectedHallName];
                 cookie.save(`cart`, cart);
             }
         }
 
         setSelectedHallName(name);
-        console.log(selectedHallName);
+        // console.log(selectedHallName);
 
     };
     const order = (hp) => {
@@ -84,6 +84,7 @@ const HallDetails = () => {
                 });
                 cart[hallName] = {
                     "id": hp.id,
+                    "hallId": hp.hallId.id,
                     "name": hallName,
                     "quantity": 1,
                     "unitPrice": hp.price
@@ -91,6 +92,7 @@ const HallDetails = () => {
             } else {
                 cart[hallName] = {
                     "id": hp.id,
+                    "hallId": hp.hallId.id,
                     "name": hallName,
                     "quantity": 1,
                     "unitPrice": hp.price
@@ -100,7 +102,8 @@ const HallDetails = () => {
                     payload: 0
                 });
             }
-            console.log(selectedHallName);
+            setSelectedHallName(hallName);
+            // console.log(selectedHallName);
             cookie.save(`cart`, cart);
             console.info(cart);
 

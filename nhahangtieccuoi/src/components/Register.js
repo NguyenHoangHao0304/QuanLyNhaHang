@@ -55,27 +55,27 @@ const Register = () => {
         <Form onSubmit={register}>
             <Form.Group className="mb-3" >
                 <Form.Label>Họ</Form.Label>
-                <Form.Control type="text" placeholder="Họ" value={user.firstName} onChange={e => change(e, "firstName")} />
+                <Form.Control type="text" placeholder="Họ" value={user.firstName} onChange={e => change(e, "firstName")} required/>
             </Form.Group>
             <Form.Group className="mb-3" >
                 <Form.Label>Tên</Form.Label>
-                <Form.Control type="text" placeholder="Tên" value={user.lastName} onChange={e => change(e, "lastName")} />
+                <Form.Control type="text" placeholder="Tên" value={user.lastName} onChange={e => change(e, "lastName")} required/>
             </Form.Group>
             <Form.Group className="mb-3" >
                 <Form.Label>Tên Đăng Nhập</Form.Label>
-                <Form.Control type="text" value={user.username} onChange={e => change(e, "username")} placeholder="Tên đăng nhập" />
+                <Form.Control type="text" value={user.username} onChange={e => change(e, "username")} placeholder="Tên đăng nhập" required/>
             </Form.Group>
             <Form.Group className="mb-3" >
                 <Form.Label>Mật Khẩu</Form.Label>
-                <Form.Control type="password" value={user.password} onChange={e => change(e, "password")} placeholder="Mật khẩu" />
+                <Form.Control type="password" value={user.password} onChange={e => change(e, "password")} placeholder="Mật khẩu" required/>
             </Form.Group>
             <Form.Group className="mb-3" >
                 <Form.Label>Xác Nhận Mật Khẩu</Form.Label>
-                <Form.Control type="password" value={user.confirmPassword} onChange={e => change(e, "confirmPassword")} placeholder="Xác Nhận Mật khẩu" />
+                <Form.Control type="password" value={user.confirmPassword} onChange={e => change(e, "confirmPassword")} placeholder="Xác Nhận Mật khẩu" required/>
             </Form.Group>
             <Form.Group className="mb-3" >
                 <Form.Label>Ảnh đại diện</Form.Label>
-                <Form.Control type="file" ref={avatar} />
+                <Form.Control type="file" ref={avatar} required/>
             </Form.Group>
             <Form.Group className="mb-3" >
                 {loading === true?<MySpinner />:<Button type="submit" variant="danger">Đăng Ký</Button>}

@@ -60,26 +60,16 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
     @Transactional(propagation = Propagation.REQUIRED)
     public boolean addReceipt(DataRequest dataRequest) {
         Session s = this.factory.getObject().getCurrentSession();
-        Payment payment = new Payment();
 
+        Payment payment = new Payment();
         Booking booking = new Booking();
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        
         try {
             Authentication authentication
                     = SecurityContextHolder.getContext().getAuthentication();
             User u = this.userRepo.getUserByUsername(authentication.getName());
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-            booking.setBookingDate(LocalDate.parse(dataRequest.getBookingDate(), dateFormatter));
-            try {
-                booking.setStartTime(dateFormat.parse(dataRequest.getStartTime()));
-            } catch (ParseException ex) {
-                Logger.getLogger(ReceiptRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            booking.setUserId(u);
-            booking.setHallId(this.hallRepository.getHallById(Integer.parseInt(dataRequest.getHallId())));
-//            booking.setHallId(this.hallRepository.getHallById(3));
-            booking.setBookingName(dataRequest.getBookingName());
-            s.save(booking);
 
             payment.setUserId(u);
             payment.setPaymentDate(new Date());
@@ -87,18 +77,30 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
             s.save(u);
 
             for (Cart c : dataRequest.getCarts().values()) {
+                if (c.getHallId() > 0) {
+                    booking.setBookingDate(LocalDate.parse(dataRequest.getBookingDate(), dateFormatter));
+                    try {
+                        booking.setStartTime(dateFormat.parse(dataRequest.getStartTime()));
+                    } catch (ParseException ex) {
+                        Logger.getLogger(ReceiptRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    booking.setUserId(u);
+                    booking.setHallId(this.hallRepository.getHallById(c.getHallId()));
+                    booking.setBookingName(dataRequest.getBookingName());
+                    s.save(booking);
+                }
                 Bill b = new Bill();
                 b.setUnitPrice(c.getUnitPrice());
                 b.setPaymentId(payment);
                 b.setBookingId(booking);
                 b.setNum(c.getQuantity());
                 s.save(b);
-                
-                if (c.getServiceId()> 0) {
-                BookingService bks = new BookingService();
-                bks.setBookingId(booking);
-                bks.setServiceId(this.serviceRepository.getServiceById((c.getServiceId())));
-                s.save(bks);
+
+                if (c.getServiceId() > 0) {
+                    BookingService bks = new BookingService();
+                    bks.setBookingId(booking);
+                    bks.setServiceId(this.serviceRepository.getServiceById((c.getServiceId())));
+                    s.save(bks);
                 }
 
                 if (c.getFoodId() > 0) {

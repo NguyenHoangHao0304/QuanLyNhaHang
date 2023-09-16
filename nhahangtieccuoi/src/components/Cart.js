@@ -13,9 +13,9 @@ const Cart = () => {
     const [startTime, setStartTime] = useState();
     const [bookingName, setBookingName] = useState();
     const [paymentMethod, setPaymentMethod] = useState();
-    const [hallId, setHallId] = useState(null);
+    // const [hallId, setHallId] = useState(null);
     const [booking, setBooking] = useState(null);
-    const [hall, setHall] = useState(null);
+    // const [hall, setHall] = useState(null);
 
     useEffect(() => {
         const loadBooking = async () => {
@@ -26,16 +26,16 @@ const Cart = () => {
                 console.error(error);
             }
         }
-        let loadHall = async () => {
-            try {
-                let e = endpoints['halls'];
-                let res = await Apis.get(e);
-                setHall(res.data);
-            } catch (ex) {
-                console.error(ex);
-            }
-        }
-        loadHall();
+        // let loadHall = async () => {
+        //     try {
+        //         let e = endpoints['halls'];
+        //         let res = await Apis.get(e);
+        //         setHall(res.data);
+        //     } catch (ex) {
+        //         console.error(ex);
+        //     }
+        // }
+        // loadHall();
         loadBooking();
     }, [])
 
@@ -67,16 +67,13 @@ const Cart = () => {
             try {
                 const dataToSend = {
                     carts: carts,
-                    hallId: hallId,
+                    // hallId: hallId,
                     bookingName: bookingName,
                     bookingDate: bookingDate,
                     startTime: startTime,
                     paymentMethod: paymentMethod
                 };
-                const res = await authApi().post(endpoints[`pay`], dataToSend, {
-                    "bookingName": bookingName,
-                    "hallId": hallId
-                });
+                const res = await authApi().post(endpoints[`pay`], dataToSend);
 
                 if (res.status === 200) {
                     cookie.remove("cart");
@@ -91,8 +88,6 @@ const Cart = () => {
 
             } catch (error) {
                 console.error(error);
-                console.log(bookingName);
-                console.log(hallId);
             }
 
             // let { data } = await authApi().post(endpoints[`add-booking`], {
@@ -116,8 +111,9 @@ const Cart = () => {
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>FoodId</th>
+                    {/* <th>FoodId</th>
                     <th>ServiceId</th>
+                    <th>HallId</th> */}
                     <th>Tên</th>
                     <th>Giá Tiền</th>
                     <th>Số lượng</th>
@@ -128,8 +124,9 @@ const Cart = () => {
                 {Object.values(carts).map(c => {
                     return <tr>
                         <td></td>
-                        <td>{c.foodId}</td>
+                        {/* <td>{c.foodId}</td>
                         <td>{c.serviceId}</td>
+                        <td>{c.hallId}</td> */}
                         <td>{c.name}</td>
                         <td>{c.unitPrice} VND</td>
                         <td>
@@ -147,7 +144,7 @@ const Cart = () => {
         <Form className="mt-1">
             <Form.Group className="mb-3" >
                 <Form.Label>Ngày tổ chức</Form.Label>
-                <Form.Control type="date" placeholder="Ngày tổ chức" value={bookingDate} onChange={(e) => setBookingDate(e.target.value)} />
+                <Form.Control type="date" placeholder="Ngày tổ chức" value={bookingDate} onChange={(e) => setBookingDate(e.target.value)}/>
             </Form.Group>
             <Form.Group className="mb-3" >
                 <Form.Label>Giờ bắt đầu</Form.Label>
@@ -157,17 +154,18 @@ const Cart = () => {
                 <Form.Label>Tên Tiệc</Form.Label>
                 <Form.Control type="text" placeholder="Dạng Tiệc" value={bookingName} onChange={(e) => setBookingName(e.target.value)} />
             </Form.Group>
-            <Form.Group className="mb-3" >
+            {/* <Form.Group className="mb-3" >
                 <Form.Label>Sảnh</Form.Label>
                 <Form.Select aria-label="Default select example" value={hallId} onChange={(e) => setHallId(e.target.value)}>
                     {hall && hall.map(h => (
                         <option value={h.id}>{h.hallName} - {h.branchId.branchName}</option>
                     ))}
                 </Form.Select>
-            </Form.Group>
+            </Form.Group> */}
             <Form.Group className="mb-3" >
                 <Form.Label>Phương Thức Thanh Toán</Form.Label>
                 <Form.Select aria-label="Default select example" value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
+                        <option></option>
                         <option>Thanh toán TRỰC TIẾP</option>
                         <option>Thanh toán qua ví MOMO</option>
                         <option>Thanh toán qua ZALOPAY</option>
