@@ -55,6 +55,7 @@ const Foods = () => {
         if (!(food.foodName in cart)) {
             cart[food.foodName] = {
                 "id": food.id,
+                "foodId":food.id,
                 "name": food.foodName,
                 "quantity": 1,
                 "unitPrice": food.foodPrice

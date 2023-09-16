@@ -15,8 +15,10 @@ import com.hh.pojo.Payment;
 import com.hh.pojo.Service;
 import com.hh.pojo.User;
 import com.hh.repository.BookingRepository;
+import com.hh.repository.FoodRepository;
 import com.hh.repository.HallRepository;
 import com.hh.repository.ReceiptRepository;
+import com.hh.repository.ServiceRepository;
 import com.hh.repository.UserRepository;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -48,6 +50,10 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
     @Autowired
     private HallRepository hallRepository;
     @Autowired
+    private ServiceRepository serviceRepository;
+    @Autowired
+    private FoodRepository foodRepository;
+    @Autowired
     private UserRepository userRepo;
 
     @Override
@@ -75,14 +81,6 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
             booking.setBookingName(dataRequest.getBookingName());
             s.save(booking);
 
-            BookingService bks = new BookingService();
-            bks.setBookingId(booking);
-            s.save(bks);
-
-            BookingFood bkf = new BookingFood();
-            bkf.setBookingId(booking);
-            s.save(bkf);
-
             payment.setUserId(u);
             payment.setPaymentDate(new Date());
             payment.setPaymentMethod(dataRequest.getPaymentMethod());
@@ -94,8 +92,22 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
                 b.setPaymentId(payment);
                 b.setBookingId(booking);
                 b.setNum(c.getQuantity());
-
                 s.save(b);
+                
+                if (c.getServiceId()> 0) {
+                BookingService bks = new BookingService();
+                bks.setBookingId(booking);
+                bks.setServiceId(this.serviceRepository.getServiceById((c.getServiceId())));
+                s.save(bks);
+                }
+
+                if (c.getFoodId() > 0) {
+                    BookingFood bkf = new BookingFood();
+                    bkf.setBookingId(booking);
+                    bkf.setFoodId(this.foodRepository.getFoodById((c.getFoodId())));
+                    s.save(bkf);
+                }
+
             }
             return true;
         } catch (HibernateException e) {

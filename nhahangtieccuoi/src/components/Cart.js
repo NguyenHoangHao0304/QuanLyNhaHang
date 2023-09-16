@@ -116,6 +116,8 @@ const Cart = () => {
             <thead>
                 <tr>
                     <th>#</th>
+                    <th>FoodId</th>
+                    <th>ServiceId</th>
                     <th>Tên</th>
                     <th>Giá Tiền</th>
                     <th>Số lượng</th>
@@ -126,6 +128,8 @@ const Cart = () => {
                 {Object.values(carts).map(c => {
                     return <tr>
                         <td></td>
+                        <td>{c.foodId}</td>
+                        <td>{c.serviceId}</td>
                         <td>{c.name}</td>
                         <td>{c.unitPrice} VND</td>
                         <td>

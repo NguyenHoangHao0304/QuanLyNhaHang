@@ -14,6 +14,8 @@ import lombok.Data;
 @Data
 public class Cart {
     private int id;
+    private int foodId;
+    private int serviceId;
     private String name;
     private int quantity;
     private BigDecimal unitPrice;

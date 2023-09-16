@@ -42,6 +42,7 @@ const Services = () => {
             });
             cart[service.serviceName] = {
                 "id": service.id,
+                "serviceId": service.id,
                 "name": service.serviceName,
                 "quantity": 1,
                 "unitPrice": service.servicePrice
