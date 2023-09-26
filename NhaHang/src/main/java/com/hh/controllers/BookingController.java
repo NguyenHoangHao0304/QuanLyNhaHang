@@ -56,10 +56,10 @@ public class BookingController {
     @GetMapping("/user/bookings")
     public String manageBookings(Model model, Principal principal, @RequestParam Map<String, String> params) {
         String username = principal.getName();
-//        User currentUser = this.userService.getUserByUsername(username);
-        params.put("username", username);
-//        model.addAttribute("userBookings", this.bookingService.getBookingsByUser(currentUser));
-        model.addAttribute("userbooking", this.bookingService.getBookings(params));
+        User currentUser = this.userService.getUserByUsername(username);
+//        params.put("username", username);
+        model.addAttribute("userBookings", this.bookingService.getBookingsByUser(currentUser));
+//        model.addAttribute("userbooking", this.bookingService.getBookings(params));
         int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE1"));
         int count = this.bookingService.countBooking();
         model.addAttribute("counter", Math.ceil(count * 1.0 / pageSize));

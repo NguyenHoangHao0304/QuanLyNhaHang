@@ -52,10 +52,10 @@ public class FeedbackController {
     @GetMapping("/user/feedbacks")
     public String manageFeedbacks(Model model, Principal principal, @RequestParam Map<String, String> params) {
         String username = principal.getName();
-//        User currentUser = this.userService.getUserByUsername(username);
-        params.put("username", username);
-//        model.addAttribute("userBookings", this.bookingService.getBookingsByUser(currentUser));
-        model.addAttribute("userfeedback", this.feedbackService.getFeedback(params));
+        User currentUser = this.userService.getUserByUsername(username);
+//        params.put("username", username);
+        model.addAttribute("userfeedback", this.feedbackService.getFeedBacksByUser(currentUser));
+//        model.addAttribute("userfeedback", this.feedbackService.getFeedback(params));
         int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE1"));
         int count = this.feedbackService.countFeedback();
         model.addAttribute("counter", Math.ceil(count * 1.0 / pageSize));

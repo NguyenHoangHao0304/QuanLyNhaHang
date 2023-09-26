@@ -33,6 +33,7 @@
                 <th>Id</th>
                 <th>Tên món ăn</th>
                 <th>Giá tiền</th>
+                <th>Trạng thái</th>
                 <th></th>
             </tr>
         </thead>
@@ -45,6 +46,15 @@
                     <td>${f.id}</td>
                     <td>${f.foodName}</td>
                     <td>${f.foodPrice} VNĐ</td>
+                    <c:choose>
+                        <c:when test="${f.status eq 'Còn Hàng' }">
+                            <td>${f.status} &#128994;</td>
+                        </c:when>
+                        <c:otherwise>
+                            <td>${f.status} &#128992;</td>
+                        </c:otherwise>
+                    </c:choose>
+
                     <sec:authorize access="hasRole('ROLE_ADMIN')"> 
                         <td>
                             <c:url value="/admin/foods/${f.id}" var="api"/>

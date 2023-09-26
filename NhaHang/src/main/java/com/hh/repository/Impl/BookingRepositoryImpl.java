@@ -158,7 +158,7 @@ public class BookingRepositoryImpl implements BookingRepository {
     @Override
     public List<Booking> getBookingsByUser(User user) {
         Session s = this.factory.getObject().getCurrentSession();
-        Query q = s.createQuery("FROM Booking WHERE userId = :user");
+        Query q = s.createQuery("SELECT b FROM Booking b WHERE b.userId = :user",Booking.class);
         q.setParameter("user", user);
         return q.getResultList();
     }

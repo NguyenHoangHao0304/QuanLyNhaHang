@@ -58,6 +58,9 @@ public class Booking implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "booking_name")
     private String bookingName;
+    @Basic(optional = false)
+    @Column(name = "table_number")
+    private Integer tableNumber;
     @JoinColumn(name = "hall_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Hall hallId;
@@ -198,6 +201,20 @@ public class Booking implements Serializable {
      */
     public void setBillSet(Set<Bill> billSet) {
         this.billSet = billSet;
+    }
+
+    /**
+     * @return the tableNumber
+     */
+    public Integer getTableNumber() {
+        return tableNumber;
+    }
+
+    /**
+     * @param tableNumber the tableNumber to set
+     */
+    public void setTableNumber(Integer tableNumber) {
+        this.tableNumber = tableNumber;
     }
 
 }

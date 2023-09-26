@@ -60,6 +60,9 @@ public class Food implements Serializable {
     @Size(max = 255)
     @Column(name = "food_image")
     private String foodImage;
+    @Size(max = 45)
+    @Column(name = "status")
+    private String status;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "foodId")
     private Set<BookingFood> bookingFoodSet;
@@ -159,6 +162,20 @@ public class Food implements Serializable {
      */
     public void setFile(MultipartFile file) {
         this.file = file;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
     }
     
 }

@@ -13,6 +13,7 @@ const Cart = () => {
     const [startTime, setStartTime] = useState();
     const [bookingName, setBookingName] = useState();
     const [paymentMethod, setPaymentMethod] = useState();
+    const [tableNumber, setTableNumber] = useState();
     // const [hallId, setHallId] = useState(null);
     const [booking, setBooking] = useState(null);
     // const [hall, setHall] = useState(null);
@@ -71,7 +72,8 @@ const Cart = () => {
                     bookingName: bookingName,
                     bookingDate: bookingDate,
                     startTime: startTime,
-                    paymentMethod: paymentMethod
+                    paymentMethod: paymentMethod,
+                    tableNumber: tableNumber
                 };
                 const res = await authApi().post(endpoints[`pay`], dataToSend);
 
@@ -101,8 +103,14 @@ const Cart = () => {
         process();
     }
 
-    if (carts === null) {
+    if (carts === null && paymentMethod === 'Thanh toán TRỰC TIẾP') {
         return <Alert variant="info" className="mt-5">Không có sản phẩm trong giỏ !!!</Alert>
+    }
+    if (carts === null && paymentMethod === 'Thanh toán qua ví MOMO') {
+        return <Alert variant="info" className="mt-5">MO MO !!!</Alert>
+    }
+    if (carts === null && paymentMethod === 'Thanh toán qua ZALOPAY') {
+        return <Alert variant="info" className="mt-5">ZALOPAY !!!</Alert>
     }
 
     return <>
@@ -148,11 +156,15 @@ const Cart = () => {
             </Form.Group>
             <Form.Group className="mb-3" >
                 <Form.Label>Giờ bắt đầu</Form.Label>
-                <Form.Control type="text" placeholder="Giờ bắt đầu" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
+                <Form.Control type="text" placeholder="Giờ bắt đầu" value={startTime} onChange={(e) => setStartTime(e.target.value)}/>
             </Form.Group>
             <Form.Group className="mb-3" >
                 <Form.Label>Tên Tiệc</Form.Label>
-                <Form.Control type="text" placeholder="Dạng Tiệc" value={bookingName} onChange={(e) => setBookingName(e.target.value)} />
+                <Form.Control type="text" placeholder="Dạng Tiệc" value={bookingName} onChange={(e) => setBookingName(e.target.value)}/>
+            </Form.Group>
+            <Form.Group className="mb-3" >
+                <Form.Label>Số lượng bàn</Form.Label>
+                <Form.Control type="number" placeholder="Số Lượng Bàn" value={tableNumber} onChange={(e) => setTableNumber(e.target.value)}/>
             </Form.Group>
             {/* <Form.Group className="mb-3" >
                 <Form.Label>Sảnh</Form.Label>
@@ -172,7 +184,7 @@ const Cart = () => {
                 </Form.Select>
             </Form.Group>
         </Form>
-        {user === null ? <p>Vui lòng <Link to="/login?next=/cart">đăng nhập</Link> để thanh toán</p> : <Button onClick={pay} variant="info mt-2 mb-3">Thanh Toán</Button>}
+        {user === null ? <p>Vui lòng <Link to="/login?next=/cart">đăng nhập</Link> để đặt tiệc</p> : <Button onClick={pay} variant="info mt-2 mb-3">Đặt Tiệc</Button>}
 
     </>
 }

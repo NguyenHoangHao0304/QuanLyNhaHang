@@ -87,6 +87,7 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
                     booking.setUserId(u);
                     booking.setHallId(this.hallRepository.getHallById(c.getHallId()));
                     booking.setBookingName(dataRequest.getBookingName());
+                    booking.setTableNumber(dataRequest.getTableNumber());
                     s.save(booking);
                 }
                 Bill b = new Bill();

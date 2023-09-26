@@ -4,6 +4,7 @@ function Delete(path) {
             method: "delete"
         }).then(res => {
             if (res.status === 204) {
+                alert("Bạn đã xóa thành công!!!");
                 location.reload();
             } else {
                 alert("something Wrong!!!");

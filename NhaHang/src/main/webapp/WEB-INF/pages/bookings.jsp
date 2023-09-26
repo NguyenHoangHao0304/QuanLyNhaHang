@@ -44,6 +44,7 @@
                 <th>Id</th>
                 <th>Ngày</th>
                 <th>Thời Gian</th>
+                <th>Số Lượng Bàn</th>
                 <th>Tên</th>
                 <th>Sảnh Cưới</th>
                 <th>User</th>
@@ -56,6 +57,7 @@
                     <td>${bk.id}</td>
                     <td>${bk.bookingDate}</td>
                     <td>${bk.startTime}</td>
+                    <td>${bk.tableNumber}</td>
                     <td>${bk.bookingName}</td>
                     <td>${bk.hallId.hallName} - ${bk.hallId.branchId.branchName}</td>
                     <td>${bk.userId.username}</td>

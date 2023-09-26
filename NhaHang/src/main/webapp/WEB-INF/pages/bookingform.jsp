@@ -25,6 +25,11 @@
         <label for="startTime">Giờ</label>
     </div>
     <div class="form-floating mb-3 mt-3">
+        <form:input type="number" class="form-control" path="tableNumber" id="tableNumber" 
+                    placeholder="Số Lượng Bàn" name="tableNumber"/>
+        <label for="tableNumber">Số Lượng Bàn</label>
+    </div>
+    <div class="form-floating mb-3 mt-3">
         <form:input type="text" class="form-control" path="bookingName" id="bookingName" 
                     placeholder="Tên" name="bookingName"/>
         <label for="bookingName">Tên</label>

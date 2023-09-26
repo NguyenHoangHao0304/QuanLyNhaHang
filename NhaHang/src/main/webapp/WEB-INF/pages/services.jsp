@@ -35,6 +35,7 @@
                 <th>Tên dịch vụ</th>
                 <th>Giá tiền</th>
                 <th>Mô tả</th>
+                <th>Trạng thái</th>
                 <th></th>
             </tr>
         </thead>
@@ -48,6 +49,14 @@
                     <td>${s.serviceName}</td>
                     <td>${s.servicePrice} VNĐ</td>
                     <td>${s.serviceDescription}</td>
+                    <c:choose>
+                        <c:when test="${s.status eq 'Sẵn sàng' }">
+                            <td>${s.status} &#128994;</td>
+                        </c:when>
+                        <c:otherwise>
+                            <td>${s.status} &#128992;</td>
+                        </c:otherwise>
+                    </c:choose>
                     <sec:authorize access="hasRole('ROLE_ADMIN')"> 
                         <td>
                             <c:url value="/admin/services/${s.id}" var="api"/>

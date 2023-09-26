@@ -45,7 +45,7 @@ public class Bill implements Serializable {
     @Column(name = "num")
     private int num;
     @JoinColumn(name = "booking_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Booking bookingId;
     @JoinColumn(name = "payment_id", referencedColumnName = "id")
     @ManyToOne(optional = false, cascade = CascadeType.ALL)

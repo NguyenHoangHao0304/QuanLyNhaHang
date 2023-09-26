@@ -108,7 +108,12 @@ const Services = () => {
                                 <Card.Title>{s.serviceName}</Card.Title>
                                 <Card.Text>{s.servicePrice} VNĐ</Card.Text>
                                 <Card.Text>{s.serviceDescription}</Card.Text>
-                                <Button variant="primary" onClick={() => order(s)}>Thêm</Button>
+                                {s.status === 'Sẵn sàng' ? (
+                                    <Card.Text>{s.status} &#128994;</Card.Text>
+                                ) : <Card.Text>{s.status} &#128992;</Card.Text>}
+                                {s.status === 'Sẵn sàng' ? (
+                                    <Button variant="primary" onClick={() => order(s)}>Thêm</Button>
+                                ) : null}
                             </Card.Body>
                         </Card>
                     </Col>

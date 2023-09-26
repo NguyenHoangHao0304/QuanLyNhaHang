@@ -5,6 +5,7 @@
 package com.hh.repository.Impl;
 
 import com.hh.pojo.Feedback;
+import com.hh.pojo.User;
 import com.hh.repository.FeedbackRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -123,7 +124,7 @@ public class FeedbackRepositoryImpl implements FeedbackRepository {
     @Override
     public List<Feedback> getFeedbackByBranchId(int branchId) {
         Session s = this.factory.getObject().getCurrentSession();
-        Query q = s.createQuery("SELECT f FROM Feedback f WHERE f.branchId.id = :id",Feedback.class);
+        Query q = s.createQuery("SELECT f FROM Feedback f WHERE f.branchId.id = :id", Feedback.class);
         q.setParameter("id", branchId);
 
         return q.getResultList();
@@ -139,5 +140,13 @@ public class FeedbackRepositoryImpl implements FeedbackRepository {
             ex.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public List<Feedback> getFeedBacksByUser(User user) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createQuery("SELECT f FROM Feedback f WHERE f.userId = :user", Feedback.class);
+        q.setParameter("user", user);
+        return q.getResultList();
     }
 }

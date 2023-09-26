@@ -82,9 +82,7 @@ const Foods = () => {
         // const isChecked = checkbox.checked;
 
         // if (isChecked) {
-        //     // Checkbox đã được chọn
         //     if (!(food.id in cart)) {
-        //         // Món ăn chưa tồn tại trong giỏ hàng, thêm nó vào
         //         cart[food.id] = {
         //             "id": food.id,
         //             "name": food.foodName,
@@ -92,19 +90,15 @@ const Foods = () => {
         //             "quantity" : 1
         //         };
 
-        //         // Tăng giá trị trong giỏ hàng
         //         cartdispatch({
         //             type: "inc",
         //             payload: 1
         //         });
         //     }
         // } else {
-        //     // Checkbox bị bỏ chọn
         //     if (food.id in cart) {
-        //         // Món ăn tồn tại trong giỏ hàng, loại bỏ nó
         //         delete cart[food.id];
 
-        //         // Giảm giá trị trong giỏ hàng
         //         cartdispatch({
         //             type: "dec",
         //             payload: 1
@@ -153,7 +147,12 @@ const Foods = () => {
                             <Card.Body>
                                 <Card.Title>{f.foodName}</Card.Title>
                                 <Card.Text>{f.foodPrice} VNĐ</Card.Text>
-                                <Button variant="primary" onClick={() => order(f)}>Thêm </Button>
+                                {f.status === 'Còn Hàng' ? (
+                                    <Card.Text>{f.status} &#128994;</Card.Text>
+                                ) : <Card.Text>{f.status} &#128992;</Card.Text>}
+                                {f.status === 'Còn Hàng' ? (
+                                    <Button variant="primary" onClick={() => order(f)}>Thêm </Button>
+                                ) : null}
                             </Card.Body>
                         </Card>
                     </Col>

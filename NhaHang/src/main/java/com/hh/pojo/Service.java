@@ -61,6 +61,9 @@ public class Service implements Serializable {
     @Size(max = 255, message = "{service.description.lenErr}")
     @Column(name = "service_description")
     private String serviceDescription;
+    @Size(max = 45)
+    @Column(name = "status")
+    private String status;
     @Size(max = 255)
     @Column(name = "service_image")
     private String serviceImage;
@@ -170,6 +173,20 @@ public class Service implements Serializable {
      */
     public void setFile(MultipartFile file) {
         this.file = file;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
     }
     
 }

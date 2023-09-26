@@ -19,4 +19,5 @@ public class DataRequest {
     private String bookingDate;
     private String startTime;
     private String paymentMethod;
+    private Integer tableNumber;
 }

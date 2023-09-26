@@ -70,5 +70,10 @@ public class FeebackServiceImpl implements FeedbackService{
         
         return this.feedbackRepository.addFeedback(f);
     }
+
+    @Override
+    public List<Feedback>getFeedBacksByUser(User user) {
+        return this.feedbackRepository.getFeedBacksByUser(user);
+    }
     
 }

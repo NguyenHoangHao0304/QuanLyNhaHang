@@ -5,6 +5,7 @@
 package com.hh.repository;
 
 import com.hh.pojo.Feedback;
+import com.hh.pojo.User;
 import java.util.List;
 import java.util.Map;
 
@@ -27,4 +28,6 @@ public interface FeedbackRepository {
     Feedback getFeedbackById(int id);
 
     boolean deleteFeedback(int id);
+    
+     List<Feedback> getFeedBacksByUser(User user);
 }

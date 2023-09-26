@@ -26,6 +26,14 @@
         <label for="foodPrice">Giá tiền</label>
         <form:errors path="foodPrice" element="div" cssClass="text-danger"/>
     </div>
+    <div class="form-floating">
+        <form:select class="form-select" id="status" name="status" path="status">
+            <option></option>
+            <option>Còn Hàng</option>
+            <option>Hết Hàng</option>
+        </form:select>
+        <label for="status" class="form-label">Trạng Thái</label>
+    </div>
     <div class="form-floating mb-3 mt-3">
         <form:input type="file" class="form-control" path="file" id="file" 
                     placeholder="Ảnh món ăn" />

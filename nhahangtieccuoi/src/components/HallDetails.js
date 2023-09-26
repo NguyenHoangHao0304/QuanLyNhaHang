@@ -154,9 +154,7 @@ const HallDetails = () => {
         // const isChecked = checkbox.checked;
 
         // if (isChecked) {
-        //     // Checkbox đã được chọn
         //     if (!(hp.hallId.hallName in cart)) {
-        //         // Món ăn chưa tồn tại trong giỏ hàng, thêm nó vào
         //         cart[hp.hallId.hallName] = {
         //             "id": hp.id,
         //             "name": hp.hallId.hallName,
@@ -164,19 +162,15 @@ const HallDetails = () => {
         //             "quantity": 1
         //         };
 
-        //         // Tăng giá trị trong giỏ hàng
         //         cartdispatch({
         //             type: "inc",
         //             payload: 1
         //         });
         //     }
         // } else {
-        //     // Checkbox bị bỏ chọn
         //     if (hp.hallId.hallName in cart) {
-        //         // Món ăn tồn tại trong giỏ hàng, loại bỏ nó
         //         delete cart[hp.hallId.hallName];
 
-        //         // Giảm giá trị trong giỏ hàng
         //         cartdispatch({
         //             type: "dec",
         //             payload: 1
