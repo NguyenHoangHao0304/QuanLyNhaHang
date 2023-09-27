@@ -35,7 +35,7 @@ public class UserController {
     private Environment env;
 
     @RequestMapping("/admin/users")
-    public String service(Model model, @RequestParam Map<String, String> params) {
+    public String user(Model model, @RequestParam Map<String, String> params) {
         model.addAttribute("user", this.userService.getUsers(params));
         int pageSize = Integer.parseInt(this.env.getProperty("PAGE_SIZE1"));
         int count = this.userService.countUser();

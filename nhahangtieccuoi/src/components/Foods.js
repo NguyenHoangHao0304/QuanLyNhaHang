@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Alert, Button, Card, Col, Pagination, Row } from "react-bootstrap";
+import { Alert, Button, Card, Col, Pagination, Row, Toast } from "react-bootstrap";
 import MySpinner from "../layout/MySpinner";
 import Apis, { endpoints } from "../configs/Apis";
 import { useSearchParams } from "react-router-dom";
@@ -12,6 +12,7 @@ const Foods = () => {
     const [q] = useSearchParams();
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(100);
+    const [showAddToCartToast, setShowAddToCartToast] = useState(false);
 
     useEffect(() => {
         let loadFoods = async () => {
@@ -31,6 +32,22 @@ const Foods = () => {
 
         loadFoods();
     }, [q])
+    useEffect(() => {
+        const handleScroll = () => {
+            const toast = document.querySelector(".toast");
+            if (toast) {
+                const scrollY = window.scrollY;
+                toast.style.top = `${scrollY}px`;
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -74,6 +91,7 @@ const Foods = () => {
             cart[food.foodName][`quantity`] += 1;
         }
         cookie.save(`cart`, cart);
+        setShowAddToCartToast(true);
         console.info(cart);
 
         // let cart = cookie.load("cart") || {};
@@ -119,6 +137,22 @@ const Foods = () => {
 
     return (
         <>
+            <Toast
+                show={showAddToCartToast}
+                onClose={() => setShowAddToCartToast(false)}
+                autohide
+                delay={2000}
+                style={{
+                    position: 'fixed',
+                    top: 100,
+                    zIndex: 1000,
+                }}
+            >
+                <Toast.Header>
+                    <strong className="mr-auto">Thông báo</strong>
+                </Toast.Header>
+                <Toast.Body className="text-success">Thức ăn đã được thêm vào giỏ hàng thành công!!!</Toast.Body>
+            </Toast>
             <h1 className="text-center text-info">Thực Đơn</h1>
             <div className="mb-2">
                 <label htmlFor="itemsPerPageSelect" className="mr-2">Số món ăn trên mỗi trang:</label>
@@ -158,7 +192,6 @@ const Foods = () => {
                     </Col>
                 })}
             </Row>
-
             {/* <div className="container">
                 <div className="row">
                     <div className="col-md-12">

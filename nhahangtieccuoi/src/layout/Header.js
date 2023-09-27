@@ -4,7 +4,7 @@ import { Badge, Button, Col, Container, Form, Nav, NavDropdown, Navbar, Row } fr
 // import MySpinner from "./MySpinner";
 import { Link, useNavigate } from "react-router-dom";
 import { MyCartContext, MyUserContext } from "../App";
-import "./Header.css";
+import "./Css.css";
 
 
 const Header = () => {
@@ -68,7 +68,7 @@ const Header = () => {
                                     <Link className="text-danger nav-link" to="/login">Đăng Nhập</Link>
                                     <Link className="text-danger nav-link" to="/register">Đăng Ký</Link>
                                 </> : <>
-                                    <Link className="text-danger nav-link" to="/">Chào, {user.username}</Link>
+                                    <Link className="text-danger nav-link" to="/userProfile">Chào, {user.username}</Link>
                                     <Button variant="secondary" onClick={logout}>Đăng Xuất</Button>
                                 </>}
 

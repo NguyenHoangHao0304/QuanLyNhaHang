@@ -52,9 +52,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean addOrUpdateUser(User u) {
 
+       if (u.getId() != null) {
+        // Đây là trường hợp cập nhật
+        User user = userRepository.getUserById(u.getId());
+
+        if (user != null) {
+            if (!u.getPassword().equals(user.getPassword())) {
+                String pass = u.getPassword();
+                u.setPassword(this.passwordEncoder.encode(pass));
+            } else {
+                u.setPassword(user.getPassword());
+            }
+        } 
+    } else {
+        // Đây là trường hợp thêm mới
         String pass = u.getPassword();
         u.setPassword(this.passwordEncoder.encode(pass));
-        if (!u.getFile().isEmpty()) {
+    }
+
+        if (u.getFile() != null && !u.getFile().isEmpty()) {
             try {
                 Map res = this.cloudinary.uploader().upload(u.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
                 u.setAvatar(res.get("secure_url").toString());
@@ -62,6 +78,7 @@ public class UserServiceImpl implements UserService {
                 Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
         return this.userRepository.addOrUpdateUser(u);
     }
 
@@ -104,8 +121,9 @@ public class UserServiceImpl implements UserService {
             } catch (IOException ex) {
                 Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else
+        } else {
             return System.err.checkError();
+        }
         return this.userRepository.addUser(u);
     }
 
@@ -113,7 +131,6 @@ public class UserServiceImpl implements UserService {
 //    public User getUserByUn(String username) {
 //        return this.userRepository.getUserByUsername(username);
 //    }
-
     @Override
     public boolean authUser(String username, String password) {
         return this.userRepository.authUser(username, password);
@@ -129,7 +146,7 @@ public class UserServiceImpl implements UserService {
         u.setUserRole(User.CUSTOMER);
         if (!avatar.isEmpty()) {
             try {
-                Map res = this.cloudinary.uploader().upload(avatar.getBytes(), 
+                Map res = this.cloudinary.uploader().upload(avatar.getBytes(),
                         ObjectUtils.asMap("resource_type", "auto"));
                 u.setAvatar(res.get("secure_url").toString());
             } catch (IOException ex) {

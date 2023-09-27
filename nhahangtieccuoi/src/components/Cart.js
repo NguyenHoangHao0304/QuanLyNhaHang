@@ -104,13 +104,17 @@ const Cart = () => {
     }
 
     if (carts === null && paymentMethod === 'Thanh toán TRỰC TIẾP') {
-        return <Alert variant="info" className="mt-5">Không có sản phẩm trong giỏ !!!</Alert>
+        return <Alert variant="info" className="mt-5">Bạn đã đặt tiệc thành công và nhớ thanh toán trực tiếp tại quầy khi đến ngày tổ chức!!!</Alert>
     }
     if (carts === null && paymentMethod === 'Thanh toán qua ví MOMO') {
-        return <Alert variant="info" className="mt-5">MO MO !!!</Alert>
+        return <Alert variant="info" className="mt-5 text-center"> <h3>QUÉT MÃ ĐỂ THANH TOÁN</h3> <br/><img src="https://res.cloudinary.com/drqfqkwfo/image/upload/v1695753097/381453333_989024882177613_4617760921413331015_n_zc7rdc.jpg" alt="QR MOMO" height={600} width={600}/><br/><strong className="text-danger mt-5">Lưu ý:</strong> Quý khách vui lòng chụp lại minh chứng đã thanh toán !!! <strong><a href="https://docs.google.com/forms/d/1MPshBCV26gE2jRMqn3wz7LGhisLL9NrOBhkKLZQWL0U/edit" target="_blank" rel="noopener noreferrer">
+        Gửi minh chứng tại đây
+      </a></strong></Alert>
     }
     if (carts === null && paymentMethod === 'Thanh toán qua ZALOPAY') {
-        return <Alert variant="info" className="mt-5">ZALOPAY !!!</Alert>
+        return <Alert variant="info" className="mt-5 text-center"> <h3>QUÉT MÃ ĐỂ THANH TOÁN </h3><br/><img src="https://res.cloudinary.com/drqfqkwfo/image/upload/v1695753097/384296077_2097408980606384_6077507150543085824_n_tjy2a2.jpg" alt="QR ZALOPAY" height={600} width={600}/><br/><strong className="text-danger mt-5">Lưu ý:</strong> Quý khách vui lòng chụp lại minh chứng đã thanh toán !!! <strong><a href="https://docs.google.com/forms/d/1MPshBCV26gE2jRMqn3wz7LGhisLL9NrOBhkKLZQWL0U/edit" target="_blank" rel="noopener noreferrer">
+        Gửi minh chứng tại đây
+      </a></strong></Alert>
     }
 
     return <>

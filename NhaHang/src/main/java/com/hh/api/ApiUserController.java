@@ -78,4 +78,27 @@ public class ApiUserController {
         User u = this.userService.getUserByUsername(user.getName());
         return new ResponseEntity<>(u, HttpStatus.OK);
     }
+
+    @PostMapping(path = "/current-user/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin
+    public ResponseEntity<User> updateCurrentUser(Principal principal, @RequestBody User updatedUser) {
+
+        User existingUser = userService.getUserByUsername(principal.getName());
+        
+        if (existingUser != null) {
+            existingUser.setFirstName(updatedUser.getFirstName());
+            existingUser.setLastName(updatedUser.getLastName());
+            existingUser.setPassword(updatedUser.getPassword());
+
+            if (updatedUser.getFile() != null && !updatedUser.getFile().isEmpty()) {
+                userService.addOrUpdateUser(existingUser);
+            } else {
+                userService.addOrUpdateUser(existingUser);
+            }
+
+            return ResponseEntity.ok(existingUser);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

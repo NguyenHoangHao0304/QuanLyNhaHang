@@ -23,13 +23,13 @@ const Home = () => {
             <Row>
                 {branchs.map(b => {
                     let branchDetailLink = `/branchs/${b.id}`;
-                    return <Col xs={12} md={3} className="mt-2">
+                    return <Col xs={12} md={3} className="mt-3">
                         <Card style={{ height: '100%' }}>
                             <Card.Img variant="top" src="https://res.cloudinary.com/drqfqkwfo/image/upload/v1691435747/osqbj4rsvciiycykxetv.png" height={200} width={100} />
                             <Card.Body>
                                 <Card.Title>{b.branchName}</Card.Title>
                                 <Card.Text>{b.branchAddress}</Card.Text>
-                                <Link to={branchDetailLink} className="btn btn-primary">Xem Chi Tiết</Link>
+                                <Link to={branchDetailLink} className="btn btn-primary mt-2">Xem Chi Tiết</Link>
                             </Card.Body>
                         </Card>
                     </Col>

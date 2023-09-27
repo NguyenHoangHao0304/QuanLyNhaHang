@@ -1,0 +1,121 @@
+import React, { useState, useEffect } from "react";
+import { Alert, Button, Form } from "react-bootstrap";
+import { authApi, endpoints } from "../configs/Apis";
+
+const UserProfile = () => {
+    const [user, setUser] = useState({});
+    const [updatedUser, setUpdatedUser] = useState({});
+    const [isEditing, setIsEditing] = useState(false);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetchUserProfile();
+    }, []);
+
+    const fetchUserProfile = async () => {
+        try {
+            const response = await authApi().get(endpoints['current-user']);
+            setUser(response.data);
+        } catch (error) {
+            console.error("Lỗi khi lấy thông tin tài khoản:", error);
+        }
+    };
+
+    const handleEditClick = () => {
+        setUpdatedUser({ ...user });
+        setIsEditing(true);
+    };
+
+    const handleCancelClick = () => {
+        setIsEditing(false);
+        setError(null);
+    };
+
+    const handleUpdateClick = async () => {
+        try {
+            const response = await authApi().post(endpoints['current-user'], updatedUser);
+
+            if (response.status === 200) {
+                setUser(response.data);
+                setIsEditing(false);
+                setError(null);
+            } else {
+                setError("Cập nhật thông tin tài khoản không thành công.");
+            }
+        } catch (error) {
+            console.error("Lỗi khi cập nhật thông tin tài khoản:", error);
+            setError("Cập nhật thông tin tài khoản không thành công.");
+        }
+    };
+
+    return (
+        <div>
+            {error && <Alert variant="danger">{error}</Alert>}
+            {isEditing ? (
+                <div>
+                    <Form>
+                        <Form.Group controlId="formFirstName">
+                            <Form.Label>Họ</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={updatedUser.firstName}
+                                onChange={(e) =>
+                                    setUpdatedUser({ ...updatedUser, firstName: e.target.value })
+                                }
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="formLastName">
+                            <Form.Label>Tên</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={updatedUser.lastName}
+                                onChange={(e) =>
+                                    setUpdatedUser({ ...updatedUser, lastName: e.target.value })
+                                }
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="formPassword">
+                            <Form.Label>Mật Khẩu</Form.Label>
+                            <Form.Control
+                                type="password"
+                                value={updatedUser.password}
+                                onChange={(e) =>
+                                    setUpdatedUser({ ...updatedUser, password: e.target.value })
+                                }
+                            />
+                        </Form.Group>
+                        <div className="mt-2">
+                            <Button onClick={handleUpdateClick} variant="primary" className="m-1">
+                                Lưu
+                            </Button>
+                            <Button onClick={handleCancelClick} variant="secondary">
+                                Hủy
+                            </Button>
+                        </div>
+
+
+                    </Form>
+                </div>
+            ) : (
+                <div className="text-center">
+                    <h2>Thông Tin Tài Khoản</h2>
+                    <p>
+                        <strong>Họ:</strong> {user.firstName}
+                    </p>
+                    <p>
+                        <strong>Tên:</strong> {user.lastName}
+                    </p>
+                    <p>
+                        <strong>Tài Khoản:</strong> {user.username}
+                    </p>
+                    <img src={user.avatar} height={300} width={300} className="rounded-circle" /> <br />
+                    <Button onClick={handleEditClick} variant="warning" className="mt-4">
+                        Đổi thông tin
+                    </Button>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default UserProfile;

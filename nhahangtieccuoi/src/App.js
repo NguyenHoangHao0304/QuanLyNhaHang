@@ -17,6 +17,7 @@ import Cart from "./components/Cart";
 import HallDetails from "./components/HallDetails";
 import BranchDetails from "./components/BranchDetails";
 import 'moment/locale/vi';
+import UserProfile from "./components/UserProfile";
 
 
 
@@ -53,6 +54,7 @@ const App = () => {
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/halls/:hallId" element={<HallDetails />} />
                   <Route path="/branchs/:branchId" element={<BranchDetails />} />
+                  <Route path="/userProfile" element={<UserProfile />} />
                 </Routes>
               </Container>
             </div>
