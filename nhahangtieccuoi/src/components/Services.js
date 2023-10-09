@@ -140,7 +140,7 @@ const Services = () => {
                             <Card.Img variant="top" src={s.serviceImage} height={200} width={100} />
                             <Card.Body>
                                 <Card.Title>{s.serviceName}</Card.Title>
-                                <Card.Text>{s.servicePrice} VNĐ</Card.Text>
+                                <Card.Text>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(s.servicePrice)}</Card.Text>
                                 <Card.Text>{s.serviceDescription}</Card.Text>
                                 {s.status === 'Sẵn sàng' ? (
                                     <Card.Text>{s.status} &#128994;</Card.Text>

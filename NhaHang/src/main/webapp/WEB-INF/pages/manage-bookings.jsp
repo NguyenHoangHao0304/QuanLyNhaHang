@@ -14,17 +14,6 @@
             <a href="<c:url value="/user/bookings/create"/>" class="btn btn-warning mt-1">Đặt Tiệc</a>
         </div>
     </sec:authorize>
-    <c:if test="${counter > 1}">
-        <ul class="pagination mt-1">
-            <li class="page-item"><a class="page-link" href="${bookingAction}">Tất cả</a></li>
-                <c:forEach begin="1" end="${counter}" var="i">
-                    <c:url value="/user/bookings" var="pageBookingAction" >
-                        <c:param name="page" value="${i}"/>
-                    </c:url>
-                <li class="page-item"><a class="page-link" href="${pageBookingAction}">${i}</a></li>
-                </c:forEach>
-        </ul>
-    </c:if>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -35,6 +24,8 @@
                 <th>Tên</th>
                 <th>Sảnh Cưới</th>
                 <th>User</th>
+                <th>Tổng Tiền</th>
+                <th>Trạng Thái</th>
                 <th></th>
             </tr>
         </thead>
@@ -48,10 +39,12 @@
                     <td>${usbk.bookingName}</td>
                     <td>${usbk.hallId.hallName}</td>
                     <td>${usbk.userId.username}</td>
+                    <td>${usbk.total}</td>
+                    <td>${usbk.status}</td>
                     <sec:authorize access="hasRole('ROLE_CUSTOMER')"> 
                         <td>
                             <c:url value="/api/bookings/${usbk.id}" var="apiDlt"/>
-                            <c:url value="/user/bookings/${usbk.id}" var="api"/>
+                            <c:url value="/bookings/${usbk.id}" var="api"/>
                             <a href="${api}" class="btn btn-success">Cập Nhật</a>
                             <button class="btn btn-danger" onclick="Delete('${apiDlt}')">Xóa</button>
                         </td>

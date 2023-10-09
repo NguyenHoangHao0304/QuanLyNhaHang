@@ -4,6 +4,7 @@
  */
 package com.hh.pojo;
 
+import java.math.BigDecimal;
 import java.util.Map;
 import lombok.Data;
 
@@ -20,4 +21,5 @@ public class DataRequest {
     private String startTime;
     private String paymentMethod;
     private Integer tableNumber;
+    private BigDecimal totalPrice;
 }

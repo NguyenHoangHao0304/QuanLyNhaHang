@@ -6,6 +6,7 @@ package com.hh.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
@@ -61,6 +62,12 @@ public class Booking implements Serializable {
     @Basic(optional = false)
     @Column(name = "table_number")
     private Integer tableNumber;
+    @Basic(optional = false)
+    @Column(name = "total")
+    private BigDecimal total;
+    @Size(max = 45)
+    @Column(name = "status")
+    private String status;
     @JoinColumn(name = "hall_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Hall hallId;
@@ -215,6 +222,34 @@ public class Booking implements Serializable {
      */
     public void setTableNumber(Integer tableNumber) {
         this.tableNumber = tableNumber;
+    }
+
+    /**
+     * @return the total
+     */
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    /**
+     * @param total the total to set
+     */
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

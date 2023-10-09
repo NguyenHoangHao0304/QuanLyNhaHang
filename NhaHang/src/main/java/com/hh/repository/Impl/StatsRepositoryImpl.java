@@ -152,6 +152,14 @@ public class StatsRepositoryImpl implements StatsRepository {
                 Logger.getLogger(StatsRepository.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        String quarter = params.get("quarter");
+        if (quarter != null && !quarter.isEmpty()) {
+            String year = params.get("year");
+            if (year != null && !year.isEmpty()) {
+                predicates.add(cb.equal(cb.function("YEAR", Integer.class, rBooking.get("bookingDate")), Integer.parseInt(year)));
+                predicates.add(cb.equal(cb.function("QUARTER", Integer.class, rBooking.get("bookingDate")), Integer.parseInt(quarter)));
+            }
+        }
 
         q.where(predicates.toArray(Predicate[]::new));
 

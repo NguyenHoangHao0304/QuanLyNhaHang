@@ -210,7 +210,7 @@ const HallDetails = () => {
                             <Card.Body>
                                 <Card.Title className="text-center">{hp.timePeriod}</Card.Title>
                                 <Card.Text className="text-center">Từ: {hp.timeStart} - Đến: {hp.timeEnd}</Card.Text>
-                                <Card.Text className="text-center">Giá: {hp.price} VNĐ</Card.Text>
+                                <Card.Text className="text-center">Giá: {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(hp.price)}</Card.Text>
                                 {isHallSelected ? (
                                     <p className="text-success">Đã chọn</p>
                                 ) : (

@@ -65,7 +65,7 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
         Booking booking = new Booking();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-        
+
         try {
             Authentication authentication
                     = SecurityContextHolder.getContext().getAuthentication();
@@ -88,6 +88,8 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
                     booking.setHallId(this.hallRepository.getHallById(c.getHallId()));
                     booking.setBookingName(dataRequest.getBookingName());
                     booking.setTableNumber(dataRequest.getTableNumber());
+                    booking.setTotal(dataRequest.getTotalPrice());
+                    booking.setStatus("Chưa thanh toán");
                     s.save(booking);
                 }
                 Bill b = new Bill();

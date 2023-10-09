@@ -180,7 +180,7 @@ const Foods = () => {
                             <Card.Img variant="top" src={f.foodImage} height={200} width={100} />
                             <Card.Body>
                                 <Card.Title>{f.foodName}</Card.Title>
-                                <Card.Text>{f.foodPrice} VNĐ</Card.Text>
+                                <Card.Text>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(f.foodPrice)}</Card.Text>
                                 {f.status === 'Còn Hàng' ? (
                                     <Card.Text>{f.status} &#128994;</Card.Text>
                                 ) : <Card.Text>{f.status} &#128992;</Card.Text>}

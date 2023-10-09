@@ -76,7 +76,7 @@ public class BookingController {
         return "bookingform";
     }
 
-    @GetMapping("/user/bookings/{id}")
+    @GetMapping("/bookings/{id}")
     public String update(Model model, @PathVariable(value = "id") int id) {
         model.addAttribute("booking", this.bookingService.getBookingById(id));
         return "bookingform";
@@ -88,7 +88,7 @@ public class BookingController {
 
         if (!rs.hasErrors()) {
             if (this.bookingService.addOrUpdateBooking(bk) == true) {
-                return "redirect:/user/bookings";
+                return "redirect:/admin/bookings";
             }
         } else {
             // Log validation errors

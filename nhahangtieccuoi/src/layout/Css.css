@@ -15,3 +15,8 @@
   right: 0;
   z-index: 1000;
 }
+
+.bg{
+  background-color: blanchedalmond;
+  border-radius: 5px;
+}
