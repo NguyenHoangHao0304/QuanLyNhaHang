@@ -10,6 +10,8 @@ const Register = () => {
         "firstName": "",
         "lastName": "",
         "username": "",
+        "email": "",
+        "phone": "",
         "password": "",
         "confirmPassword": "",
     });
@@ -66,6 +68,14 @@ const Register = () => {
             <Form.Group className="mb-3" >
                 <Form.Label>Tên Đăng Nhập</Form.Label>
                 <Form.Control type="text" value={user.username} onChange={e => change(e, "username")} placeholder="Tên đăng nhập" required />
+            </Form.Group>
+            <Form.Group className="mb-3" >
+                <Form.Label>Email</Form.Label>
+                <Form.Control type="email" value={user.email} onChange={e => change(e, "email")} placeholder="email" required />
+            </Form.Group>
+            <Form.Group className="mb-3" >
+                <Form.Label>Phone</Form.Label>
+                <Form.Control type="tel" value={user.phone} onChange={e => change(e, "phone")} placeholder="phone" required />
             </Form.Group>
             <Form.Group className="mb-3" >
                 <Form.Label>Mật Khẩu</Form.Label>

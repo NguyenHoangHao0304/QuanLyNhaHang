@@ -23,27 +23,44 @@
         <form:input type="text" class="form-control" path="firstName" id="firstName" 
                     placeholder="Họ" name="firstName"/>
         <label for="firstName">Họ</label>
+        <form:errors path="firstName" element="div" cssClass="text-danger"/>
     </div>
     <div class="form-floating mb-3 mt-3">
         <form:input type="text" class="form-control" path="lastName" id="lastName" 
                     placeholder="Tên" name="lastName"/>
         <label for="lastName">Tên</label>
+        <form:errors path="lastName" element="div" cssClass="text-danger"/>
     </div>
     <div class="form-floating mb-3 mt-3">
         <form:input type="text" class="form-control" path="username" id="username" 
                     placeholder="username" name="username"/>
         <label for="username">Username</label>
+        <form:errors path="username" element="div" cssClass="text-danger"/>
     </div>
     <div class="form-floating mb-3 mt-3">
         <form:input type="password" class="form-control" path="password" id="password" 
                     placeholder="password" name="password"/>
         <label for="password">Password</label>
+        <form:errors path="password" element="div" cssClass="text-danger"/>
     </div>
     <div class="form-floating mb-3 mt-3">
         <form:input type="password" class="form-control" path="confirmPassword" id="confirm-password" 
                     placeholder="confirm-password" name="confirm-password"/>
         <label for="confirm-password">ConfirmPassword</label>
+        <form:errors path="confirmPassword" element="div" cssClass="text-danger"/>
         <%--<form:errors path="serviceDescription" element="div" cssClass="text-danger"/>--%>
+    </div>
+    <div class="form-floating mb-3 mt-3">
+        <form:input type="email" class="form-control" path="email" id="email" 
+                    placeholder="email" name="email"/>
+        <label for="email">Email</label>
+        <form:errors path="email" element="div" cssClass="text-danger"/>
+    </div>
+    <div class="form-floating mb-3 mt-3">
+        <form:input type="tel" class="form-control" path="phone" id="phone" 
+                    placeholder="phone" name="phone"/>
+        <label for="password">Phone</label>
+        <form:errors path="phone" element="div" cssClass="text-danger"/>
     </div>
     <div class="form-floating mb-3 mt-3">
         <form:input type="file" class="form-control" path="file" id="file" 

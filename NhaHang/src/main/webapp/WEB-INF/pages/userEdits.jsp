@@ -38,6 +38,18 @@
         <label for="password">Password</label>
         <form:errors path="password" element="div" cssClass="text-danger"/>
     </div>
+    <div class="form-floating mb-3 mt-3">
+        <form:input type="email" class="form-control" path="email" id="email" 
+                    placeholder="email" name="email"/>
+        <label for="email">Email</label>
+        <form:errors path="email" element="div" cssClass="text-danger"/>
+    </div>
+    <div class="form-floating mb-3 mt-3">
+        <form:input type="tel" class="form-control" path="phone" id="phone" 
+                    placeholder="phone" name="phone"/>
+        <label for="password">Phone</label>
+        <form:errors path="phone" element="div" cssClass="text-danger"/>
+    </div>
     <%--<div class="form-floating mb-3 mt-3">
         <form:input type="text" class="form-control" path="userRole" id="userRole" 
                     placeholder="userRole" name="userRole"/>

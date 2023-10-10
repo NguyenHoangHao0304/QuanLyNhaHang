@@ -32,6 +32,8 @@
                 <th>Tên</th>
                 <th>Username</th>
                 <th>Password</th>
+                <th>Email</th>
+                <th>Phone</th>
                 <th>UserRole</th>
             </tr>
         </thead>
@@ -46,6 +48,8 @@
                     <td>${u.lastName}</td>
                     <td>${u.username}</td>
                     <td>${u.password}</td>
+                    <td>${u.email}</td>
+                    <td>${u.phone}</td>
                     <td>${u.userRole}</td>
                     <td>
                         <c:url value="/admin/users/${u.id}" var="api"/>

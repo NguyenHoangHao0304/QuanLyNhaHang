@@ -29,16 +29,9 @@ const Header = () => {
     }, []);
 
     const search = (evt) => {
-        const currentPath = window.location.pathname;
         evt.preventDefault();
-        if (currentPath === '/foods') {
-           nav(`/foods/?kw=${kw}`);
-        } else if (currentPath === '/services') {
-            nav(`/services/?kw=${kw}`);
-        }
-        else if (currentPath === '/halls') {
-            nav(`/halls/?kw=${kw}`);
-        }
+        const currentPath = window.location.pathname;
+        nav(`${currentPath}?kw=${kw}`);
     }
 
     const logout = () => {

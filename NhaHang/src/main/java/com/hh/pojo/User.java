@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -42,7 +43,6 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar"),
     @NamedQuery(name = "User.findByUserRole", query = "SELECT u FROM User u WHERE u.userRole = :userRole")})
 public class User implements Serializable {
-
 
     public static final String ADMIN = "ROLE_ADMIN";
     public static final String EMPLOYEE = "ROLE_EMPLOYEE";
@@ -73,6 +73,14 @@ public class User implements Serializable {
     @Size(min = 1, max = 300, message = "{user.password.notNull}")
     @Column(name = "password")
     private String password;
+    @Basic(optional = false)
+    @Column(name = "email")
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "Định dạng email không hợp lệ! Email phải đúng dạng là ***@***.*** hoặc ***@***.***.***")
+    private String email;
+    @Basic(optional = false)
+    @Column(name = "phone")
+     @Pattern(regexp = "^[0-9]{10}$", message = "Định dạng số điện thoại không hợp lệ! Phone có tối thiếu và tối đa 10 chữ số và phải đúng dạng là 0*********")
+    private String phone;
     @NotNull
     @Size(max = 300)
     @Column(name = "avatar")
@@ -247,6 +255,34 @@ public class User implements Serializable {
 
     public void setPaymentSet(Set<Payment> paymentSet) {
         this.paymentSet = paymentSet;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return the phone
+     */
+    public String getPhone() {
+        return phone;
+    }
+
+    /**
+     * @param phone the phone to set
+     */
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
 }

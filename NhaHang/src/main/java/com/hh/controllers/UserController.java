@@ -55,7 +55,7 @@ public class UserController {
     }
     
     @PostMapping("/register")
-    public String register(Model model,@ModelAttribute(value = "user") User u){
+    public String register(@ModelAttribute(value = "user") User u, Model model){
         String errMsg = "";
         if(u.getPassword().equals(u.getConfirmPassword())){
             if(this.userService.addUser(u) == true){

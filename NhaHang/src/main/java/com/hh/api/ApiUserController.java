@@ -89,6 +89,8 @@ public class ApiUserController {
             existingUser.setFirstName(updatedUser.getFirstName());
             existingUser.setLastName(updatedUser.getLastName());
             existingUser.setPassword(updatedUser.getPassword());
+            existingUser.setEmail(updatedUser.getEmail());
+            existingUser.setPhone(updatedUser.getPhone());
 
             if (updatedUser.getFile() != null && !updatedUser.getFile().isEmpty()) {
                 userService.addOrUpdateUser(existingUser);

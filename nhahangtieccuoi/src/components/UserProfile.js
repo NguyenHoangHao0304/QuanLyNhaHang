@@ -74,6 +74,26 @@ const UserProfile = () => {
                                 }
                             />
                         </Form.Group>
+                        <Form.Group controlId="formEmail">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={updatedUser.email}
+                                onChange={(e) =>
+                                    setUpdatedUser({ ...updatedUser, email: e.target.value })
+                                }
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="formPhone">
+                            <Form.Label>Phone</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={updatedUser.phone}
+                                onChange={(e) =>
+                                    setUpdatedUser({ ...updatedUser, phone: e.target.value })
+                                }
+                            />
+                        </Form.Group>
                         <Form.Group controlId="formPassword">
                             <Form.Label>Mật Khẩu</Form.Label>
                             <Form.Control
@@ -107,6 +127,12 @@ const UserProfile = () => {
                     </p>
                     <p>
                         <strong>Tài Khoản:</strong> {user.username}
+                    </p>
+                    <p>
+                        <strong>Email:</strong> {user.email}
+                    </p>
+                    <p>
+                        <strong>Phone:</strong> {user.phone}
                     </p>
                     <img src={user.avatar} height={300} width={300} className="rounded-circle" /> <br />
                     <Button onClick={handleEditClick} variant="warning" className="mt-4">
