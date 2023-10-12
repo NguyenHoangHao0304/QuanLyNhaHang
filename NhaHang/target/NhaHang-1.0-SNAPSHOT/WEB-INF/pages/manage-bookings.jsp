@@ -49,12 +49,6 @@
                             <button class="btn btn-danger" onclick="Delete('${apiDlt}')">Xóa</button>
                         </td>
                     </sec:authorize>
-                    <sec:authorize access="hasRole('ROLE_ADMIN')"> 
-                        <td>
-                            <c:url value="/api/bookings/${usbk.id}" var="apiDlt"/>
-                            <button class="btn btn-danger" onclick="Delete('${apiDlt}')">Xóa</button>
-                        </td>
-                    </sec:authorize>
                 </tr>
             </c:forEach>
         </tbody>

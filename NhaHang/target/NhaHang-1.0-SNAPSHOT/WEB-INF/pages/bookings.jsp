@@ -65,7 +65,7 @@
                                         <td>${bk.userId.username}</td>
                                         <td>${bk.total}</td>
                                         <td>${bk.status}</td>
-                                        <sec:authorize access="hasAnyRole('ROLE_CUSTOMER','ROLE_ADMIN')"> 
+                                        <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')"> 
                                             <td>
                                                 <c:url value="/api/bookings/${bk.id}" var="apiDlt"/>
                                                 <c:url value="/bookings/${bk.id}" var="api"/>

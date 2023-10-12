@@ -91,7 +91,7 @@ const Services = () => {
         return <MySpinner />
     }
     if (services.length === 0) {
-        return <Alert variant="info" className="mt-5">Không có món ăn nào!!</Alert>
+        return <Alert variant="info" className="mt-5">Không có dịch vụ nào!!</Alert>
     }
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;

@@ -14,10 +14,8 @@ const Cart = () => {
   const [bookingName, setBookingName] = useState();
   const [paymentMethod, setPaymentMethod] = useState();
   const [tableNumber, setTableNumber] = useState();
-  // const [hallId, setHallId] = useState(null);
   const [booking, setBooking] = useState(null);
-  // const [hall, setHall] = useState(null);
-  const [totalPrice, setTotalPrice] = useState();
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     const loadBooking = async () => {
@@ -28,30 +26,20 @@ const Cart = () => {
         console.error(error);
       }
     };
-    // let loadHall = async () => {
-    //     try {
-    //         let e = endpoints['halls'];
-    //         let res = await Apis.get(e);
-    //         setHall(res.data);
-    //     } catch (ex) {
-    //         console.error(ex);
-    //     }
-    // }
-    // loadHall();
     loadBooking();
   }, []);
 
-  const calculateTotalPrice = () => {
-    let total = 0;
-    if (carts) {
-      Object.values(carts).forEach((cartItem) => {
-        total += cartItem.unitPrice * cartItem.quantity;
-      });
-    }
-    return total;
-  };
-
   useEffect(() => {
+    const calculateTotalPrice = () => {
+      let total = 0;
+      if (carts) {
+        Object.values(carts).forEach((cartItem) => {
+          total += cartItem.unitPrice * cartItem.quantity;
+        });
+      }
+      return total;
+    };
+
     const total = calculateTotalPrice();
     setTotalPrice(total);
   }, [carts]);
@@ -87,7 +75,6 @@ const Cart = () => {
       try {
         const dataToSend = {
           carts: carts,
-          // hallId: hallId,
           bookingName: bookingName,
           bookingDate: bookingDate,
           startTime: startTime,
@@ -110,14 +97,6 @@ const Cart = () => {
       } catch (error) {
         console.error(error);
       }
-
-      // let { data } = await authApi().post(endpoints[`add-booking`], {
-      //     // "bookingDate": bookingDate,
-      //     // "startTime": startTime,
-      //     "bookingName": bookingName,
-      //     "hallId": hallId
-      // });
-      // setBooking([...booking, data]);
     };
     process();
   };
@@ -134,7 +113,11 @@ const Cart = () => {
     return (
       <Alert variant="info" className="mt-5 text-center">
         {" "}
-        <h3>QUÉT MÃ ĐỂ THANH TOÁN</h3> <br />
+        <h3>
+          CHÚC MỪNG KHÁCH HÀNG ĐÃ ĐẶT TIỆC THÀNH CÔNG, VUI LÒNG QUÉT MÃ ĐỂ THANH
+          TOÁN !!!
+        </h3>{" "}
+        <br />
         <img
           src="https://res.cloudinary.com/drqfqkwfo/image/upload/v1695753097/381453333_989024882177613_4617760921413331015_n_zc7rdc.jpg"
           alt="QR MOMO"
@@ -160,7 +143,10 @@ const Cart = () => {
     return (
       <Alert variant="info" className="mt-5 text-center">
         {" "}
-        <h3>QUÉT MÃ ĐỂ THANH TOÁN </h3>
+        <h3>
+          CHÚC MỪNG KHÁCH HÀNG ĐÃ ĐẶT TIỆC THÀNH CÔNG, VUI LÒNG QUÉT MÃ ĐỂ THANH
+          TOÁN !!!
+        </h3>
         <br />
         <img
           src="https://res.cloudinary.com/drqfqkwfo/image/upload/v1695753097/384296077_2097408980606384_6077507150543085824_n_tjy2a2.jpg"
@@ -191,9 +177,6 @@ const Cart = () => {
         <thead>
           <tr>
             <th>#</th>
-            {/* <th>FoodId</th>
-                    <th>ServiceId</th>
-                    <th>HallId</th> */}
             <th>Tên</th>
             <th>Giá Tiền</th>
             <th>Số lượng</th>
@@ -205,9 +188,6 @@ const Cart = () => {
             return (
               <tr>
                 <td></td>
-                {/* <td>{c.foodId}</td>
-                        <td>{c.serviceId}</td>
-                        <td>{c.hallId}</td> */}
                 <td>{c.name}</td>
                 <td>
                   {new Intl.NumberFormat("vi-VN", {
@@ -253,8 +233,12 @@ const Cart = () => {
           </tr>
         </tfoot>
       </Table>
-      {/* <h6 className=" text-secondary mt-0 float-end" >Tổng Tiền: {totalPrice} VND</h6> */}
-      <div className="bg">
+      {user === null ? (
+        <p>
+          Vui lòng <Link to="/login?next=/cart">đăng nhập</Link> để đặt tiệc
+        </p>
+      ) : (
+        <div className="bg">
         <div className="container ">
           <strong>
             <h4 className="text-center text-black mt-5 pt-4">
@@ -322,15 +306,11 @@ const Cart = () => {
             </Form.Group>
           </Form>
         </div>
-      </div>
-      {user === null ? (
-        <p>
-          Vui lòng <Link to="/login?next=/cart">đăng nhập</Link> để đặt tiệc
-        </p>
-      ) : (
-        <Button onClick={pay} variant="info mt-2 mb-3">
+        <Button onClick={pay} variant="info mt-2 mb-3" style={{marginLeft:"10px"}}>
           Đặt Tiệc
         </Button>
+      </div>
+        
       )}
     </>
   );

@@ -39,7 +39,7 @@ const Halls = () => {
         return <MySpinner />
     }
     if (halls.length === 0) {
-        return <Alert variant="info" className="mt-5">Không có món ăn nào!!</Alert>
+        return <Alert variant="info" className="mt-5">Không có sảnh nào!!</Alert>
     }
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;

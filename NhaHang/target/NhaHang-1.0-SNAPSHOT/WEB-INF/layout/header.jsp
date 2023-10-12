@@ -61,14 +61,14 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')"> 
+                    <sec:authorize access="hasRole('ROLE_ADMIN')"> 
                         <a
                             class="nav-link dropdown-toggle" href="#" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false"> Thống Kê
                         </a>
                     </sec:authorize>
                     <ul class="dropdown-menu">
-                        <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_EMPLOYEE')"> 
+                        <sec:authorize access="hasRole('ROLE_ADMIN')"> 
                             <li><a class="dropdown-item" href="<c:url value="/admin/statsRevenue"/>">Thống kê doanh thu</a></li>
                             <li><a class="dropdown-item" href="<c:url value="/admin/countBookingByBranch"/>">Thống kê mật độ tiệc cưới</a></li>
                             <li><a class="dropdown-item" href="<c:url value="/admin/countHallStats"/>">Thống kê mật độ sử dụng sảnh</a></li>
