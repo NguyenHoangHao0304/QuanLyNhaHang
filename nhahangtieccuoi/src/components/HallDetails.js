@@ -212,7 +212,7 @@ const HallDetails = () => {
                                 <Card.Text className="text-center">Từ: {hp.timeStart} - Đến: {hp.timeEnd}</Card.Text>
                                 <Card.Text className="text-center">Giá: {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(hp.price)}</Card.Text>
                                 {isHallSelected ? (
-                                    <p className="text-success">Đã chọn</p>
+                                    <p className="text-success">Đã Chọn</p>
                                 ) : (
                                     <Button variant="outline-success" onClick={() => {
                                         handleSelectHall(hp.id);

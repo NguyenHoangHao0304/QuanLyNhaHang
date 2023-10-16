@@ -38,7 +38,7 @@
     </div>
     <div class="form-floating mb-3 mt-3">
         <form:select class="form-select" id="status" name="status" path="status">
-            <option></option>
+            <option selected>${booking.status}</option>
             <option>Chưa thanh toán</option>
             <option>Đã thanh toán</option>
             <option>Đã hoàn thành</option>

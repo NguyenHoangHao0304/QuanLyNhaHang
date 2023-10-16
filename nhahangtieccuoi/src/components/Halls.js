@@ -46,7 +46,7 @@ const Halls = () => {
     const currentHalls = halls.slice(startIndex, endIndex);
     return (
         <>
-            <h1 className="text-center text-info">Sảnh Cưới</h1>
+            <h1 className="text-center text-info">Sảnh</h1>
             <div className="mb-2">
                 <label htmlFor="itemsPerPageSelect" className="mr-2">Số sảnh trên mỗi trang:</label>
                 <select id="itemsPerPageSelect" onChange={handleItemsPerPageChange} value={itemsPerPage}>

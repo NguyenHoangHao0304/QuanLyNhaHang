@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:url value="/" var="action" />
 <nav class="navbar navbar-expand-lg bg-light navbar-light">
-    <div class="container-fluid">
+    <div class="container">
         <a class="navbar-brand" href="${action}"><img
                 src="<c:url value="/images/logo1.png"/>"
                 alt="Bootstrap" height="70" width="100"></a>
@@ -28,7 +28,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="<c:url value="/branchs"/>">Chi Nhánh</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="<c:url value="/halls"/>">Sảnh Cưới</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/halls"/>">Sảnh Tiệc</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="<c:url value="/foods"/>">Thức Ăn</a></li>
                         <li><hr class="dropdown-divider"></li>
@@ -70,8 +70,8 @@
                     <ul class="dropdown-menu">
                         <sec:authorize access="hasRole('ROLE_ADMIN')"> 
                             <li><a class="dropdown-item" href="<c:url value="/admin/statsRevenue"/>">Thống kê doanh thu</a></li>
-                            <li><a class="dropdown-item" href="<c:url value="/admin/countBookingByBranch"/>">Thống kê mật độ tiệc cưới</a></li>
-                            <li><a class="dropdown-item" href="<c:url value="/admin/countHallStats"/>">Thống kê mật độ sử dụng sảnh</a></li>
+                            <li><a class="dropdown-item" href="<c:url value="/admin/countBookingByBranch"/>">Thống kê mật độ tiệc</a></li>
+                            <li><a class="dropdown-item" href="<c:url value="/admin/countHallStats"/>">Thống kê mật độ sử dụng sảnh tiệc</a></li>
                             </sec:authorize> 
 
                     </ul>

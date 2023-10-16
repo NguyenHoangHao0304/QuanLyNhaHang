@@ -9,10 +9,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:url value="/halls" var="hallAction" />
 <section class="container">
-    <h1 class="text-center text-primary mt-1"> SẢNH CƯỚI </h1>
+    <h1 class="text-center text-primary mt-1"> SẢNH TIỆC </h1>
     <sec:authorize access="hasRole('ROLE_ADMIN')"> 
         <div>
-            <a href="<c:url value="/admin/halls/create"/>" class="btn btn-warning mt-1">Thêm Sảnh Cưới</a>
+            <a href="<c:url value="/admin/halls/create"/>" class="btn btn-warning mt-1">Thêm Sảnh Tiệc</a>
             <a href="<c:url value="/halls/hallprices"/>" class="btn btn-warning mt-1">Quản Lý Giá Các Sảnh</a>
         </div>
     </sec:authorize>

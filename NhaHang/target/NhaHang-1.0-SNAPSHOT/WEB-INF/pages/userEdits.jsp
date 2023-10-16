@@ -33,7 +33,7 @@
         <form:errors path="username" element="div" cssClass="text-danger"/>
     </div>
     <div class="form-floating mb-3 mt-3">
-        <form:input type="text" class="form-control" path="password" id="password" 
+        <form:input type="password" class="form-control" path="password" id="password" 
                     placeholder="password" name="password"/>
         <label for="password">Password</label>
         <form:errors path="password" element="div" cssClass="text-danger"/>

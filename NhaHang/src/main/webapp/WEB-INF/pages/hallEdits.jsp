@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<h1 class="text-center text-info mt-1">QUẢN LÝ SẢNH CƯỚI</h1>
+<h1 class="text-center text-info mt-1">QUẢN LÝ SẢNH TIỆC</h1>
 <c:url value="/halls" var="action" />
 <form:form modelAttribute="hall" method="post" action="${action}" enctype="multipart/form-data">
     <%--<form:errors path="*" element="div" cssClass="alert alert-danger"/>--%>

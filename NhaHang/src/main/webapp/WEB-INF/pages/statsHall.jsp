@@ -3,7 +3,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:url value="/admin/countHallStats" var="statsAction" />
 <section class="container">
-    <h1 class="text-center text-primary mt-1"> THỐNG KÊ DOANH THU</h1>
+    <h1 class="text-center text-primary mt-1"> THỐNG KÊ MẬT ĐỘ SỬ DỤNG SẢNH TIỆC</h1>
     <div class="row mt-5">
         <div class="col-lg-4 col-4">
             <strong><label for="filterYear">Chọn năm:</label></strong>
