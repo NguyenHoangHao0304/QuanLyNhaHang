@@ -61,21 +61,18 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
     public boolean addReceipt(DataRequest dataRequest) {
         Session s = this.factory.getObject().getCurrentSession();
 
-        Payment payment = new Payment();
-        Booking booking = new Booking();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
         try {
-            Authentication authentication
-                    = SecurityContextHolder.getContext().getAuthentication();
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             User u = this.userRepo.getUserByUsername(authentication.getName());
-
+            Payment payment = new Payment();
             payment.setUserId(u);
             payment.setPaymentDate(new Date());
             payment.setPaymentMethod(dataRequest.getPaymentMethod());
-            s.save(u);
-
+            s.save(payment);
+            Booking booking = new Booking();
             for (Cart c : dataRequest.getCarts().values()) {
                 if (c.getHallId() > 0) {
                     booking.setBookingDate(LocalDate.parse(dataRequest.getBookingDate(), dateFormatter));
@@ -89,9 +86,14 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
                     booking.setBookingName(dataRequest.getBookingName());
                     booking.setTableNumber(dataRequest.getTableNumber());
                     booking.setTotal(dataRequest.getTotalPrice());
-                    booking.setStatus("Chưa thanh toán");
+                    if ("Thanh toán qua PAYPAL".equals(dataRequest.getPaymentMethod())) {
+                        booking.setStatus("Đã thanh toán");
+                    } else {
+                        booking.setStatus("Chưa thanh toán");
+                    }
                     s.save(booking);
                 }
+
                 Bill b = new Bill();
                 b.setUnitPrice(c.getUnitPrice());
                 b.setPaymentId(payment);
@@ -102,17 +104,16 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
                 if (c.getServiceId() > 0) {
                     BookingService bks = new BookingService();
                     bks.setBookingId(booking);
-                    bks.setServiceId(this.serviceRepository.getServiceById((c.getServiceId())));
+                    bks.setServiceId(this.serviceRepository.getServiceById(c.getServiceId()));
                     s.save(bks);
                 }
 
                 if (c.getFoodId() > 0) {
                     BookingFood bkf = new BookingFood();
                     bkf.setBookingId(booking);
-                    bkf.setFoodId(this.foodRepository.getFoodById((c.getFoodId())));
+                    bkf.setFoodId(this.foodRepository.getFoodById(c.getFoodId()));
                     s.save(bkf);
                 }
-
             }
             return true;
         } catch (HibernateException e) {
@@ -120,5 +121,4 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
             return false;
         }
     }
-
 }

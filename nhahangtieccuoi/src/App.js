@@ -36,7 +36,7 @@ const App = () => {
   const [user, dispatch] = useReducer(MyUserReducer, cookie.load("user") || null);
   const [cartCounter, cartdispatch] = useReducer(MyCartCounterReducer, countCart());
 
-  return (
+  return <>
     <MyUserContext.Provider value={[user, dispatch]}>
       <MyCartContext.Provider value={[cartCounter, cartdispatch]}>
         <BrowserRouter >
@@ -63,6 +63,7 @@ const App = () => {
         </BrowserRouter>
       </MyCartContext.Provider>
     </MyUserContext.Provider>
-  )
+    
+    </>
 }
 export default App;

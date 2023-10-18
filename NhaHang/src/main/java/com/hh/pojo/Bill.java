@@ -44,12 +44,12 @@ public class Bill implements Serializable {
     private BigDecimal unitPrice;
     @Column(name = "num")
     private int num;
-    @JoinColumn(name = "booking_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    private Booking bookingId;
     @JoinColumn(name = "payment_id", referencedColumnName = "id")
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Payment paymentId;
+    @JoinColumn(name = "booking_id", referencedColumnName = "id")
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    private Booking bookingId;
 
     public Bill() {
     }
@@ -128,5 +128,5 @@ public class Bill implements Serializable {
     public void setNum(int num) {
         this.num = num;
     }
-    
+
 }

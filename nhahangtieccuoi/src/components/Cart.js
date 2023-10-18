@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Alert, Button, Form, Table } from "react-bootstrap";
 import cookie from "react-cookies";
 import { MyCartContext, MyUserContext } from "../App";
@@ -16,6 +16,55 @@ const Cart = () => {
   const [tableNumber, setTableNumber] = useState();
   const [booking, setBooking] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [showPaymentAlert, setShowPaymentAlert] = useState(false);
+  const [showPaymentError, setShowPaymentError] = useState(false);
+  const paypal = useRef();
+
+  const createPaypalOrder = (totalPrice) => {
+    return window.paypal.Buttons({
+      createOrder: (data, actions, err) => {
+        return actions.order.create({
+          intent: "CAPTURE",
+          purchase_units: [
+            {
+              amount: {
+                currency_code: "THB",
+                value: totalPrice,
+              },
+            },
+          ],
+        });
+      },
+      onApprove: async (data, actions) => {
+        const order = await actions.order.capture();
+        console.log(order);
+        setPaymentSuccess(true);
+        setShowPaymentAlert(false);
+        setShowPaymentError(false);
+      },
+      onError: (err) => {
+        console.log(err);
+        setShowPaymentError(true);
+      },
+    });
+  };
+
+  const handlePayWithPaypal = () => {
+    if (paypal.current && !paypal.current.hasChildNodes()) {
+      createPaypalOrder(totalPrice).render(paypal.current);
+    } else {
+      console.error("paypal.current is not a valid DOM element.");
+    }
+  };
+
+  const handlePlaceOrder = () => {
+    if (paymentMethod === "Thanh toán qua PAYPAL" && !paymentSuccess) {
+      setShowPaymentAlert(true); 
+    } else {
+      pay();
+    }
+  };
 
   useEffect(() => {
     const loadBooking = async () => {
@@ -56,6 +105,9 @@ const Cart = () => {
         cookie.save("cart", cart);
         setCarts(cart);
         console.info(cart);
+        if (paypal.current) {
+          paypal.current.innerHTML = "";
+        }
       }
     }
   };
@@ -68,6 +120,9 @@ const Cart = () => {
       0
     );
     cartDispatch({ type: "update", payload: sum });
+    if (paypal.current) {
+      paypal.current.innerHTML = "";
+    }
   };
 
   const pay = () => {
@@ -104,8 +159,17 @@ const Cart = () => {
   if (carts === null && paymentMethod === "Thanh toán TRỰC TIẾP") {
     return (
       <Alert variant="info" className="mt-5">
-        Bạn đã đặt tiệc thành công và nhớ phải thanh toán trực tiếp tại quầy thu
-        ngân trước khi buổi tiệc diễn ra khoảng 12 tiếng!!!
+        <h3>
+          Bạn đã đặt tiệc thành công và nhớ phải thanh toán trực tiếp tại quầy
+          thu ngân trước khi buổi tiệc diễn ra khoảng 12 tiếng!!!
+        </h3>
+      </Alert>
+    );
+  }
+  if (carts === null && paymentMethod === "Thanh toán qua PAYPAL") {
+    return (
+      <Alert variant="info" className="mt-5">
+        <h3>Bạn đã đặt tiệc thành công!!!</h3>
       </Alert>
     );
   }
@@ -223,7 +287,7 @@ const Cart = () => {
         <tfoot>
           <tr>
             <td></td>
-            <p className=" text-secondary mt-0">
+            <p className="text-secondary mt-0">
               Tổng Tiền:{" "}
               {new Intl.NumberFormat("vi-VN", {
                 style: "currency",
@@ -239,78 +303,110 @@ const Cart = () => {
         </p>
       ) : (
         <div className="bg">
-        <div className="container ">
-          <strong>
-            <h4 className="text-center text-black mt-5 pt-4">
-              Thông tin đặt tiệc
-            </h4>
-          </strong>
-          <Form className="mt-2">
-            <Form.Group className="mb-4">
-              <Form.Label>
-                <strong>Ngày tổ chức</strong>
-              </Form.Label>
-              <Form.Control
-                type="date"
-                value={bookingDate}
-                onChange={(e) => setBookingDate(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-4">
-              <Form.Label>
-                <strong>Giờ bắt đầu</strong>
-              </Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Giờ bắt đầu"
-                value={startTime}
-                onChange={(e) => setStartTime(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-4">
-              <Form.Label>
-                <strong>Tên Tiệc</strong>
-              </Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Dạng Tiệc"
-                value={bookingName}
-                onChange={(e) => setBookingName(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-4">
-              <Form.Label>
-                <strong>Số lượng bàn</strong>
-              </Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Số Lượng Bàn"
-                value={tableNumber}
-                onChange={(e) => setTableNumber(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-4 pb-4">
-              <Form.Label>
-                <strong>Phương Thức Thanh Toán</strong>
-              </Form.Label>
-              <Form.Select
-                aria-label="Default select example"
-                value={paymentMethod}
-                onChange={(e) => setPaymentMethod(e.target.value)}
+          <div className="container ">
+            <strong>
+              <h4 className="text-center text-black mt-5 pt-4">
+                Thông tin đặt tiệc
+              </h4>
+            </strong>
+            <Form className="mt-2">
+              <Form.Group className="mb-4">
+                <Form.Label>
+                  <strong>Ngày tổ chức</strong>
+                </Form.Label>
+                <Form.Control
+                  type="date"
+                  value={bookingDate}
+                  onChange={(e) => setBookingDate(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group className="mb-4">
+                <Form.Label>
+                  <strong>Giờ bắt đầu</strong>
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Giờ bắt đầu"
+                  value={startTime}
+                  onChange={(e) => setStartTime(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group className="mb-4">
+                <Form.Label>
+                  <strong>Loại Tiệc</strong>
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Loại Tiệc"
+                  value={bookingName}
+                  onChange={(e) => setBookingName(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group className="mb-4">
+                <Form.Label>
+                  <strong>Số lượng bàn</strong>
+                </Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Số Lượng Bàn"
+                  value={tableNumber}
+                  onChange={(e) => setTableNumber(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3 pb-4">
+                <Form.Label>
+                  <strong>Phương Thức Thanh Toán</strong>
+                </Form.Label>
+                <Form.Select
+                  aria-label="Default select example"
+                  value={paymentMethod}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                >
+                  <option></option>
+                  <option>Thanh toán TRỰC TIẾP</option>
+                  <option>Thanh toán qua PAYPAL</option>
+                  <option>Thanh toán qua ví MOMO</option>
+                  <option>Thanh toán qua ZALOPAY</option>
+                </Form.Select>
+              </Form.Group>
+            </Form>
+          </div>
+          {paymentMethod === "Thanh toán qua PAYPAL" && (
+            <>
+              <Button
+                onClick={handlePayWithPaypal}
+                variant="info mt-2 mb-2"
+                style={{ marginLeft: "10px" }}
               >
-                <option></option>
-                <option>Thanh toán TRỰC TIẾP</option>
-                <option>Thanh toán qua ví MOMO</option>
-                <option>Thanh toán qua ZALOPAY</option>
-              </Form.Select>
-            </Form.Group>
-          </Form>
+                Thanh toán PayPal
+              </Button>
+              <div ref={paypal} style={{ marginLeft: "10px" }}></div>
+            </>
+          )}
+
+          {paymentSuccess ? ( // Kiểm tra trạng thái thanh toán
+            <Alert variant="success" className="mt-1 text-center">
+              Thanh toán thành công! Mời bạn đặt tiệc.
+            </Alert>
+          ) : null}
+          {showPaymentAlert && ( // Hiển thị thông báo nếu showPaymentAlert là true
+            <Alert variant="danger" className="mt-2 text-center">
+              Vui lòng thanh toán bằng PayPal trước khi đặt tiệc.
+            </Alert>
+          )}
+          {showPaymentError && (
+            <Alert variant="danger" className="mt-2 text-center">
+              Thanh toán thất bại! Mời bạn kiểm tra lại giỏ hàng trước khi thanh toán!!
+            </Alert>
+          )}
+          <Button
+            onClick={handlePlaceOrder}
+            variant="info mt-2 mb-3"
+            style={{ marginLeft: "10px" }}
+          >
+            Đặt Tiệc
+          </Button>
         </div>
-        <Button onClick={pay} variant="info mt-2 mb-3" style={{marginLeft:"10px"}}>
-          Đặt Tiệc
-        </Button>
-      </div>
-        
       )}
     </>
   );
