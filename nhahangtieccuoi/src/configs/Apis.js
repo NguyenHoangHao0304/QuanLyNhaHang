@@ -20,6 +20,8 @@ export const endpoints ={
     "add-feedback":`${SERVER_CONTEXT}/api/feedbacks/`,
     "add-booking":`${SERVER_CONTEXT}/api/booking/`,
     "bookings":`${SERVER_CONTEXT}/api/bookings/`,
+    "bookinglist":`${SERVER_CONTEXT}/api/bookinglist/`,
+    "bookingUpdate": (id) => `${SERVER_CONTEXT}/api/bookings/${id}/`,
 }
 
 export const authApi = () => {

@@ -168,7 +168,7 @@ const Cart = () => {
   }
   if (carts === null && paymentMethod === "Thanh toán qua PAYPAL") {
     return (
-      <Alert variant="info" className="mt-5">
+      <Alert variant="info" className="mt-5 text-center">
         <h3>Bạn đã đặt tiệc thành công!!!</h3>
       </Alert>
     );
@@ -384,12 +384,12 @@ const Cart = () => {
             </>
           )}
 
-          {paymentSuccess ? ( // Kiểm tra trạng thái thanh toán
+          {paymentSuccess ? ( 
             <Alert variant="success" className="mt-1 text-center">
               Thanh toán thành công! Mời bạn đặt tiệc.
             </Alert>
           ) : null}
-          {showPaymentAlert && ( // Hiển thị thông báo nếu showPaymentAlert là true
+          {showPaymentAlert && ( 
             <Alert variant="danger" className="mt-2 text-center">
               Vui lòng thanh toán bằng PayPal trước khi đặt tiệc.
             </Alert>

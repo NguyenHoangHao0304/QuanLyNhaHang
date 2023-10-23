@@ -18,6 +18,8 @@ import HallDetails from "./components/HallDetails";
 import BranchDetails from "./components/BranchDetails";
 import 'moment/locale/vi';
 import UserProfile from "./components/UserProfile";
+import BookingList from "./components/ListBooking";
+
 
 
 
@@ -55,6 +57,7 @@ const App = () => {
                   <Route path="/halls/:hallId" element={<HallDetails />} />
                   <Route path="/branchs/:branchId" element={<BranchDetails />} />
                   <Route path="/userProfile" element={<UserProfile />} />
+                  <Route path="/bookingList" element={<BookingList/>} />
                 </Routes>
               </Container>
             </div>
